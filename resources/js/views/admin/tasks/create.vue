@@ -14,15 +14,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>{{ strError }}</strong>
             </div>
-<<<<<<< HEAD
 
             {{ task }}
             
             <form @submit.prevent="addTask()">
-=======
-              {{ task }}     
-            <form @submit.prevent="addTask">
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
                     <input v-model="task.name" type="text" class="form-control" placeholder="Nombre tarea">
@@ -59,7 +54,6 @@
 
 
 <script setup>
-<<<<<<< HEAD
     import axios from "axios";
 import { ref } from "vue";
     const task = ref({});
@@ -79,27 +73,6 @@ function addTask(){
     })
 }
 
-=======
-
-import { ref } from "vue";
-    const task = ref({});
-
-    const strError = ref();
-    const strSuccess = ref();
-
-    function addTask(){
-    axios.post('/api/tasks',task.value)
-    .then(response =>{
-        console.log(response);
-        strSuccess.value = response.data.success;
-        strError.value = "";
-    }).catch(error =>{
-        console.log(error);
-        strSuccess.value = "";
-        strError.value = error.response.data.message;
-    }); 
-};
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
 </script>
 
 

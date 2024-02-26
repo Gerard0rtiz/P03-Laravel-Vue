@@ -6,11 +6,7 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las tareas</h5>
                         <div>
-<<<<<<< HEAD
                             <router-link class="btn btn-success" :to="{name:'tasks.create'}">Nueva Tarea</router-link>
-=======
-                            <RouterLink :to="{name:'tasks.create'}" class="btn btn-success">Nueva tarea</RouterLink>
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
                         </div>
                     </div>
 
@@ -53,27 +49,14 @@ onMounted(() => {
     axios.get('/api/tasks')
         .then(response => {
             tasks.value = response.data;
-<<<<<<< HEAD
 
         })
-=======
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.error("Error fetching tasks:", error);
-        });
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
 });
 
 const deleteTask = (id, index) => {
     swal({
-<<<<<<< HEAD
         title: 'Quieres eliminar la tarea?',
         text: 'Esta acción no es reversible!',
-=======
-        title: '¿Quieres eliminar la tarea?',
-        text: 'Esta acción no se puede revertir.',
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Sí, eliminar',
@@ -81,12 +64,10 @@ const deleteTask = (id, index) => {
         timer: 20000,
         timerProgressBar: true,
         reverseButtons: true
-<<<<<<< HEAD
     })
         .then(result => {
             if (result.isConfirmed) {
                 axios.delete('/api/tasks/' + id)
-                    .then(response => {
                         tasks.value.splice(index, 1);
                         swal({
                             icon: 'success',
@@ -112,24 +93,3 @@ const deleteTask = (id, index) => {
         if (result.isConfirmed) {
             axios.delete('/api/tasks/' + id)
                 .then(response => {
-                    tasks.value.splice(index, 1);
-                    swal({
-                        icon: 'success',
-                        title: 'Se ha eliminado la tarea exitosamente.'
-                    });
-                })
-                .catch(error => {
-                    swal({
-                        icon: 'error',
-                        title: 'Error al eliminar la tarea.'
-                    });
-                    console.error("Error deleting task:", error);
-                });
-        }
-    });
-};
-</script>
-
-
-<style></style>
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
