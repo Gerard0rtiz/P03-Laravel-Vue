@@ -16,3 +16,7 @@ class Task extends Model
         'date_close'
     ];
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
