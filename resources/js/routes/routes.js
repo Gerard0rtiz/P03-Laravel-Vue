@@ -10,15 +10,9 @@ const PostsEdit  = ()  => import('../views/admin/posts/Edit.vue');
 const ExercisesIndex  = ()  => import('../views/admin/exercises/Index.vue');
 const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
 const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
-<<<<<<< HEAD
 const TaskList  = ()  => import('../views/admin/tasks/index.vue');
 const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
-=======
-const TasksList  = ()  => import('../views/admin/tasks/index.vue');
-const TasksCreate = () => import('../views/admin/tasks/create.vue');
-const TasksEdit = () => import('../views/admin/tasks/edit.vue');
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
 
 function requireLogin(to, from, next) {
     let isLogin = false;
