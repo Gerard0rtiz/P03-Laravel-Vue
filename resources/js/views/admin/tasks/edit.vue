@@ -47,8 +47,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Tarea testing button</button>
-                <!--dsadsadsadsadsa-->
+                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Tarea</button>
 
             </form>
 
