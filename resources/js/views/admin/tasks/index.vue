@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las tareas</h5>
                         <div>
-                            <router-link class="btn btn-success" :to="{name:'tasks.create'}">Nueva Tarea</router-link>
+                            <RouterLink :to="{name:'tasks.create'}" class="btn btn-success">Nueva tarea</RouterLink>
                         </div>
                     </div>
 
@@ -23,15 +23,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(task, index) in tasks">
+                            <tr v-for="(task,index) in tasks">
                                 <td class="text-center">{{ task.id }}</td>
                                 <td>{{ task.name }}</td>
                                 <td>{{ task.description }}</td>
                                 <td>{{ task.date_open }}</td>
                                 <th>{{ task.date_close }}</th>
                                 <td class="text-center">
-                                    <router-link class="btn btn-warning mr-1" :to="{name:'tasks.edit'}">Edit</router-link>
-                                    <button @click="deleteTask(task.id, index)" class="btn btn-danger">Delete</button>
+                                    <RouterLink :to="{name:'tasks.update'}" @click="updateTask(task.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
+                                    <button class="btn btn-danger" @click="deleteTask(task.id,index)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -49,14 +53,17 @@ onMounted(() => {
     axios.get('/api/tasks')
         .then(response => {
             tasks.value = response.data;
-
+            console.log(response.data);
         })
+        .catch(error => {
+            console.error("Error fetching tasks:", error);
+        });
 });
 
 const deleteTask = (id, index) => {
     swal({
-        title: 'Quieres eliminar la tarea?',
-        text: 'Esta acción no es reversible!',
+        title: '¿Quieres eliminar la tarea?',
+        text: 'Esta acción no se puede revertir.',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Sí, eliminar',
@@ -64,32 +71,27 @@ const deleteTask = (id, index) => {
         timer: 20000,
         timerProgressBar: true,
         reverseButtons: true
-    })
-        .then(result => {
-            if (result.isConfirmed) {
-                axios.delete('/api/tasks/' + id)
-                        tasks.value.splice(index, 1);
-                        swal({
-                            icon: 'success',
-                            title: 'Tarea eliminada correctamente'
-                        });
-                    }).catch(error => {
-                        swal({
-                            icon: 'error',
-                            title: 'Error al eliminar la tarea'
-                        });
-                    })
-            }
-        })
-
-
-}
-</script>
-
-
-<style></style>
-=======
     }).then(result => {
         if (result.isConfirmed) {
             axios.delete('/api/tasks/' + id)
                 .then(response => {
+                    tasks.value.splice(index, 1);
+                    swal({
+                        icon: 'success',
+                        title: 'Se ha eliminado la tarea exitosamente.'
+                    });
+                })
+                .catch(error => {
+                    swal({
+                        icon: 'error',
+                        title: 'Error al eliminar la tarea.'
+                    });
+                    console.error("Error deleting task:", error);
+                });
+        }
+    });
+};
+</script>
+
+
+<style></style>
