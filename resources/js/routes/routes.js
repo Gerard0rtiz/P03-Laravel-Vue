@@ -10,6 +10,9 @@ const PostsEdit  = ()  => import('../views/admin/posts/Edit.vue');
 const ExercisesIndex  = ()  => import('../views/admin/exercises/Index.vue');
 const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
 const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
+const TaskList  = ()  => import('../views/admin/tasks/index.vue');
+const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
+const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -125,6 +128,33 @@ export default [
                 component: PostsEdit,
                 meta: { breadCrumb: 'Edit post' }
             },
+
+            {
+                name: 'tasks',
+                path: 'tasks',
+                meta: { breadCrumb: 'Tareas'},
+                children: [
+                    {
+                        name: 'tasks.index',
+                        path: '',
+                        component: TaskList,
+                        meta: { breadCrumb: 'Listado tareas' }
+                    },
+                    {
+                        name: 'tasks.create',
+                        path: 'create',
+                        component: TaskCreate,
+                        meta: { breadCrumb: 'Crear tarea' }
+                    },
+                    {
+                        name: 'tasks.edit',
+                        path: 'edit',
+                        component: TaskEdit,
+                        meta: { breadCrumb: 'Editar tarea' }
+                    }
+                ]
+            },
+
             {
                 name: 'exercises',
                 path: 'exercises',
