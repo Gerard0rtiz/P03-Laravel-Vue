@@ -47,8 +47,13 @@
                 </div>
 
 
+<<<<<<< HEAD
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Tarea</button>
                 <!--dsadsadsadsadsa-->
+=======
+                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Tarea hola testing</button>
+
+>>>>>>> 71631381b6f647674293f878c8ea708a1b80a6c7
 
             </form>
 
