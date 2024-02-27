@@ -41,11 +41,6 @@
         "vue-sweetalert2": "^5.0.5",
         "vuex": "^4.1.0",
         "vuex-persistedstate": "^4.1.0",
-<<<<<<< HEAD
-=======
-        "yu": "^1.0.0",
-        "yum": "^0.1.1",
->>>>>>> 962a4ad8f6ae4bd8a7f551e57bb2078fb8bafcb9
         "yup": "^1.3.3",
         "yup-locales": "^1.2.21"
     }

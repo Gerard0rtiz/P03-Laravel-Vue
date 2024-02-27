@@ -163,19 +163,19 @@ export default [
                     {
                         name: 'tasks.index',
                         path: '',
-                        component: TasksList,
+                        component: TaskList,
                         meta: { breadCrumb: 'Listado tareas' }
                     },
                     {
                         name: 'tasks.create',
                         path: 'create',
-                        component: TasksCreate,
+                        component: TaskCreate,
                         meta: { breadCrumb: 'Crear tareas' }
                     },
                     {
                         name: 'tasks.update',
                         path: 'update',
-                        component: TasksEdit,
+                        component: TaskEdit,
                         meta: { breadCrumb: 'Editar tareas' }
                     }
                 ]
