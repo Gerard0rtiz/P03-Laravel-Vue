@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
             $table->string('NombreUsuario');
-            $table->fechaFichaje();
-            $table->horaEntrada();
-            $table->horaSalida();
+            $table->date('fechaFichaje');
+            $table->time('horaEntrada');
+            $table->time('horaSalida');
             $table->timestamps();
         });
     }
