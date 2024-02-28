@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
             $table->unsignedBigInteger('idProyecto');
             $table->foreign('idProyecto')->references('id')->on('Proyecto')->onDelete('cascade');
+            $table->primary(['idUser','idProyecto']);
         });
     }
 
