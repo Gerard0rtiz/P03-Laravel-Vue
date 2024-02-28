@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
             $table->unsignedBigInteger('idProyecto');
             $table->foreign('idProyecto')->references('id')->on('Proyecto')->onDelete('cascade');
-            $table->nombreJefe();
-            $table->fechaImputacion();
-            $table->horasRealizadas();
-            $table->descripcion();
+            $table->string('nombreJefe');
+            $table->date('fechaImputacion');
+            $table->date('horasRealizadas');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
