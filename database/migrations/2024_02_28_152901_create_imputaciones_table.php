@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fichajes', function (Blueprint $table) {
+        Schema::create('imputaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
-            $table->string('NombreUsuario');
-            $table->fechaFichaje();
-            $table->horaEntrada();
-            $table->horaSalida();
+            $table->unsignedBigInteger('idProyecto');
+            $table->foreign('idProyecto')->references('id')->on('Proyecto')->onDelete('cascade');
+            $table->nombreJefe();
+            $table->fechaImputacion();
+            $table->horasRealizadas();
+            $table->descripcion();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fichajes');
+        Schema::dropIfExists('imputaciones');
     }
 };
