@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fichajes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idUser');
-            $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
+            $table->foreign('idUser')->references('id')->on('Users')->onDelete('cascade');
             $table->string('NombreUsuario');
             $table->date('fechaFichaje');
             $table->time('horaEntrada');

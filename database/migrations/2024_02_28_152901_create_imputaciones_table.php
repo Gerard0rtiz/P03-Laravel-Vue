@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('imputaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idUser');
-            $table->foreign('idUser')->references('id')->on('User')->onDelete('cascade');
+            $table->foreign('idUser')->references('id')->on('Users')->onDelete('cascade');
             $table->unsignedBigInteger('idProyecto');
-            $table->foreign('idProyecto')->references('id')->on('Proyecto')->onDelete('cascade');
+            $table->foreign('idProyecto')->references('id')->on('Proyectos')->onDelete('cascade');
             $table->string('nombreJefe');
             $table->date('fechaImputacion');
             $table->float('horasRealizadas', 8, 2);
