@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('idProyecto')->references('id')->on('Proyecto')->onDelete('cascade');
             $table->string('nombreJefe');
             $table->date('fechaImputacion');
-            $table->date('horasRealizadas');
+            $table->float('horasRealizadas', 8, 2);
             $table->string('descripcion');
             $table->timestamps();
         });
