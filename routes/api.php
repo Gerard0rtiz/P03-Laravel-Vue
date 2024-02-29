@@ -8,6 +8,10 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\ProyectoController;
+use App\Http\Controllers\Api\ImputacionController;
+use App\Http\Controllers\Api\FichajeController;
+
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +20,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
-
 Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/',[TaskController::class,'store']);
 Route::put('tasks/update/{id}',[TaskController::class,'update']);
