@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class FichajeController extends Controller
 {
-    //
+    public function index()
+    {
+        $fichajes = Fichaje::all()->toArray();
+        return $fichajes;
+    }
 }
