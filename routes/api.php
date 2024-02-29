@@ -27,12 +27,21 @@ Route::delete('tasks/{id}',[TaskController::class,'destroy']);
 
 //Rutas de ProyectoController:
 Route::get('proyectos',[ProyectoController::class,'index']);
+Route::post('proyectos/',[ProyectoController::class,'store']);
+Route::put('proyectos/update/{id}',[ProyectoController::class,'update']);
+Route::delete('proyectos/{id}',[ProyectoController::class,'destroy']);
 
 //Rutas de ImputacionController:
 Route::get('imputaciones',[ImputacionController::class,'index']);
+Route::post('imputaciones/',[ImputacionController::class,'store']);
+Route::put('imputaciones/update/{id}',[ImputacionController::class,'update']);
+Route::delete('imputaciones/{id}',[ImputacionController::class,'destroy']);
 
 //Rutas de FichajeController:
 Route::get('fichajes',[FichajeController::class,'index']);
+Route::post('fichajes/',[FichajeController::class,'store']);
+Route::put('fichajes/update/{id}',[FichajeController::class,'update']);
+Route::delete('fichajes/{id}',[FichajeController::class,'destroy']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);

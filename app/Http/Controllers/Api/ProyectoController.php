@@ -7,9 +7,5 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
-    public function index()
-    {
-        $proyectos = Proyecto::all()->toArray();
-        return $proyectos;
-    }
+    //
 }
