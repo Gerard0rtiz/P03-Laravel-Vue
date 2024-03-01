@@ -162,30 +162,31 @@ export default [
             },
 
             {
-                name: 'tasks',
-                path: 'tasks',
-                meta: { breadCrumb: 'Tareas'},
+                name: 'proyectos',
+                path: 'proyectos',
+                meta: { breadCrumb: 'Proyectos'},
                 children: [
                     {
-                        name: 'tasks.index',
+                        name: 'proyectos.index',
                         path: '',
-                        component: TaskList,
-                        meta: { breadCrumb: 'Listado tareas' }
+                        component: ProyectoList,
+                        meta: { breadCrumb: 'Listado proyectos' }
                     },
                     {
-                        name: 'tasks.create',
+                        name: 'proyectos.create',
                         path: 'create',
-                        component: TaskCreate,
-                        meta: { breadCrumb: 'Crear tareas' }
+                        component: ProyectoCreate,
+                        meta: { breadCrumb: 'Crear proyecto' }
                     },
                     {
-                        name: 'tasks.update',
-                        path: 'update',
-                        component: TaskEdit,
-                        meta: { breadCrumb: 'Editar tareas' }
+                        name: 'proyectos.edit',
+                        path: 'edit',
+                        component: ProyectoEdit,
+                        meta: { breadCrumb: 'Editar proyecto' }
                     }
                 ]
             },
+            
             {
                 name: 'exercises',
                 path: 'exercises',
