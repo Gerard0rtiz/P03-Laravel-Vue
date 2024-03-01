@@ -42,6 +42,6 @@ class ProyectoController extends Controller
     public function destroy($id){
         $Proyecto = Proyecto::find($id);
         $Proyecto->delete();
-        return response()->json(['success' => true, 'data' => 'Tarea eliminada correctamente']);
+        return response()->json(['success' => true, 'data' => 'Proyecto eliminado correctamente']);
     }
 }

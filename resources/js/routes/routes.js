@@ -15,10 +15,19 @@ const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
 const TaskList  = ()  => import('../views/admin/tasks/index.vue');
 const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
+
 //rutas a proyecto
 const ProyectoList  = ()  => import('../views/admin/proyectos/index.vue');
 const ProyectoCreate  = ()  => import('../views/admin/proyectos/create.vue');
 const ProyectoEdit  = ()  => import('../views/admin/proyectos/edit.vue');
+//rutas a imputacion
+const ImputacionList  = ()  => import('../views/admin/imputaciones/index.vue');
+const ImputacionCreate  = ()  => import('../views/admin/imputaciones/create.vue');
+const ImputacionEdit  = ()  => import('../views/admin/imputaciones/edit.vue');
+//rutas a fichaje
+const FichajeList  = ()  => import('../views/admin/fichajes/index.vue');
+const FichajeCreate  = ()  => import('../views/admin/fichajes/create.vue');
+const FichajeEdit  = ()  => import('../views/admin/fichajes/edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -183,6 +192,57 @@ export default [
                         path: 'edit',
                         component: ProyectoEdit,
                         meta: { breadCrumb: 'Editar proyecto' }
+                    }
+                ]
+            },
+            
+            {
+                name: 'fichajes',
+                path: 'fichajes',
+                meta: { breadCrumb: 'Fichajes'},
+                children: [
+                    {
+                        name: 'fichajes.index',
+                        path: '',
+                        component: FichajeList,
+                        meta: { breadCrumb: 'Listado fichajes' }
+                    },
+                    {
+                        name: 'fichajes.create',
+                        path: 'create',
+                        component: FichajeCreate,
+                        meta: { breadCrumb: 'Crear fichaje' }
+                    },
+                    {
+                        name: 'fichajes.edit',
+                        path: 'edit',
+                        component: FichajeEdit,
+                        meta: { breadCrumb: 'Editar fichaje' }
+                    }
+                ]
+            },
+            {
+                name: 'imputaciones',
+                path: 'imputaciones',
+                meta: { breadCrumb: 'Imputaciones'},
+                children: [
+                    {
+                        name: 'imputaciones.index',
+                        path: '',
+                        component: ImputacionList,
+                        meta: { breadCrumb: 'Listado imputaciones' }
+                    },
+                    {
+                        name: 'imputaciones.create',
+                        path: 'create',
+                        component: ImputacionCreate,
+                        meta: { breadCrumb: 'Crear imputacion' }
+                    },
+                    {
+                        name: 'imputaciones.edit',
+                        path: 'edit',
+                        component: ImputacionEdit,
+                        meta: { breadCrumb: 'Editar imputacion' }
                     }
                 ]
             },

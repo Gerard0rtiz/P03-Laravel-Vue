@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Fichajes extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'fechaFichaje',
+        'horaEntrada',
+        'horaSalida'
+    ];
 }
