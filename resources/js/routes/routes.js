@@ -7,12 +7,18 @@ const GuestLayout = ()  => import('../layouts/Guest.vue');
 const PostsIndex  = ()  => import('../views/admin/posts/Index.vue');
 const PostsCreate  = ()  => import('../views/admin/posts/Create.vue');
 const PostsEdit  = ()  => import('../views/admin/posts/Edit.vue');
+
 const ExercisesIndex  = ()  => import('../views/admin/exercises/Index.vue');
 const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
 const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
+
 const TaskList  = ()  => import('../views/admin/tasks/index.vue');
 const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
+//rutas a proyecto
+const ProyectoList  = ()  => import('../views/admin/proyectos/index.vue');
+const ProyectoCreate  = ()  => import('../views/admin/proyectos/create.vue');
+const ProyectoEdit  = ()  => import('../views/admin/proyectos/edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
