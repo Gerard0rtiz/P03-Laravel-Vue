@@ -27,20 +27,10 @@ const model = ref([
         items: [
             { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
             { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
-            { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
-        ]
-    },
-    {
-        label: 'Ejercicios',
-        items: [
-            { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
-            { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
-        ]
-    },
-    {
-        label: 'Posts',
-        items: [
-            { label: 'Posts', icon: 'pi pi-fw pi-id-card', to: '/admin/posts', permision: 'post-list' }
+            { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' },
+            { label: 'Proyectos', icon: 'pi pi-server', to: '/admin/proyectos', permision:'permission-list' },
+            { label: 'Imputaciones', icon: 'pi pi-folder-open', to: '/admin/imputaciones', permision:'permission-list' },
+            { label: 'Fichajes', icon: 'pi pi-paperclip', to: '/admin/fichajes', permision:'permission-list' }
         ]
     }
 ]);
