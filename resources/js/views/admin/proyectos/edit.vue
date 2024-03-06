@@ -47,7 +47,7 @@
 
 <script setup>
 import useProyectos from "@/composables/proyectos";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, watchEffect } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
@@ -81,7 +81,6 @@ function submitForm() {
 }
 onMounted(() => {
     getProyecto(route.params.id)
-    getCategoryList()
 })
 watchEffect(() => {
     proyecto.id = proyectoData.value.id
