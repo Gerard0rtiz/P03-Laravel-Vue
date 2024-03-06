@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todos los proyectos</h5>
                         <div>
-                            <RouterLink :to="{titulo:'proyectos.create'}" class="btn btn-success">Nuevo proyecto</RouterLink>
+                            <RouterLink :to="{name:'proyectos.create'}" class="btn btn-success">Nuevo proyecto</RouterLink>
                         </div>
                     </div>
 
@@ -15,9 +15,9 @@
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
-                                <th>Título</th>
-                                <th>Descripcion</th>
-                                <th>ID jefe de proyecto</th>
+                                <th>titulo</th>
+                                <th>descripcion</th>
+                                <th>ID jefe del proyecto</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
@@ -28,7 +28,7 @@
                                 <td>{{ proyecto.descripcion }}</td>
                                 <td>{{ proyecto.idUser }}</td>
                                 <td class="text-center">
-                                    <RouterLink :to="{titulo:'proyecto.update'}" @click="updateProyecto(proyecto.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
+                                    <RouterLink :to="{ name: 'proyectos.edit', params: { id: proyecto.id } }" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteProyecto(proyecto.id,index)">Delete</button>
                                 </td>
                             </tr>
@@ -57,6 +57,10 @@ onMounted(() => {
             console.error("Error fetching proyectos:", error);
         });
 });
+
+function updateProyecto(id, index){
+
+}
 
 const deleteProyecto = (id, index) => {
     swal({

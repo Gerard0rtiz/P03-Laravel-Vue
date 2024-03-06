@@ -17,17 +17,17 @@ const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
 
 //rutas a proyecto
-const ProyectoList  = ()  => import('../views/admin/proyectos/index.vue');
-const ProyectoCreate  = ()  => import('../views/admin/proyectos/create.vue');
-const ProyectoEdit  = ()  => import('../views/admin/proyectos/edit.vue');
+const ProyectoList  = ()  => import('../views/admin/proyectos/Index.vue');
+const ProyectoCreate  = ()  => import('../views/admin/proyectos/Create.vue');
+const ProyectoEdit  = ()  => import('../views/admin/proyectos/Edit.vue');
 //rutas a imputacion
-const ImputacionList  = ()  => import('../views/admin/imputaciones/index.vue');
-const ImputacionCreate  = ()  => import('../views/admin/imputaciones/create.vue');
-const ImputacionEdit  = ()  => import('../views/admin/imputaciones/edit.vue');
+const ImputacionList  = ()  => import('../views/admin/imputaciones/Index.vue');
+const ImputacionCreate  = ()  => import('../views/admin/imputaciones/Create.vue');
+const ImputacionEdit  = ()  => import('../views/admin/imputaciones/Edit.vue');
 //rutas a fichaje
-const FichajeList  = ()  => import('../views/admin/fichajes/index.vue');
-const FichajeCreate  = ()  => import('../views/admin/fichajes/create.vue');
-const FichajeEdit  = ()  => import('../views/admin/fichajes/edit.vue');
+const FichajeList  = ()  => import('../views/admin/fichajes/Index.vue');
+const FichajeCreate  = ()  => import('../views/admin/fichajes/Create.vue');
+const FichajeEdit  = ()  => import('../views/admin/fichajes/Edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -189,7 +189,7 @@ export default [
                     },
                     {
                         name: 'proyectos.edit',
-                        path: 'edit',
+                        path: 'edit/:id',
                         component: ProyectoEdit,
                         meta: { breadCrumb: 'Editar proyecto' }
                     }

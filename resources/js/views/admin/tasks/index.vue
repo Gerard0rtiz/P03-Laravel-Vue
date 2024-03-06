@@ -30,7 +30,7 @@
                                 <td>{{ task.date_open }}</td>
                                 <th>{{ task.date_close }}</th>
                                 <td class="text-center">
-                                    <RouterLink :to="{name:'tasks.update'}" @click="updateTask(task.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
+                                    <RouterLink :to="{name:'tasks.edit'}" @click="updateTask(task.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteTask(task.id,index)">Delete</button>
                                 </td>
                             </tr>
