@@ -44,4 +44,8 @@ class ProyectoController extends Controller
         $Proyecto->delete();
         return response()->json(['success' => true, 'data' => 'Proyecto eliminado correctamente']);
     }
+
+    public function show($id){
+        return Proyecto::find($id);
+    }
 }

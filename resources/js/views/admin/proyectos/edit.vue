@@ -31,80 +31,65 @@
                         placeholder="Descripción"></textarea>
                 </div>
 
-                <div class="form-gorup mb-2">
+                <div class="form-group mb-2">
                     <label>ID jefe de proyecto</label><span class="text-danger">*</span>
                     <input class="form-control" type="text" v-model="proyecto.idUser" placeholder="ID jefe del proyecto" />
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar proyecto</button>
-
-
             </form>
         </div>
     </div>
 </template>
 
-
 <script setup>
-import useProyectos from "@/composables/proyectos";
-import { ref, onMounted, reactive, watchEffect } from "vue";
-import { useForm, useField } from "vee-validate";
-import { useRoute } from "vue-router";
-import * as yup from 'yup';
-import { es } from 'yup-locales';
-import { setLocale } from 'yup';
+import axios from "axios";
+import { ref, reactive, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 
-const schema = yup.object({
-    titulo: yup.string().required().label('Título'),
-})
+const route = useRoute();
+const router = useRouter();
 
-const { validate, errors } = useForm({ validationSchema: schema })
+const strSuccess = ref('');
+const strError = ref('');
 
-setLocale(es);
-
-const strSuccess = ref();
-const strError = ref();
-
-
-const { value: titulo } = useField('titulo', null, { initialValue: '' });
-const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
-const { value: idUser } = useField('idUser', null, { initialValue: '' });
-const { proyecto: proyectoData, getProyecto, updateProyecto, validationErrors, isLoading } = useProyectos()
 const proyecto = reactive({
-    titulo,
-    descripcion,
-    idUser
-})
-const route = useRoute()
-function submitForm() {
-    validate().then(form => { if (form.valid) updateProyecto(proyecto) })
-}
+    id: route.params.id,
+    titulo: '',
+    descripcion: '',
+    idUser: ''
+});
+
+const errors = reactive({
+    name: ''
+});
+
 onMounted(() => {
-    getProyecto(route.params.id)
-})
-watchEffect(() => {
-    proyecto.id = proyectoData.value.id
-    proyecto.titulo = proyectoData.value.titulo
-    proyecto.descripcion = proyectoData.value.descripcion
-    proyecto.idUser = proyectoData.value.idUser
+    axios.get('/api/proyectos/' + route.params.id)
+    .then(response => {
+        proyecto.id = response.data.id;
+        proyecto.titulo = response.data.titulo;
+        proyecto.descripcion = response.data.descripcion;
+        proyecto.idUser = response.data.idUser;
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
 })
 
-// function saveProyecto() {
-//    validate().then(form => {
-//        console.log('validate');
-//        if (form.valid) {
-//            axios.post('/api/proyectos/update/' + route.params.id, proyecto)
-//                .then(response => {
-//                    strError.value = ""
-//                    strSuccess.value = response.data.success
-//                })
-//                .catch(function (error) {
-//                    strSuccess.value = ""
-//                    strError.value = error.response.data.message
-//                });
-//        }
-//    })
+const submitForm = async () => {
+    try {
+        await axios.put(`/api/proyectos/update/${proyecto.id}`, proyecto);
 
-// }
+        strSuccess.value = 'Proyecto actualizado exitosamente';
+
+        router.push({ name: 'proyectos.index' });
+    } catch (error) {
+        console.error("Error updating proyecto:", error);
+
+        strError.value = 'Error al actualizar el proyecto';
+    }
+};
 </script>
+
 <style></style>
