@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Añade una proyecto nuevo</h5>
+                <h5 class="card-title">Añade un proyecto nuevo</h5>
             </div>
 
             <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">

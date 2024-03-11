@@ -6,29 +6,30 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todos los fichajes</h5>
                         <div>
-                            <RouterLink :to="{titulo:'fichaje.create'}" class="btn btn-success">Nuevo fichaje</RouterLink>
+                            <RouterLink :to="{name:'fichajes.create'}" class="btn btn-success">Nuevo fichaje</RouterLink>
                         </div>
                     </div>
-
 
                     <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
-                                <th>Fecha fichaje</th>
-                                <th>Horas entrada</th>
-                                <th>Hora salida</th>
+                                <th>ID de usuario</th>
+                                <th>Fecha de fichaje</th>
+                                <th>Hora de entrada</th>
+                                <th>Hora de salida</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(fichaje,index) in fichajes">
                                 <td class="text-center">{{ fichaje.id }}</td>
-                                <td>{{ fichaje.fechaFichaje}}</td>
-                                <td>{{ fichaje.horaEntrada}}</td>
-                                <td>{{ fichaje.horaSalida}}</td>
+                                <td>{{ fichaje.idUser }}</td>
+                                <td>{{ fichaje.fechaFichaje }}</td>
+                                <td>{{ fichaje.horaEntrada }}</td>
+                                <td>{{ fichaje.horaSalida }}</td>
                                 <td class="text-center">
-                                    <RouterLink :to="{titulo:'fichaje.update'}" @click="updateFichaje(fichaje.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
+                                    <RouterLink :to="{ name: 'fichajes.edit', params: { id: fichaje.id } }" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteFichaje(fichaje.id,index)">Delete</button>
                                 </td>
                             </tr>

@@ -58,10 +58,6 @@ onMounted(() => {
         });
 });
 
-function updateProyecto(id, index){
-
-}
-
 const deleteProyecto = (id, index) => {
     swal({
         title: '¿Quieres eliminar el proyecto?',

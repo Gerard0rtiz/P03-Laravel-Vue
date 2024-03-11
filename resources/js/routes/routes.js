@@ -215,7 +215,7 @@ export default [
                     },
                     {
                         name: 'fichajes.edit',
-                        path: 'edit',
+                        path: 'edit/:id',
                         component: FichajeEdit,
                         meta: { breadCrumb: 'Editar fichaje' }
                     }
@@ -240,7 +240,7 @@ export default [
                     },
                     {
                         name: 'imputaciones.edit',
-                        path: 'edit',
+                        path: 'edit/:id',
                         component: ImputacionEdit,
                         meta: { breadCrumb: 'Editar imputacion' }
                     }

@@ -40,6 +40,7 @@ Route::delete('imputaciones/{id}',[ImputacionController::class,'destroy']);
 
 //Rutas de FichajeController:
 Route::get('fichajes',[FichajeController::class,'index']);
+Route::get('fichajes/{id}',[FichajeController::class,'show']);
 Route::post('fichajes/',[FichajeController::class,'store']);
 Route::put('fichajes/update/{id}',[FichajeController::class,'update']);
 Route::delete('fichajes/{id}',[FichajeController::class,'destroy']);
