@@ -25,7 +25,9 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
         $role = Role::create(['name' => 'admin']);
+        $role3 = Role::create(['name' => 'jefe']);
         $role2 = Role::create(['name' => 'user']);
+        
         $permissions = [
             'post-list',
             'post-create',
@@ -41,7 +43,14 @@ class CreateAdminUserSeeder extends Seeder
         Category::create(['name' => 'Vue.js']);
         Category::create(['name' => 'Cat 2']);
 
-        $permissions = Permission::pluck('id','id')->all();
+        $additionalPermissions = [
+            
+        ];
+        
+        $permissions = array_merge($permissions, $additionalPermissions);
+        $role3->syncPermissions($permissions);
+        
+        $permissions = Permission::pluck('id', 'id')->all();
 
         $role->syncPermissions($permissions);
 
