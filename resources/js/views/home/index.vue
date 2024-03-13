@@ -10,8 +10,8 @@
                         <ClockComponent class="text-center" style="background-color: #0d6efd; padding: 8px 20px; border-radius: 25px;" />
                     </div>
                     <div id="btns-fichaje" class="card-body" style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
-                        <button class="btn btn-primary" style="padding: 12px 25px; font-size: 18px;">Entrar</button>
-                        <button class="btn btn-secondary" style="padding: 12px 25px; font-size: 18px;">Salir</button>
+                        <button @click="EntradaFichaje()" class="btn btn-primary" style="padding: 12px 25px; font-size: 18px;">Entrar</button>
+                        <button @click="SalidaFichaje()"class="btn btn-secondary" style="padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
                 </div>
             </div>
