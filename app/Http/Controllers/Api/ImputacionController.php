@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Imputacion;
 
 class ImputacionController extends Controller
    {
@@ -13,19 +14,16 @@ class ImputacionController extends Controller
           return $imputaciones;
       }
 
-      public function show()
+      public function show($id)
       {
-       //  $this->authorize('imputacion-edit');
-         //if ($imputacion->user_id !== auth()->user()->id && !auth()->user()->hasPermissionTo('imputacion-all')) {
-          //   return response()->json(['status' => 405, 'success' => false, 'message' => 'imputacion prueba']);
-         //} else {
-          //   return new ImputacionResource($imputacion);
-         //}
+        return Imputacion::find($id);
       }
   
       public function store(Request $request)
       {
           $request->validate([
+              'idUser' => 'required',
+              'idProyecto' => 'required',
               'fechaImputacion' => 'required',
               'horasRealizadas' => 'required',
               'descripcion' => 'required'
@@ -38,8 +36,10 @@ class ImputacionController extends Controller
   
       public function update($id, Request $request)
       {
-          $imputacion = Imputacion::find($id);
+          $Imputacion = Imputacion::find($id);
           $request->validate([
+              'idUser' => 'required',
+              'idProyecto' => 'required',
               'fechaImputacion' => 'required',
               'horasRealizadas' => 'required',
               'descripcion' => 'required'

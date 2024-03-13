@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\PostController;
@@ -34,6 +33,7 @@ Route::delete('proyectos/{id}',[ProyectoController::class,'destroy']);
 
 //Rutas de ImputacionController:
 Route::get('imputaciones',[ImputacionController::class,'index']);
+Route::get('imputaciones/{id}',[ImputacionController::class,'show']);
 Route::post('imputaciones/',[ImputacionController::class,'store']);
 Route::put('imputaciones/update/{id}',[ImputacionController::class,'update']);
 Route::delete('imputaciones/{id}',[ImputacionController::class,'destroy']);

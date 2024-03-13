@@ -6,29 +6,31 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todos las imputaciones</h5>
                         <div>
-                            <RouterLink :to="{titulo:'imputacion.create'}" class="btn btn-success">Nueva imputacion</RouterLink>
+                            <RouterLink :to="{name:'imputaciones.create'}" class="btn btn-success">Nueva imputacion</RouterLink>
                         </div>
                     </div>
-
-
                     <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
+                                <th>ID de usuario</th>
+                                <th>ID de proyecto</th>
                                 <th>Fecha imputacion</th>
                                 <th>Horas realizadas</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(imputacion,index) in imputaciones">
                                 <td class="text-center">{{ imputacion.id }}</td>
-                                <td>{{ imputacion.fechaImputacion}}</td>
-                                <td>{{ imputacion.horasRealizadas}}</td>
-                                <td>{{ imputacion.descripcion}}</td>
+                                <td>{{ imputacion.idUser }}</td>
+                                <td>{{ imputacion.idProyecto }}</td>
+                                <td>{{ imputacion.fechaImputacion }}</td>
+                                <td>{{ imputacion.horasRealizadas }}</td>
+                                <td>{{ imputacion.descripcion }}</td>
                                 <td class="text-center">
-                                    <RouterLink :to="{titulo:'Imputacion.update'}" @click="updateImputacion(imputacion.id,index)" class="btn btn-warning mr-1">Edit</RouterLink>
+                                    <RouterLink :to="{name:'imputaciones.edit', params: { id: imputacion.id } }" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteImputacion(imputacion.id,index)">Delete</button>
                                 </td>
                             </tr>
@@ -58,6 +60,8 @@ onMounted(() => {
         });
 });
 
+
+
 const deleteImputacion = (id, index) => {
     swal({
         title: '¿Quieres eliminar la imputacion?',
@@ -77,14 +81,13 @@ const deleteImputacion = (id, index) => {
                     swal({
                         icon: 'success',
                         title: 'Se ha eliminado la imputacion exitosamente.'
-                    });
+      });
                 })
-                .catch(error => {
+  .catch(error => {
                     swal({
                         icon: 'error',
                         title: 'Error al eliminar la imputacion.'
-                    });
-                    console.error("Error deleting imputacion:", error);
+                    });     console.error("Error deleting imputacion:", error);
                 });
         }
     });

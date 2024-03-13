@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('idUser')->references('id')->on('Users')->onDelete('cascade');
             $table->unsignedBigInteger('idProyecto');
             $table->foreign('idProyecto')->references('id')->on('Proyectos')->onDelete('cascade');
-            $table->string('nombreJefe');
             $table->date('fechaImputacion');
             $table->float('horasRealizadas', 8, 2);
             $table->string('descripcion');
