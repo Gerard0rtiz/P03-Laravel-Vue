@@ -41,8 +41,11 @@ export default defineComponent({
     components: {
         ClockComponent
     },
+    
     setup() {
+        
         const proyectos = ref([]);
+       
 
         onMounted(() => {
             axios.get('/api/proyectos')
@@ -60,6 +63,16 @@ export default defineComponent({
         };
     }
 });
+
+const EntradaFichaje = () => {
+
+}
+
+const SalidaFichaje = () => {
+    
+}
+
+
 </script>
 
 <style scoped>
