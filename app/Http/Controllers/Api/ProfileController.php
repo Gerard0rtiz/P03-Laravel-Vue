@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
     public function user(Request $request)
     {
-        $user = $request->user();
+        $user = $request->user()->load('roles');
 
         return $this->successResponse($user, 'User found');
     }
