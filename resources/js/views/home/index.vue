@@ -18,7 +18,7 @@
                             style="padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
                 </div>
-                <li>idUser:{{ fichaje }}</li>
+                <li>idUser:{{ fichaje.idUser }}</li>
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
@@ -59,11 +59,11 @@ onMounted(() => {
         });
 });
 
-const EntradaFichaje = () => {
-    fichaje.idUser = user.idUser;
+function EntradaFichaje() {
+    fichaje.value.idUser = user.value.id;
 }
 
-const SalidaFichaje = () => {
+function SalidaFichaje() {
 
 }
 </script>
@@ -72,9 +72,9 @@ const SalidaFichaje = () => {
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  components: {
-    ClockComponent
-  }
+    components: {
+        ClockComponent
+    }
 });
 </script>
 
