@@ -49,21 +49,5 @@ class FichajeController extends Controller
 
     public function show($id){
         return Fichaje::find($id);
-    }
-
-    public function registroFichaje(Request $request){ 
-        $request->validate([
-            'idUser' => 'required',
-            'fechaFichaje' => 'required',
-            'horaEntrada' => 'required',
-            'horaSalida' => 'required'
-        ]);
-        $horaActual = Date::now()->format('H:i:s');
-        $fechaActual = Date::now()->format('Y-m-d');
-
-        return response()->json(['success' => true, 'horaActual' => $horaActual, 'fechaActual' => $fechaActual]);
-
-    }
-
-    
+    }    
 }

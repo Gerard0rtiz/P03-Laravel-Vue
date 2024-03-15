@@ -7,13 +7,18 @@
             <div class="container mt-5">
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
                     <div class="card-body">
-                        <ClockComponent class="text-center" style="background-color: #0d6efd; padding: 8px 20px; border-radius: 25px;" />
+                        <ClockComponent class="text-center"
+                            style="background-color: #0d6efd; padding: 8px 20px; border-radius: 25px;" />
                     </div>
-                    <div id="btns-fichaje" class="card-body" style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
-                        <button @click="EntradaFichaje()" class="btn btn-primary" style="padding: 12px 25px; font-size: 18px;">Entrar</button>
-                        <button @click="SalidaFichaje()" class="btn btn-secondary" style="padding: 12px 25px; font-size: 18px;">Salir</button>
+                    <div id="btns-fichaje" class="card-body"
+                        style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
+                        <button @click="EntradaFichaje()" class="btn btn-primary"
+                            style="padding: 12px 25px; font-size: 18px;">Entrar</button>
+                        <button @click="SalidaFichaje()" class="btn btn-secondary"
+                            style="padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
                 </div>
+                <li>idUser:{{ fichaje }}</li>
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
@@ -22,7 +27,7 @@
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
-                    <div v-for="(proyecto,index) in proyectos" class="col-md-3">
+                    <div v-for="(proyecto, index) in proyectos" class="col-md-3">
                         <h2>{{ proyecto.titulo }}</h2>
                         <p>{{ proyecto.descripcion }}</p>
                     </div>
@@ -32,47 +37,45 @@
     </div>
 </template>
   
-<script>
+<script setup>
 import axios from "axios";
+import { useStore } from "vuex";
 import ClockComponent from '@/components/ClockComponent.vue';
-import { ref, onMounted, defineComponent } from "vue";
+import { ref, computed, onMounted } from "vue";
 
-export default defineComponent({
-    components: {
-        ClockComponent
-    },
-    
-    setup() {
-        
-        const proyectos = ref([]);
-       
+const store = useStore();
+const user = computed(() => store.getters["auth/user"]);
+const fichaje = ref({});
+const proyectos = ref([]);
 
-        onMounted(() => {
-            axios.get('/api/proyectos')
-                .then(response => {
-                    proyectos.value = response.data;
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.error("Error fetching proyectos:", error);
-                });
+onMounted(() => {
+    axios.get('/api/proyectos')
+        .then(response => {
+            proyectos.value = response.data;
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching proyectos:", error);
         });
-
-        return {
-            proyectos
-        };
-    }
 });
 
 const EntradaFichaje = () => {
-
+    fichaje.idUser = user.idUser;
 }
 
 const SalidaFichaje = () => {
-    
+
 }
+</script>
 
+<script>
+import { defineComponent } from 'vue';
 
+export default defineComponent({
+  components: {
+    ClockComponent
+  }
+});
 </script>
 
 <style scoped>
