@@ -23,7 +23,7 @@
 
                 <div class="form-group mb-2">
                     <label>Descripción</label><span class="text-danger"> *</span>
-                    <textarea v-model="proyecto.descripcion" class="form-control" rows="3" placeholder="Descripción"></textarea>
+                    <textarea v-model="proyecto.descripcion" class="form-control" rows="3" maxlength="200" placeholder="Descripción"></textarea>
                 </div>
 
                 <div class="form-gorup mb-2">

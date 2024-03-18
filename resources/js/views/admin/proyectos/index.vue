@@ -10,8 +10,9 @@
                         </div>
                     </div>
 
-
-                    <table class="table table-hover table-sm">
+                   
+             
+                    <table  class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
@@ -22,11 +23,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(proyecto,index) in proyectos">
+                        
+                            <tr  v-for="(proyecto,index) in proyectos ">
                                 <td class="text-center">{{ proyecto.id }}</td>
-                                <td>{{ proyecto.titulo }}</td>
-                                <td>{{ proyecto.descripcion }}</td>
-                                <td>{{ proyecto.idUser }}</td>
+                                <td  >{{ proyecto.titulo }}</td>
+                                <td  class="descripcion">{{ proyecto.descripcion }}</td>
+                                <td >{{ proyecto.idUser }}</td>
                                 <td class="text-center">
                                     <RouterLink :to="{ name: 'proyectos.edit', params: { id: proyecto.id } }" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteProyecto(proyecto.id,index)">Delete</button>
@@ -35,9 +37,10 @@
                         </tbody>
                     </table>
                 </div>
+                </div>
             </div>
         </div>
-    </div>
+
 </template>
 
 
@@ -92,4 +95,9 @@ const deleteProyecto = (id, index) => {
 </script>
 
 
-<style></style>
+
+<style>
+.descripcion {
+    max-width: 500px;
+}
+</style>

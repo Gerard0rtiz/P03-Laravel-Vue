@@ -28,7 +28,7 @@
                                 <td>{{ imputacion.idProyecto }}</td>
                                 <td>{{ imputacion.fechaImputacion }}</td>
                                 <td>{{ imputacion.horasRealizadas }}</td>
-                                <td>{{ imputacion.descripcion }}</td>
+                                <td class="descripcion"> {{ imputacion.descripcion }}</td>
                                 <td class="text-center">
                                     <RouterLink :to="{name:'imputaciones.edit', params: { id: imputacion.id } }" class="btn btn-warning mr-1">Edit</RouterLink>
                                     <button class="btn btn-danger" @click="deleteImputacion(imputacion.id,index)">Delete</button>
@@ -95,4 +95,8 @@ const deleteImputacion = (id, index) => {
 </script>
 
 
-<style></style>
+<style>
+.descripcion {
+    max-width: 500px;
+}
+</style>
