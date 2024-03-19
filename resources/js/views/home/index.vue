@@ -69,8 +69,8 @@ onMounted(() => {
 
 // Función para verificar las cookies de usuario
 function checkUserCookies() {
-    const userId = getCookie("userId");
-    if (userId) {
+    const idUser = getCookie("idUser");
+    if (idUser) {
         entradaDisabled.value = true;
         salidaDisabled.value = false;
     } else {
@@ -91,12 +91,13 @@ function checkSalidaFichaje() {
 // Función para guardar las cookies de entrada al fichar
 function saveEntradaCookies() {
     const now = new Date();
-    const fechaEntrada = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`;
+const fechaFichaje = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
     const horaEntrada = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    const userId = user.value.id;
-    setCookie("fechaEntrada", fechaEntrada, 1); // Cookie expira en 1 día
+    const idUser = user.value.id;
+
+    setCookie("fechaFichaje", fechaFichaje, 1); // Cookie expira en 1 día
     setCookie("horaEntrada", horaEntrada, 1);
-    setCookie("userId", userId, 1);
+    setCookie("idUser", idUser, 1);
 }
 
 // Función para fichar entrada
@@ -120,23 +121,23 @@ function SalidaFichaje() {
         const now = new Date();
         const horaSalida = now.toLocaleTimeString('en-US', { hour12: false });
 
-        fichaje.value.userId = parseInt(getCookie("userId"), 10);
-        fichaje.value.fechaEntrada = getCookie("fechaEntrada");
+        fichaje.value.idUser = parseInt(getCookie("idUser"), 10);
+        fichaje.value.fechaFichaje = getCookie("fechaFichaje");
         fichaje.value.horaEntrada = getCookie("horaEntrada");
         fichaje.value.horaSalida = horaSalida
 
-        // axios.post('/api/fichajes', fichaje.value)
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
+        axios.post('/api/fichajes', fichaje.value)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
         // Eliminar cookies al salir
-        document.cookie = "fechaEntrada=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "fechaFichaje=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "horaEntrada=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "idUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "horaSalida=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
         salidaDisabled.value = true;
