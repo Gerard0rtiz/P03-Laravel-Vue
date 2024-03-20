@@ -30,6 +30,7 @@ Route::get('proyectos/{id}',[ProyectoController::class,'show']);
 Route::post('proyectos/',[ProyectoController::class,'store']);
 Route::put('proyectos/update/{id}',[ProyectoController::class,'update']);
 Route::delete('proyectos/{id}',[ProyectoController::class,'destroy']);
+Route::get('Proyecto',[ProyectoController::class,'index']);
 
 //Rutas de ImputacionController:
 Route::get('imputaciones',[ImputacionController::class,'index']);

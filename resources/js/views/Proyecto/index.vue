@@ -2,28 +2,17 @@
     <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1>{{ $t('welcome_starter_title') }}</h1>
+             
             </div>
             <div class="container mt-5">
-                <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
-                    <div class="card-body">
-                        <ClockComponent class="text-center"
-                            style="background-color: #0d6efd; padding: 8px 20px; border-radius: 25px;" />
-                    </div>
-                
-                </div>
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1>{{ $t('imp_horas_proyectos') }}</h1>
+                <h1>{{ proyecto.titulo }}</h1>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
-                    <div v-for="(proyecto, index) in proyectos" class="col-md-3">
-                        <h2>{{ proyecto.titulo }}</h2>
-                        <p>{{ proyecto.descripcion }}</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -34,16 +23,13 @@
 
 import axios from "axios";
 import { useStore } from "vuex";
-import ClockComponent from '@/components/ClockComponent.vue';
 import { ref, computed, onMounted } from "vue";
 
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const fichaje = ref({});
-const proyectos = ref([]);
-const entradaDisabled = ref(false);
-const salidaDisabled = ref(true);
+const proyecto = ref([]);
+
 
 onMounted(() => {
     axios.get('/api/proyectos')
@@ -56,35 +42,7 @@ onMounted(() => {
         });
 });
 
-function EntradaFichaje() {
-if (user.value.id) {
-    fichaje.value.idUser = user.value.id;
-    entradaDisabled.value = true;
-    salidaDisabled.value = false;
-} else {
-    console.log("Error debes de iniciar sesión");
-}
-}
 
-function SalidaFichaje() {
-if (user.value.id) {
-    salidaDisabled.value = true;
-    entradaDisabled.value = false;
-} else {
-    console.log("Error debes de iniciar sesión");
-}
-}
-
-</script>
-
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    components: {
-        ClockComponent
-    }
-});
 </script>
 
 <style scoped>

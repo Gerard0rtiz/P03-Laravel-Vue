@@ -20,6 +20,7 @@ const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
 const ProyectoList  = ()  => import('../views/admin/proyectos/Index.vue');
 const ProyectoCreate  = ()  => import('../views/admin/proyectos/Create.vue');
 const ProyectoEdit  = ()  => import('../views/admin/proyectos/Edit.vue');
+const ProyectoVista = () => import('../views/proyecto/index.vue');
 //rutas a imputacion
 const ImputacionList  = ()  => import('../views/admin/imputaciones/Index.vue');
 const ImputacionCreate  = ()  => import('../views/admin/imputaciones/Create.vue');
@@ -101,6 +102,19 @@ export default [
                 name: 'auth.reset-password',
                 component: () => import('../views/auth/passwords/Reset.vue'),
                 beforeEnter: guest,
+            },
+            {
+                name: 'Proyecto',
+                path: 'ProyectoVista',
+                meta: { breadCrumb: 'Proyecto'},
+                children: [
+                    {
+                        name: 'Proyecto.index',
+                        path: '',
+                        component: ProyectoVista,
+                        meta: { breadCrumb: 'Proyecto' }
+                    },
+                ]
             },
         ]
     },
