@@ -29,8 +29,8 @@
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
 
-                    <div v-for="(proyecto, index) in proyectos" class="border border-primary border border-5 col-md-3">
-                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }" class="btn btn-light  mr-1">
+                    <div v-for="(proyecto, index) in proyectos" class="border border-3 col-md-3" style="margin-right: 5px; border-radius: 20px;">
+                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }" class="btn btn-light d-flex flex-column align-items-center justify-content-center" style="border-radius: 16px; width: 100%; height: 100%;">
                             <h2>{{ proyecto.titulo }}</h2>
                             <p>{{ proyecto.descripcion }}</p>
                         </RouterLink>
