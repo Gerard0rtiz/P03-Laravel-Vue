@@ -2,19 +2,19 @@
     <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1>{{ $t('welcome_starter_title') }}</h1>
+                <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
             </div>
             <div class="container mt-5">
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
                     <div class="card-body">
                         <ClockComponent class="text-center"
-                            style="font-family: 'Nunito', sans-serif; background-color: #043927; padding: 8px 20px; border-radius: 25px;" />
+                            style="font-family: 'Nunito', sans-serif; background-color: #053b28; padding: 8px 20px; border-radius: 25px;" />
                     </div>
                     <div id="btns-fichaje" class="card-body"
                         style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
                         <button class="btn-pulse" @click="EntradaFichaje()" :disabled="entradaDisabled"
                             :class="{ 'btn': true, 'btn-primary': true, 'btn-secondary': entradaDisabled }"
-                            style="padding: 12px 25px; font-size: 18px; background-color: #043927;">Entrar</button>
+                            style="padding: 12px 25px; font-size: 18px; background-color: #053b28;">Entrar</button>
                         <button class="btn-pulse" @click="SalidaFichaje()" :disabled="salidaDisabled"
                             :class="{ 'btn': true, 'btn-danger': true, 'btn-gris': salidaDisabled }"
                             style="padding: 12px 25px; font-size: 18px;">Salir</button>
@@ -24,7 +24,7 @@
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1>{{ $t('imp_horas_proyectos') }}</h1>
+                <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
@@ -33,9 +33,9 @@
                         style="margin-right: 5px; border-radius: 20px;">
                         <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
-                            style="padding: 20px 30px; background-color: #043927; border-radius: 16px; width: 100%; height: 100%;">
-                            <h2 style="color: white; text-transform: uppercase; font-size: 25px;">{{ proyecto.titulo }}</h2>
-                            <p style="color: white;">{{ proyecto.descripcion }}</p>
+                            :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100%', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center'}">
+                            <h2 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">{{ proyecto.titulo }}</h2>
+                            <p style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">{{ proyecto.descripcion }}</p>
                         </RouterLink>
                     </div>
                 </div>
