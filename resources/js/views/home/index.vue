@@ -8,14 +8,14 @@
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
                     <div class="card-body">
                         <ClockComponent class="text-center"
-                            style="background-color: #0d6efd; padding: 8px 20px; border-radius: 25px;" />
+                            style="font-family: 'Nunito', sans-serif; background-color: #043927; padding: 8px 20px; border-radius: 25px;" />
                     </div>
                     <div id="btns-fichaje" class="card-body"
                         style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
-                        <button @click="EntradaFichaje()" :disabled="entradaDisabled"
+                        <button class="btn-pulse" @click="EntradaFichaje()" :disabled="entradaDisabled"
                             :class="{ 'btn': true, 'btn-primary': true, 'btn-secondary': entradaDisabled }"
-                            style="padding: 12px 25px; font-size: 18px;">Entrar</button>
-                        <button @click="SalidaFichaje()" :disabled="salidaDisabled"
+                            style="padding: 12px 25px; font-size: 18px; background-color: #043927;">Entrar</button>
+                        <button class="btn-pulse" @click="SalidaFichaje()" :disabled="salidaDisabled"
                             :class="{ 'btn': true, 'btn-danger': true, 'btn-gris': salidaDisabled }"
                             style="padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
@@ -29,10 +29,13 @@
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
 
-                    <div v-for="(proyecto, index) in proyectos" class="border border-3 col-md-3" style="margin-right: 5px; border-radius: 20px;">
-                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }" class="btn btn-light d-flex flex-column align-items-center justify-content-center" style="border-radius: 16px; width: 100%; height: 100%;">
-                            <h2>{{ proyecto.titulo }}</h2>
-                            <p>{{ proyecto.descripcion }}</p>
+                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-md-3"
+                        style="margin-right: 5px; border-radius: 20px;">
+                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }"
+                            class="btn btn-light d-flex flex-column align-items-center justify-content-center"
+                            style="padding: 20px 30px; background-color: #043927; border-radius: 16px; width: 100%; height: 100%;">
+                            <h2 style="color: white; text-transform: uppercase; font-size: 25px;">{{ proyecto.titulo }}</h2>
+                            <p style="color: white;">{{ proyecto.descripcion }}</p>
                         </RouterLink>
                     </div>
                 </div>
@@ -94,7 +97,7 @@ function checkSalidaFichaje() {
 // Función para guardar las cookies de entrada al fichar
 function saveEntradaCookies() {
     const now = new Date();
-const fechaFichaje = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+    const fechaFichaje = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
     const horaEntrada = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
     const idUser = user.value.id;
 
@@ -191,10 +194,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-body {
-    font-family: 'Nunito', sans-serif;
-}
-
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
     line-height: 1.15;
@@ -203,6 +202,10 @@ html {
 
 body {
     margin: 0
+}
+
+h1, h2, p, button {
+    font-family: 'Nunito', sans-serif !important;
 }
 
 a {
@@ -583,5 +586,17 @@ video {
         color: #6b7280;
         color: rgba(107, 114, 128, var(--tw-text-opacity))
     }
+}
+
+.btn-pulse {
+    transition: transform 0.1s ease;
+}
+
+.btn-pulse:active {
+    transform: scale(0.95);
+}
+
+.btn-light:hover {
+    background-color: #f0f0f0;
 }
 </style>

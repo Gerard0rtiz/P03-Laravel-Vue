@@ -1,7 +1,7 @@
 <template>
     <div>
       <!-- Aquí puedes mostrar el tiempo en tu vista -->
-      <h2 style="color: white; margin: 0;">{{ time }}</h2>
+      <h2 style="font-weight: 600; color: white; margin: 0;">{{ time }}</h2>
     </div>
   </template>
   

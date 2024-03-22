@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm custom-navbar">
         <div class="container">
             <router-link to="/" class="navbar-brand">DAW 2</router-link>
             <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,12 +10,6 @@
                     <LocaleSwitcher />
                 </ul>
                 <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
-                        <li class="nav-item">
-                            <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name : 'public-posts.index'}" class="nav-link">Blog</router-link>
-                        </li>
                     <template v-if="!user?.name">
                         <li class="nav-item">
                             <router-link class="nav-link" to="/login"
@@ -28,7 +22,7 @@
                     </template>
                     <li v-if="user?.name" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.name }}
+                            Hola, {{ user.name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li v-if="user.roles[0]?.name == 'admin'"><router-link class="dropdown-item" to="/admin">Gestión</router-link></li>
@@ -52,3 +46,21 @@ import LocaleSwitcher from "@/components/LocaleSwitcher.vue";
     const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
 </script>
+<style scoped>
+    .navbar.custom-navbar {
+    background-color: #043927;
+    font-size: 20px;
+    height: 100px; 
+    font-family: 'Nunito', sans-serif;
+}
+
+.navbar.custom-navbar .nav-link{
+    color: white !important;
+    font-size: 20px;
+}
+
+.navbar.custom-navbar .navbar-brand {
+    font-size: 20px;
+    color: white !important;
+}
+</style>
