@@ -9,7 +9,7 @@
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1>{{ proyecto.titulo }}</h1>
+                <h1>{{ proyectoTitulo }}</h1>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
@@ -23,19 +23,23 @@
 
 import axios from "axios";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import { ref, computed, onMounted } from "vue";
 
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
 const proyecto = ref([]);
-
+const route = useRoute();
+const proyectoId = route.params.id;
+const proyectoTitulo = route.params.titulo;
 
 onMounted(() => {
     axios.get('/api/proyectos')
         .then(response => {
-            proyectos.value = response.data;
+            proyecto.value = response.data;
             console.log(response.data);
+
         })
         .catch(error => {
             console.error("Error fetching proyectos:", error);

@@ -31,7 +31,7 @@
 
                     <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-md-3"
                         style="margin-right: 5px; border-radius: 20px;">
-                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id } }"
+                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
                             :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100%', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center'}">
                             <h2 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">{{ proyecto.titulo }}</h2>

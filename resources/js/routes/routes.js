@@ -105,7 +105,7 @@ export default [
             },
             {
                 name: 'Proyecto',
-                path: 'ProyectoVista',
+                path: '/ProyectoVista/:id/:titulo',
                 meta: { breadCrumb: 'Proyecto'},
                 children: [
                     {
