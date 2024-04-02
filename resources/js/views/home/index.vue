@@ -1,5 +1,6 @@
 <template>
-    <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"
+        style="margin-top: 100px;">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
@@ -27,23 +28,29 @@
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="container mt-5 card">
-                <div class="container" style="display: flex !important;">
+                <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
-                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-md-3"
-                        style="margin-right: 5px; border-radius: 20px;">
-                        <RouterLink :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
+                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
+                        style="margin: 6px; border-radius: 20px; width: 24% !important; padding: 0;">
+                        <RouterLink
+                            :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
-                            :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100%', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center'}">
-                            <h2 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">{{ proyecto.titulo }}</h2>
-                            <p style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">{{ proyecto.descripcion }}</p>
+                            :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '270px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                            <h2
+                                style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                                {{ proyecto.titulo }}</h2>
+                            <p
+                                style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">
+                                {{ proyecto.descripcion }}</p>
                         </RouterLink>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import axios from "axios";
 import { useStore } from "vuex";
@@ -182,7 +189,7 @@ function getCookie(name) {
     return "";
 }
 </script>
-  
+
 <script>
 import { defineComponent } from 'vue';
 
@@ -204,7 +211,10 @@ body {
     margin: 0
 }
 
-h1, h2, p, button {
+h1,
+h2,
+p,
+button {
     font-family: 'Nunito', sans-serif !important;
 }
 
@@ -402,7 +412,7 @@ video {
 }
 
 .shadow {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)
+    box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.75) !important;
 }
 
 .text-center {
@@ -589,14 +599,13 @@ video {
 }
 
 .btn-pulse {
-    transition: transform 0.1s ease;
+    transition: transform 0.3s ease, box-shadow 0.4s ease;;
+    box-shadow: 4px 4px 4px 2px rgba(0,0,0,0.75) !important;
 }
 
 .btn-pulse:active {
     transform: scale(0.95);
+    box-shadow: 4px 4px 4px 2px rgba(0,0,0,0) !important;
 }
 
-.btn-light:hover {
-    background-color: #f0f0f0;
-}
 </style>

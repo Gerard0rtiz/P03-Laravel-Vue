@@ -1,17 +1,17 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm custom-navbar">
-        <div class="container">
-            <router-link to="/" class="navbar-brand">DAW 2</router-link>
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm custom-navbar fixed-top">
+        <div class="container" style="justify-content: space-around;">
+            <a width="33%" height="90px" href="/"><img style="border: none;" class="navbar-toggler" height="90px" src="/images/logos/logoP3DAW2.svg" alt="logoMarcaImputfy"></a>
             <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse">
+                <ul class="width-33 navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
                     <LocaleSwitcher />
                 </ul>
-                <img width="20%" height="90px" src="/images/logos/logoP3DAW2.svg" alt="logoMarcaImputfy">
-                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+                <a width="33%" height="90px" href="/"><img width="100%" height="90px" src="/images/logos/logoP3DAW2.svg" alt="logoMarcaImputfy"></a>
+                <ul class="width-33 navbar-nav mt-2 mt-lg-0 ms-auto" style="justify-content: right !important;">
                     <template v-if="!user?.name">
                         <li class="nav-item">
                             <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
@@ -52,6 +52,10 @@ const user = computed(() => store.getters["auth/user"])
 const { processing, logout } = useAuth();
 </script>
 <style scoped>
+.width-33{
+    width: 33% !important;
+}
+
 .navbar.custom-navbar {
     background-color: #053b28;
     font-size: 20px;
