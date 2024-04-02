@@ -10,7 +10,7 @@
                 <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
                     <LocaleSwitcher />
                 </ul>
-                <img width="20%" src="/images/logos/logoP3DAW2.svg" alt="logoMarcaImputfy">
+                <img width="20%" height="90px" src="/images/logos/logoP3DAW2.svg" alt="logoMarcaImputfy">
                 <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
                     <template v-if="!user?.name">
                         <li class="nav-item">
