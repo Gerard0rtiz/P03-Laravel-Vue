@@ -2,7 +2,6 @@
     <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-             
             </div>
             <div class="container mt-5">
             </div>
@@ -10,12 +9,58 @@
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1>{{ proyectoTitulo }}</h1>
+                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px;" to="/">❮ VOLVER</router-link>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
+                    <table  class="table table-hover table-sm" style="width: 100%;">
+                        <thead class="bg-dark text-light">
+                        <tr>
+                            <th style="background-color: green; color: #FFF; width: 25%;">EMPLEADO</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">HORAS</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr  v-for="(imputacion,index) in imputaciones ">
+                                <td class="text-center">{{ imputacion.idUser }}</td>
+                                <td  >{{ imputacion.fechaImputacion }}</td>
+                                <td >{{ imputacion.horasRealizadas }}</td>
+                                <td  class="descripcion">{{ imputacion.descripcion }}</td>
+                                <td class="text-center">
+                                </td>
+                            </tr>
+                    </tbody>
+                    </table>
+
+                </div>
+                <div class="container">
+                    <form @submit.prevent="InsertarImputacion" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="fecha" class="form-label">FECHA:</label>
+                            <input type="text" class="form-control" id="fecha" v-model="fechaImputacion">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="horas" class="form-label">HORAS REALIZADAS:</label>
+                            <input type="text" class="form-control" id="horas" v-model="horasRealizadas">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="descripcion" class="form-label">DESCRIPCIÓN:</label>
+                            <textarea class="form-control" id="descripcion" v-model="descripcion"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn " style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <footer >
+            <p>Términos y condiciones</p>
+            <p>Politica de privacidad</p>
+            <p>cookies</p>
+        </footer>
     </div>
 </template>
 
@@ -29,15 +74,28 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const proyecto = ref([]);
+const imputacion = ref();
 const route = useRoute();
 const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
 
-onMounted(() => {
-    axios.get('/api/proyectos')
+function InsertarImputacion()  {
+    axios.post('/api/imputaciones', imputacion.value)
         .then(response => {
-            proyecto.value = response.data;
+            console.log(response);
+            strSuccess.value = response.data.success;
+            strError.value = null;
+        })
+        .catch(error => {
+            console.log(error);
+            strSuccess.value = null;
+            strError.value = error.response.data.message;
+        });
+}
+onMounted(() => {
+    axios.get('/api/imputaciones')
+        .then(response => {
+            imputacion.value = response.data;
             console.log(response.data);
 
         })
