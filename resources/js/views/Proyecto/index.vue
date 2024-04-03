@@ -16,21 +16,21 @@
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
                     <table  class="table table-hover table-sm" style="width: 100%;">
-                        <thead class="bg-dark text-light">
+                        <thead class="text-light">
                         <tr>
-                            <th style="background-color: green; color: #FFF; width: 25%;">EMPLEADO</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">HORAS</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
+                            <th class="text-center" style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%;">EMPLEADO</th>
+                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
+                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%;">HORAS</th>
+                            <th class="text-center" style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr  v-for="(imputacion,index) in imputaciones ">
-                                <td class="text-center">{{ imputacion.idUser }}</td>
-                                <td  >{{ imputacion.fechaImputacion }}</td>
-                                <td >{{ imputacion.horasRealizadas }}</td>
-                                <td  class="descripcion">{{ imputacion.descripcion }}</td>
-                                <td class="text-center">
+                                <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.idUser }}</td>
+                                <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.fechaImputacion }}</td>
+                                <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.horasRealizadas }}</td>
+                                <td v-if="imputacion.idProyecto == proyectoId" class="descripcion text-center">{{ imputacion.descripcion }}</td>
+                                <td v-if="imputacion.idProyecto == proyectoId" class="text-center">
                                 </td>
                             </tr>
                         </tbody>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="descripcion" class="form-label">DESCRIPCIÓN:</label>
-                            <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; height: 100px;" ></textarea>
+                            <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; min-height: 100px;" ></textarea>
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn " style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
@@ -76,7 +76,7 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputacion = ref();
+const imputaciones = ref();
 const route = useRoute();
 const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
