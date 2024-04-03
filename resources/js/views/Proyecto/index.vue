@@ -8,20 +8,20 @@
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div class="flex justify-content-between pt-8 sm:text-gray-600 dark:text-gray-400 text-sm"  style="max-width:  1320px;">
-                <h1>{{ proyectoTitulo }}</h1>
-                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px;" to="/">❮
+            <div class="flex justify-content-between pt-8 sm:text-gray-600 dark:text-gray-400 text-sm"  >
+                <h1 style="margin-left: 40px;">{{ proyectoTitulo }}</h1>
+                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; margin-right: 15px;" to="/">❮
                     VOLVER</router-link>
             </div>
-            <div class="container mt-5 card">
-                <div class="container" style="display: flex !important;">
-                    <table  class="table table-hover table-sm" style="width: 100%;">
+            <div class="container mt-5 card" :style="{ backgroundImage: 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', backgroundSize: 'cover', backgroundPosition: 'center' }">
+                <div class="container" style="display: flex !important; ">
+                    <table  class="table table-hover table-sm" style="width: 100%; ">
                         <thead class="text-light">
                         <tr>
-                            <th class="text-center" style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%;">EMPLEADO</th>
-                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
-                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%;">HORAS</th>
-                            <th class="text-center" style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
+                            <th class="text-center" style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">EMPLEADO</th>
+                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">FECHA IMPUTACIÓN</th>
+                            <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">HORAS</th>
+                            <th class="text-center" style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">DESCRIPCIÓN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,18 +37,18 @@
                     </table>
 
                 </div>
-                <div class="container" style="padding-top: 60px;">
+                <div class="container" style="padding-top: 60px; ">
                     <form @submit.prevent="InsertarImputacion" class="row g-3">
                         <div class="col-md-3">
-                            <label for="fecha" class="form-label">FECHA:</label>
+                            <label  class="form-label" style="font-size: 18; font-weight: 700; color: white">FECHA:</label>
                             <input type="date" class="form-control border rounded"  v-model="fechaImputacion">
                         </div>
                         <div class="col-md-3">
-                            <label for="horas" class="form-label">HORAS REALIZADAS:</label>
-                            <input type="number" max="8" class="form-control border rounded"  v-model="horasRealizadas">
+                            <label  style="font-size: 18; font-weight: 700; color: white" class="form-label" >HORAS REALIZADAS:</label>
+                            <input type="number" min="0" max="8" class="form-control border rounded"  v-model="horasRealizadas">
                         </div>
                         <div class="col-md-6">
-                            <label for="descripcion" class="form-label">DESCRIPCIÓN:</label>
+                            <label  style="font-size: 18; font-weight: 700; color: white;" class="form-label">DESCRIPCIÓN:</label>
                             <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; min-height: 100px;" ></textarea>
                         </div>
                         <div class="col-12">
@@ -58,11 +58,6 @@
                 </div>
             </div>
         </div>
-        <footer >
-            <p>Términos y condiciones</p>
-            <p>Politica de privacidad</p>
-            <p>cookies</p>
-        </footer>
     </div>
 </template>
 
@@ -82,7 +77,7 @@ const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
 
 function InsertarImputacion()  {
-    axios.post('/api/imputaciones', imputacion.value)
+    axios.post('/api/imputaciones', imputaciones.value)
         .then(response => {
             console.log(response);
             strSuccess.value = response.data.success;
