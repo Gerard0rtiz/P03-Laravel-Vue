@@ -1,5 +1,6 @@
 <template>
-    <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    <div
+        class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
             </div>
@@ -9,28 +10,30 @@
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
             <div class="flex justify-content-between pt-8 sm:text-gray-600 dark:text-gray-400 text-sm"  style="max-width:  1320px;">
                 <h1>{{ proyectoTitulo }}</h1>
-                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px;" to="/">❮ VOLVER</router-link>
+                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px;" to="/">❮
+                    VOLVER</router-link>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
                     <table  class="table table-hover table-sm" style="width: 100%;">
-                        <thead class="text-light">
+                        <thead class="bg-dark text-light">
                         <tr>
-                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">EMPLEADO</th>
-                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">FECHA IMPUTACIÓN</th>
-                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">HORAS</th>
-                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">DESCRIPCIÓN</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">EMPLEADO</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">HORAS</th>
+                            <th style="background-color: green; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr  v-for="(imputacion,index) in imputaciones ">
-                                <td style="text-align: center;">{{ imputacion.idUser }}</td>
-                                <td style="text-align: center;" >{{ imputacion.fechaImputacion }}</td>
-                                <td style="text-align: center;" >{{ imputacion.horasRealizadas }}</td>
-                                <td style="text-align: center;" >{{ imputacion.descripcion }}</td>
-                              
+                                <td class="text-center">{{ imputacion.idUser }}</td>
+                                <td  >{{ imputacion.fechaImputacion }}</td>
+                                <td >{{ imputacion.horasRealizadas }}</td>
+                                <td  class="descripcion">{{ imputacion.descripcion }}</td>
+                                <td class="text-center">
+                                </td>
                             </tr>
-                    </tbody>
+                        </tbody>
                     </table>
 
                 </div>
@@ -48,14 +51,18 @@
                             <label for="descripcion" class="form-label">DESCRIPCIÓN:</label>
                             <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; height: 100px;" ></textarea>
                         </div>
-                        <div class="col-12 ">
-                            <button type="submit" class="btn" style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
+                        <div class="col-12">
+                            <button type="submit" class="btn " style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-       
+        <footer >
+            <p>Términos y condiciones</p>
+            <p>Politica de privacidad</p>
+            <p>cookies</p>
+        </footer>
     </div>
 </template>
 
@@ -69,13 +76,13 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputaciones = ref();
+const imputacion = ref();
 const route = useRoute();
 const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
 
 function InsertarImputacion()  {
-    axios.post('/api/imputaciones', imputaciones.value)
+    axios.post('/api/imputaciones', imputacion.value)
         .then(response => {
             console.log(response);
             strSuccess.value = response.data.success;
@@ -360,11 +367,13 @@ video {
     color: #1a202c;
     color: rgba(26, 32, 44, var(--text-opacity))
 }
+
 .btn-gris {
-background-color: #6c757d;
-border-color: #6c757d;
-cursor: not-allowed;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
 }
+
 .underline {
     text-decoration: underline
 }
