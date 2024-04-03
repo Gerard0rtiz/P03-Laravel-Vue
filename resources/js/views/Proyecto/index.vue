@@ -7,60 +7,55 @@
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+            <div class="flex justify-content-between pt-8 sm:text-gray-600 dark:text-gray-400 text-sm"  style="max-width:  1320px;">
                 <h1>{{ proyectoTitulo }}</h1>
                 <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px;" to="/">❮ VOLVER</router-link>
             </div>
             <div class="container mt-5 card">
                 <div class="container" style="display: flex !important;">
                     <table  class="table table-hover table-sm" style="width: 100%;">
-                        <thead class="bg-dark text-light">
+                        <thead class="text-light">
                         <tr>
-                            <th style="background-color: green; color: #FFF; width: 25%;">EMPLEADO</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">FECHA IMPUTACIÓN</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">HORAS</th>
-                            <th style="background-color: green; color: #FFF; width: 25%;">DESCRIPCIÓN</th>
+                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">EMPLEADO</th>
+                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">FECHA IMPUTACIÓN</th>
+                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">HORAS</th>
+                            <th style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18PX; text-align: center;">DESCRIPCIÓN</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr  v-for="(imputacion,index) in imputaciones ">
-                                <td class="text-center">{{ imputacion.idUser }}</td>
-                                <td  >{{ imputacion.fechaImputacion }}</td>
-                                <td >{{ imputacion.horasRealizadas }}</td>
-                                <td  class="descripcion">{{ imputacion.descripcion }}</td>
-                                <td class="text-center">
-                                </td>
+                                <td style="text-align: center;">{{ imputacion.idUser }}</td>
+                                <td style="text-align: center;" >{{ imputacion.fechaImputacion }}</td>
+                                <td style="text-align: center;" >{{ imputacion.horasRealizadas }}</td>
+                                <td style="text-align: center;" >{{ imputacion.descripcion }}</td>
+                              
                             </tr>
                     </tbody>
                     </table>
 
                 </div>
-                <div class="container">
+                <div class="container" style="padding-top: 60px;">
                     <form @submit.prevent="InsertarImputacion" class="row g-3">
                         <div class="col-md-3">
                             <label for="fecha" class="form-label">FECHA:</label>
-                            <input type="text" class="form-control" id="fecha" v-model="fechaImputacion">
+                            <input type="date" class="form-control border rounded"  v-model="fechaImputacion">
                         </div>
                         <div class="col-md-3">
                             <label for="horas" class="form-label">HORAS REALIZADAS:</label>
-                            <input type="text" class="form-control" id="horas" v-model="horasRealizadas">
+                            <input type="number" max="8" class="form-control border rounded"  v-model="horasRealizadas">
                         </div>
                         <div class="col-md-6">
                             <label for="descripcion" class="form-label">DESCRIPCIÓN:</label>
-                            <textarea class="form-control" id="descripcion" v-model="descripcion"></textarea>
+                            <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; height: 100px;" ></textarea>
                         </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn " style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
+                        <div class="col-12 ">
+                            <button type="submit" class="btn" style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <footer >
-            <p>Términos y condiciones</p>
-            <p>Politica de privacidad</p>
-            <p>cookies</p>
-        </footer>
+       
     </div>
 </template>
 
@@ -74,13 +69,13 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputacion = ref();
+const imputaciones = ref();
 const route = useRoute();
 const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
 
 function InsertarImputacion()  {
-    axios.post('/api/imputaciones', imputacion.value)
+    axios.post('/api/imputaciones', imputaciones.value)
         .then(response => {
             console.log(response);
             strSuccess.value = response.data.success;
@@ -95,7 +90,7 @@ function InsertarImputacion()  {
 onMounted(() => {
     axios.get('/api/imputaciones')
         .then(response => {
-            imputacion.value = response.data;
+            imputaciones.value = response.data;
             console.log(response.data);
 
         })
@@ -111,6 +106,7 @@ onMounted(() => {
 body {
     font-family: 'Nunito', sans-serif;
 }
+
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
