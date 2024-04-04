@@ -5,9 +5,9 @@
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
             </div>
-            <div class="container mt-5">
+            <div  v-if="user.id" class="container mt-5">
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
-                    <div class="card-body">
+                    <div  class="card-body">
                         <ClockComponent class="text-center"
                             style="font-family: 'Nunito', sans-serif; background-color: #053b28; padding: 8px 20px; border-radius: 25px;" />
                     </div>
@@ -27,7 +27,11 @@
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
-            <div class="container mt-5 card">
+            <div class="d-flex justify-content-center" v-if="!user.id">
+                    <h2>Debe iniciar sesión para hacer uso de la aplicación</h2>  
+                </div>
+            <div  v-if="user.id" class="container mt-5 card">
+               
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
                     <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"

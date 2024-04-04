@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="container mt-5 card" >
-                <div class="container" style="display: flex !important; ">
+                <div class="container table-container" style="display: flex !important; ">
                     <table  class="table table-hover table-sm" style="width: 100%; ">
                         <thead class="text-light">
                         <tr>
@@ -26,13 +26,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr  v-for="(imputacion,index) in imputaciones">
+                            <tr style="" v-for="(imputacion,index) in imputaciones">
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.idUser }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.fechaImputacion }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.horasRealizadas }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="descripcion text-center">{{ imputacion.descripcion }}</td>
-                                <td v-if="imputacion.idProyecto == proyectoId" class="text-center">
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -136,6 +134,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.table-container {
+    height: 300px; 
+    overflow-y: auto; 
+}
 body  {
     font-family: 'Nunito', sans-serif !important; 
 }
@@ -144,6 +146,10 @@ div {
     font-family: 'Nunito', sans-serif !important; 
 }
 input {
+    font-size: large;    
+    font-family: 'Nunito', sans-serif !important; 
+}
+textarea{
     font-size: large;    
     font-family: 'Nunito', sans-serif !important; 
 }
