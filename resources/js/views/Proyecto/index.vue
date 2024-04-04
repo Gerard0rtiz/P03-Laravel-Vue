@@ -7,13 +7,14 @@
             <div class="container mt-5">
             </div>
         </div>
-        <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div class="flex justify-content-between pt-8 sm:text-gray-600 dark:text-gray-400 text-sm"  >
-                <h1 style="margin-left: 40px;">{{ proyectoTitulo }}</h1>
-                <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; margin-right: 15px;" to="/">❮
-                    VOLVER</router-link>
+        <div class="mx-auto sm:px-6 lg:px-8 container" style="width: 100%;">
+            <div>
+                <div class="d-flex justify-content-between align pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                    <h1>{{ proyectoTitulo }}</h1>
+                    <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; " to="/">❮ VOLVER</router-link>
+                </div>
             </div>
-            <div class="container mt-5 card" :style="{ backgroundImage: 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', backgroundSize: 'cover', backgroundPosition: 'center' }">
+            <div class="container mt-5 card" >
                 <div class="container" style="display: flex !important; ">
                     <table  class="table table-hover table-sm" style="width: 100%; ">
                         <thead class="text-light">
@@ -40,15 +41,15 @@
                 <div class="container" style="padding-top: 60px; ">
                     <form @submit.prevent="InsertarImputacion" class="row g-3">
                         <div class="col-md-3">
-                            <label for="fecha" class="form-label">FECHA:</label>
+                            <label>FECHA:</label>
                             <input type="date" class="form-control border rounded" v-model="fechaImputacion">
                         </div>
                         <div class="col-md-3">
-                            <label for="horas" class="form-label">HORAS REALIZADAS:</label>
-                            <input type="number" max="8" class="form-control border rounded"  v-model="horasRealizadas">
+                            <label>HORAS REALIZADAS:</label>
+                            <input type="number" max="8" min="0" class="form-control border rounded"  v-model="horasRealizadas">
                         </div>
                         <div class="col-md-6">
-                            <label  style="font-size: 18; font-weight: 700; color: white;" class="form-label">DESCRIPCIÓN:</label>
+                            <label>DESCRIPCIÓN:</label>
                             <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; min-height: 100px;" ></textarea>
                         </div>
                         <div class="col-12">
@@ -105,11 +106,20 @@ onMounted(() => {
 </script>
 
 <style scoped>
-body {
-    font-family: 'Nunito', sans-serif;
+body  {
+    font-family: 'Nunito', sans-serif !important; 
 }
 
-
+div {
+    font-family: 'Nunito', sans-serif !important; 
+}
+input {
+    font-size: large;    
+    font-family: 'Nunito', sans-serif !important; 
+}
+label {
+    font-weight: 700; font-size: 18px
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
     line-height: 1.15;
