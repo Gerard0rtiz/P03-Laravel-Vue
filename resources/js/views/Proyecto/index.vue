@@ -26,7 +26,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr  v-for="(imputacion,index) in imputaciones ">
+                            <tr  v-for="(imputacion,index) in imputaciones">
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.idUser }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.fechaImputacion }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.horasRealizadas }}</td>
@@ -39,21 +39,21 @@
 
                 </div>
                 <div class="container" style="padding-top: 60px; ">
-                    <form @submit.prevent="InsertarImputacion" class="row g-3">
+                    <form @submit.prevent="addImputacion()" class="row g-3">
                         <div class="col-md-3">
                             <label>FECHA:</label>
-                            <input type="date" class="form-control border rounded" v-model="fechaImputacion">
+                            <input type="date" class="form-control border rounded" v-model="imputacion.fechaImputacion">
                         </div>
                         <div class="col-md-3">
                             <label>HORAS REALIZADAS:</label>
-                            <input type="number" max="8" min="0" class="form-control border rounded"  v-model="horasRealizadas">
+                            <input type="number" max="12" min="0" class="form-control border rounded" v-model="imputacion.horasRealizadas">
                         </div>
                         <div class="col-md-6">
                             <label>DESCRIPCIÓN:</label>
-                            <textarea class="form-control border rounded"  v-model="descripcion" maxlength="400" style="max-height: 100px; min-height: 100px;" ></textarea>
+                            <textarea class="form-control border rounded" v-model="imputacion.descripcion" maxlength="400" style="max-height: 100px; min-height: 100px;" ></textarea>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn " style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
+                            <button type="submit" class="btn" style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
                         </div>
                     </form>
                 </div>
@@ -72,17 +72,26 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputaciones = ref([]);
+const imputaciones = ref({});
+const strError = ref(null);
+const strSuccess = ref(null);
 const route = useRoute();
+const imputacion = ref({});
+imputacion.value.idUser = user.value.id;
 const proyectoId = route.params.id;
+imputacion.value.idProyecto = proyectoId;
 const proyectoTitulo = route.params.titulo;
 
-function InsertarImputacion()  {
-    axios.post('/api/imputaciones', imputaciones.value)
+function addImputacion() {
+    axios.post('/api/imputaciones', imputacion.value)
         .then(response => {
             console.log(response);
             strSuccess.value = response.data.success;
             strError.value = null;
+            //actualizar tabla al imputar
+            getImputaciones();
+            //Vaciar formulario
+            imputacion.value = {};
         })
         .catch(error => {
             console.log(error);
@@ -90,15 +99,36 @@ function InsertarImputacion()  {
             strError.value = error.response.data.message;
         });
 }
-onMounted(() => {
+
+function getImputaciones() {
     axios.get('/api/imputaciones')
         .then(response => {
             imputaciones.value = response.data;
+            //Ordenar las imputaciones por fecha de más recienta a más vieja
+            imputaciones.value.sort((a, b) => {
+                return new Date(b.fechaImputacion) - new Date(a.fechaImputacion);
+            });
             console.log(response.data);
-
         })
         .catch(error => {
-            console.error("Error fetching proyectos:", error);
+            console.error("Error fetching imputaciones:", error);
+        });
+}
+
+onMounted(() => {
+    getImputaciones();
+    axios.get('/api/imputaciones')
+        .then(response => {
+            imputaciones.value = response.data;
+            //Ordenar las imputaciones por fecha de manera descendente
+            imputaciones.value.sort((a, b) => {
+                return new Date(b.fechaImputacion) - new Date(a.fechaImputacion);
+            });
+
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching imputaciones:", error);
         });
 });
 
