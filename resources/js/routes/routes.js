@@ -58,7 +58,7 @@ export default [
         // redirect: { name: 'login' },
         component: GuestLayout,
         children: [
-           
+        
             {
                 path: '/',
                 name: 'home',
@@ -127,7 +127,7 @@ export default [
         beforeEnter: requireLogin,
         meta: { breadCrumb: 'Dashboard' },
         children: [
-            {
+                        {
                 name: 'admin.index',
                 path: '',
                 component: () => import('../views/admin/index.vue'),

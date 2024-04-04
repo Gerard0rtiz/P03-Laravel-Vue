@@ -40,12 +40,12 @@
                 <div class="container" style="padding-top: 60px; ">
                     <form @submit.prevent="InsertarImputacion" class="row g-3">
                         <div class="col-md-3">
-                            <label  class="form-label" style="font-size: 18; font-weight: 700; color: white">FECHA:</label>
-                            <input type="date" class="form-control border rounded"  v-model="fechaImputacion">
+                            <label for="fecha" class="form-label">FECHA:</label>
+                            <input type="date" class="form-control border rounded" v-model="fechaImputacion">
                         </div>
                         <div class="col-md-3">
-                            <label  style="font-size: 18; font-weight: 700; color: white" class="form-label" >HORAS REALIZADAS:</label>
-                            <input type="number" min="0" max="8" class="form-control border rounded"  v-model="horasRealizadas">
+                            <label for="horas" class="form-label">HORAS REALIZADAS:</label>
+                            <input type="number" max="8" class="form-control border rounded"  v-model="horasRealizadas">
                         </div>
                         <div class="col-md-6">
                             <label  style="font-size: 18; font-weight: 700; color: white;" class="form-label">DESCRIPCIÓN:</label>
@@ -71,7 +71,7 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputaciones = ref();
+const imputaciones = ref([]);
 const route = useRoute();
 const proyectoId = route.params.id;
 const proyectoTitulo = route.params.titulo;
