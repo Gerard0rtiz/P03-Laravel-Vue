@@ -90,6 +90,8 @@ function addImputacion() {
             getImputaciones();
             //Vaciar formulario
             imputacion.value = {};
+            imputacion.value.idUser = user.value.id;
+            imputacion.value.idProyecto = proyectoId;
         })
         .catch(error => {
             console.log(error);
