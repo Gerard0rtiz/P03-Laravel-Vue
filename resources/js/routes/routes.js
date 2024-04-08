@@ -62,7 +62,7 @@ export default [
             {
                 path: '/editar-usuarios/:id',
                 name: 'EditarUsuarios',
-                component: () => import('../views/user-proyectos/EditarUsuarios.vue')
+                component: () => import('../views/user-proyectos/editUser.vue')
             },
             {
                 path: '/',
