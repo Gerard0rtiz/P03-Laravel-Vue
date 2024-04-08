@@ -5,9 +5,9 @@
             <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
             </div>
-            <div  v-if="user.id" class="container mt-5">
+            <div v-if="user.id" class="container mt-5">
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
-                    <div  class="card-body">
+                    <div class="card-body">
                         <ClockComponent class="text-center"
                             style="font-family: 'Nunito', sans-serif; background-color: #053b28; padding: 8px 20px; border-radius: 25px;" />
                     </div>
@@ -28,10 +28,10 @@
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="d-flex justify-content-center" v-if="!user.id">
-                    <h2>Debe iniciar sesión para hacer uso de la aplicación</h2>  
-                </div>
-            <div  v-if="user.id" class="container mt-5 card">
-               
+                <h2>Debe iniciar sesión para hacer uso de la aplicación</h2>
+            </div>
+            <div v-if="user.id" class="container mt-5 card">
+
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
                     <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
@@ -39,13 +39,16 @@
                         <RouterLink
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
-                            :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '270px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                            :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '300px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
                             <h2
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
                                 {{ proyecto.titulo }}</h2>
                             <p
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">
                                 {{ proyecto.descripcion }}</p>
+                            <Router-link :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
+                                <button class="btn btn-warning" style="margin-top: -10px;">Editar Usuarios</button>
+                            </Router-link>
                         </RouterLink>
                     </div>
 
@@ -68,6 +71,9 @@ const proyectos = ref([]);
 const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
+const editarUsuarios = () => {
+    $router.push({ name: 'EditarUsuarios' });
+}
 
 // Al iniciar la vista, verifica las cookies y establece los estados de los botones
 onMounted(() => {
@@ -416,7 +422,7 @@ video {
 }
 
 .shadow {
-    box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.75) !important;
+    box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.75) !important;
 }
 
 .text-center {
@@ -603,13 +609,13 @@ video {
 }
 
 .btn-pulse {
-    transition: transform 0.3s ease, box-shadow 0.4s ease;;
-    box-shadow: 4px 4px 4px 2px rgba(0,0,0,0.75) !important;
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+    ;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.75) !important;
 }
 
 .btn-pulse:active {
     transform: scale(0.95);
-    box-shadow: 4px 4px 4px 2px rgba(0,0,0,0) !important;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0) !important;
 }
-
 </style>

@@ -2,33 +2,33 @@ import Cookies from 'js-cookie'
 import store from "../store";
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
-const GuestLayout = ()  => import('../layouts/Guest.vue');
+const GuestLayout = () => import('../layouts/Guest.vue');
 
-const PostsIndex  = ()  => import('../views/admin/posts/Index.vue');
-const PostsCreate  = ()  => import('../views/admin/posts/Create.vue');
-const PostsEdit  = ()  => import('../views/admin/posts/Edit.vue');
+const PostsIndex = () => import('../views/admin/posts/Index.vue');
+const PostsCreate = () => import('../views/admin/posts/Create.vue');
+const PostsEdit = () => import('../views/admin/posts/Edit.vue');
 
-const ExercisesIndex  = ()  => import('../views/admin/exercises/Index.vue');
-const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
-const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
+const ExercisesIndex = () => import('../views/admin/exercises/Index.vue');
+const ExercisesCreate = () => import('../views/admin/exercises/Create.vue');
+const ExercisesEdit = () => import('../views/admin/exercises/Edit.vue');
 
-const TaskList  = ()  => import('../views/admin/tasks/index.vue');
-const TaskCreate  = ()  => import('../views/admin/tasks/create.vue');
-const TaskEdit  = ()  => import('../views/admin/tasks/edit.vue');
+const TaskList = () => import('../views/admin/tasks/index.vue');
+const TaskCreate = () => import('../views/admin/tasks/create.vue');
+const TaskEdit = () => import('../views/admin/tasks/edit.vue');
 
 //rutas a proyecto
-const ProyectoList  = ()  => import('../views/admin/proyectos/Index.vue');
-const ProyectoCreate  = ()  => import('../views/admin/proyectos/Create.vue');
-const ProyectoEdit  = ()  => import('../views/admin/proyectos/Edit.vue');
+const ProyectoList = () => import('../views/admin/proyectos/Index.vue');
+const ProyectoCreate = () => import('../views/admin/proyectos/Create.vue');
+const ProyectoEdit = () => import('../views/admin/proyectos/Edit.vue');
 const ProyectoVista = () => import('../views/proyecto/index.vue');
 //rutas a imputacion
-const ImputacionList  = ()  => import('../views/admin/imputaciones/Index.vue');
-const ImputacionCreate  = ()  => import('../views/admin/imputaciones/Create.vue');
-const ImputacionEdit  = ()  => import('../views/admin/imputaciones/Edit.vue');
+const ImputacionList = () => import('../views/admin/imputaciones/Index.vue');
+const ImputacionCreate = () => import('../views/admin/imputaciones/Create.vue');
+const ImputacionEdit = () => import('../views/admin/imputaciones/Edit.vue');
 //rutas a fichaje
-const FichajeList  = ()  => import('../views/admin/fichajes/Index.vue');
-const FichajeCreate  = ()  => import('../views/admin/fichajes/Create.vue');
-const FichajeEdit  = ()  => import('../views/admin/fichajes/Edit.vue');
+const FichajeList = () => import('../views/admin/fichajes/Index.vue');
+const FichajeCreate = () => import('../views/admin/fichajes/Create.vue');
+const FichajeEdit = () => import('../views/admin/fichajes/Edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -58,7 +58,12 @@ export default [
         // redirect: { name: 'login' },
         component: GuestLayout,
         children: [
-        
+
+            {
+                path: '/editar-usuarios/:id',
+                name: 'EditarUsuarios',
+                component: () => import('../views/user-proyectos/EditarUsuarios.vue')
+            },
             {
                 path: '/',
                 name: 'home',
@@ -106,7 +111,7 @@ export default [
             {
                 name: 'Proyecto',
                 path: '/ProyectoVista/:id/:titulo',
-                meta: { breadCrumb: 'Proyecto'},
+                meta: { breadCrumb: 'Proyecto' },
                 children: [
                     {
                         name: 'Proyecto.index',
@@ -127,7 +132,7 @@ export default [
         beforeEnter: requireLogin,
         meta: { breadCrumb: 'Dashboard' },
         children: [
-                        {
+            {
                 name: 'admin.index',
                 path: '',
                 component: () => import('../views/admin/index.vue'),
@@ -161,7 +166,7 @@ export default [
             {
                 name: 'tasks',
                 path: 'tasks',
-                meta: { breadCrumb: 'Tareas'},
+                meta: { breadCrumb: 'Tareas' },
                 children: [
                     {
                         name: 'tasks.index',
@@ -187,7 +192,7 @@ export default [
             {
                 name: 'proyectos',
                 path: 'proyectos',
-                meta: { breadCrumb: 'Proyectos'},
+                meta: { breadCrumb: 'Proyectos' },
                 children: [
                     {
                         name: 'proyectos.index',
@@ -209,11 +214,11 @@ export default [
                     }
                 ]
             },
-            
+
             {
                 name: 'fichajes',
                 path: 'fichajes',
-                meta: { breadCrumb: 'Fichajes'},
+                meta: { breadCrumb: 'Fichajes' },
                 children: [
                     {
                         name: 'fichajes.index',
@@ -238,7 +243,7 @@ export default [
             {
                 name: 'imputaciones',
                 path: 'imputaciones',
-                meta: { breadCrumb: 'Imputaciones'},
+                meta: { breadCrumb: 'Imputaciones' },
                 children: [
                     {
                         name: 'imputaciones.index',
@@ -260,11 +265,11 @@ export default [
                     }
                 ]
             },
-            
+
             {
                 name: 'exercises',
                 path: 'exercises',
-                meta: { breadCrumb: 'Exercises'},
+                meta: { breadCrumb: 'Exercises' },
                 children: [
                     {
                         name: 'exercises.index',
@@ -276,8 +281,10 @@ export default [
                         name: 'exercises.create',
                         path: 'create',
                         component: ExercisesCreate,
-                        meta: { breadCrumb: 'Add new exercise' ,
-                        linked: false, }
+                        meta: {
+                            breadCrumb: 'Add new exercise',
+                            linked: false,
+                        }
                     },
                     {
                         name: 'exercises.edit',
@@ -290,11 +297,11 @@ export default [
                     }
                 ]
             },
-        
+
             {
                 name: 'categories',
                 path: 'categories',
-                meta: { breadCrumb: 'Categories'},
+                meta: { breadCrumb: 'Categories' },
                 children: [
                     {
                         name: 'categories.index',
@@ -306,9 +313,9 @@ export default [
                         name: 'categories.create',
                         path: 'create',
                         component: () => import('../views/admin/categories/Create.vue'),
-                        meta: { 
-                            breadCrumb: 'Add new category' ,
-                            linked: false, 
+                        meta: {
+                            breadCrumb: 'Add new category',
+                            linked: false,
                         }
                     },
                     {
@@ -326,7 +333,7 @@ export default [
             {
                 name: 'permissions',
                 path: 'permissions',
-                meta: { breadCrumb: 'Permisos'},
+                meta: { breadCrumb: 'Permisos' },
                 children: [
                     {
                         name: 'permissions.index',
@@ -338,16 +345,16 @@ export default [
                         name: 'permissions.create',
                         path: 'create',
                         component: () => import('../views/admin/permissions/Create.vue'),
-                        meta: { 
+                        meta: {
                             breadCrumb: 'Create Permission',
-                            linked: false,  
+                            linked: false,
                         }
                     },
                     {
                         name: 'permissions.edit',
                         path: 'edit/:id',
                         component: () => import('../views/admin/permissions/Edit.vue'),
-                        meta: { 
+                        meta: {
                             breadCrumb: 'Permission Edit',
                             linked: false,
                         }
