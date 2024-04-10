@@ -19,7 +19,7 @@
                         <td>{{ usuario.name }}</td>
                         <td>{{ usuario.pivot.idProyecto }}</td>
                         <td>
-                            <button @click="eliminarUsuario(proyecto.id, usuario.idUser)">Eliminar</button>
+                            <button @click="eliminarUsuario(proyecto.id, usuario.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
