@@ -17,4 +17,7 @@ class Imputacion extends Model
         'horasRealizadas',
         'descripcion'
     ];
+    public function user(){
+        return $this->belongsTo(User::class, 'idUser', 'id');
+    }
 }

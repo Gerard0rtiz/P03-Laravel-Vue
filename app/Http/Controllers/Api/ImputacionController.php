@@ -10,13 +10,14 @@ class ImputacionController extends Controller
    {
       public function index()
       {
-          $imputaciones = Imputacion::all()->toArray();
-          return $imputaciones;
+        $imputaciones = Imputacion::with('user')->get();
+        return $imputaciones;
       }
-
+      
       public function show($id)
       {
         return Imputacion::find($id);
+
       }
   
       public function store(Request $request)
@@ -28,7 +29,7 @@ class ImputacionController extends Controller
               'horasRealizadas' => 'required',
               'descripcion' => 'required'
           ]);
-
+          
           $imputacion = $request->all();
           $createdImputacion = Imputacion::create($imputacion);
           return response()->json(['success' => true, 'data' => $createdImputacion]);

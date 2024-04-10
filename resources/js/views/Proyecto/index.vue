@@ -26,8 +26,8 @@
                             </tr>
                             </thead>
                             <tbody >
-                                <tr style="" v-for="(imputacion,index) in imputaciones">
-                                    <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.idUser }}</td>
+                                <tr style="" v-for="(imputacion) in imputaciones">
+                                    <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.user.name }}</td>
                                     <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.fechaImputacion }}</td>
                                     <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.horasRealizadas }}</td>
                                     <td v-if="imputacion.idProyecto == proyectoId" class="descripcion text-center">{{ imputacion.descripcion }}</td>
@@ -80,7 +80,6 @@
     const proyectoId = route.params.id;
     imputacion.value.idProyecto = proyectoId;
     const proyectoTitulo = route.params.titulo;
-  
 
     function addImputacion() {
         axios.post('/api/imputaciones', imputacion.value)
@@ -101,26 +100,26 @@
                 strError.value = error.response.data.message;
             });
     }
+
     function getImputaciones() {
         axios.get('/api/imputaciones')
             .then(response => {
-                imputaciones.value = response.data;
-                //Ordenar las imputaciones por fecha de más recienta a más vieja
-                imputaciones.value.sort((a, b) => {
-                    return new Date(b.fechaImputacion) - new Date(a.fechaImputacion);
-                });
-                console.log(response.data);
+            imputaciones.value = response.data;
+            imputaciones.value.sort((a, b) => {
+                return new Date(b.fechaImputacion) - new Date(a.fechaImputacion);
+            });
             })
             .catch(error => {
-                console.error("Error fetching imputaciones:", error);
+                console.error("Error al obtener imputaciones:", error);
             });
     }
 
+
     onMounted(() => {
         getImputaciones();
-
     });
-
+   
+   
 
     </script>
 
