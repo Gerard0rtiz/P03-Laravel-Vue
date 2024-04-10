@@ -12,6 +12,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    public function proyectos(){
+        return $this->belongsToMany(Proyecto::class, 'user_proyectos');
+    }
+
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**

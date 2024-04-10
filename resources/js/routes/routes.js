@@ -16,6 +16,9 @@ const TaskList = () => import('../views/admin/tasks/index.vue');
 const TaskCreate = () => import('../views/admin/tasks/create.vue');
 const TaskEdit = () => import('../views/admin/tasks/edit.vue');
 
+//rutas a userProyecto
+const UserProyectoVista = () => import('../views/user-proyectos/editUser.vue');
+
 //rutas a proyecto
 const ProyectoList = () => import('../views/admin/proyectos/Index.vue');
 const ProyectoCreate = () => import('../views/admin/proyectos/Create.vue');
@@ -60,9 +63,17 @@ export default [
         children: [
 
             {
-                path: '/editar-usuarios/:id',
                 name: 'EditarUsuarios',
-                component: () => import('../views/user-proyectos/editUser.vue')
+                path: '/editar-usuarios/:id',
+                meta: { breadCrumb: 'Editar usuarios asignados' },
+                component: () => import('../views/user-proyectos/editUser.vue'),
+                children: [
+                    {
+                        name: 'UserProyecto.index',
+                        path: '',
+                        component: () => import('../views/user-proyectos/editUser.vue'),
+                    },
+                ]
             },
             {
                 path: '/',

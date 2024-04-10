@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\ProyectoController;
 use App\Http\Controllers\Api\ImputacionController;
 use App\Http\Controllers\Api\FichajeController;
+use App\Http\Controllers\Api\UserProyectoController;
 
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::get('proyectos/{id}',[ProyectoController::class,'show']);
 Route::post('proyectos/',[ProyectoController::class,'store']);
 Route::put('proyectos/update/{id}',[ProyectoController::class,'update']);
 Route::delete('proyectos/{id}',[ProyectoController::class,'destroy']);
+Route::delete('/proyectos/{idProyecto}/usuarios/{idUser}', 'App\Http\Controllers\api\ProyectoController@eliminarUsuario');
+Route::get('proyectos/{id}/usuarios', [ProyectoController::class, 'getUsersByProyectoId']);
 Route::get('Proyecto',[ProyectoController::class,'index']);
 
 //Rutas de ImputacionController:

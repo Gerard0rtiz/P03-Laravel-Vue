@@ -71,11 +71,8 @@ const proyectos = ref([]);
 const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
-const editarUsuarios = () => {
-    $router.push({ name: 'EditarUsuarios' });
-}
 
-// Al iniciar la vista, verifica las cookies y establece los estados de los botones
+//Al iniciar la vista, verifica las cookies y establece los estados de los botones
 onMounted(() => {
     axios.get('/api/proyectos')
         .then(response => {

@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proyecto extends Model
 {
-    use HasFactory;
+    public function users(){
+        return $this->belongsToMany(User::class, 'user_proyectos', 'idProyecto', 'idUser');
+    }
 
+    use HasFactory;
     protected $fillable = [
         'titulo',
         'descripcion',
