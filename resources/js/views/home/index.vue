@@ -34,7 +34,7 @@
 
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
-                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
+                    <div  v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
                         style="margin: 6px; border-radius: 20px; width: 24% !important; padding: 0;">
                         <RouterLink
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
@@ -46,8 +46,8 @@
                             <p
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">
                                 {{ proyecto.descripcion }}</p>
-                            <Router-link :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
-                                <button class="btn btn-warning" style="margin-top: -10px;">Editar Usuarios</button>
+                            <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id" :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
+                                <button  class="btn btn-warning">Editar Usuarios</button>
                             </Router-link>
                         </RouterLink>
                     </div>
@@ -71,6 +71,8 @@ const proyectos = ref([]);
 const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
+
+
 
 //Al iniciar la vista, verifica las cookies y establece los estados de los botones
 onMounted(() => {
