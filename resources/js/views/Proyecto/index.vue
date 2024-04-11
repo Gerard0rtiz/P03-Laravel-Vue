@@ -16,8 +16,8 @@
                 </div>
                 <div class="container mt-5 card" >
                     <div class="container table-container" style="display: flex !important;">
-                        <table  class="table table-hover table-sm" style=" width: 100%;">
-                            <thead  class="text-light" >
+                        <table class="table table-hover table-sm" style=" width: 100%;">
+                            <thead class="text-light" >
                             <tr>
                                 <th class="text-center" style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">EMPLEADO</th>
                                 <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">FECHA IMPUTACIÓN</th>
@@ -26,7 +26,7 @@
                             </tr>
                             </thead>
                             <tbody >
-                                <tr style="" v-for="(imputacion) in imputaciones">
+                                <tr v-for="(imputacion) in imputaciones">
                                     <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.user.name }}</td>
                                     <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.fechaImputacion }}</td>
                                     <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{ imputacion.horasRealizadas }}</td>
