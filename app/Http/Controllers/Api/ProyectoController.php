@@ -67,6 +67,20 @@ class ProyectoController extends Controller
         return response()->json(['success' => true, 'data' => $usuariosAsignados]);
     }
 
+    public function asignarUsuario($idProyecto, $idUser){
+        $proyecto = Proyecto::find($idProyecto);
+
+        if (!$proyecto) {
+            return response()->json(['success' => false, 'message' => 'Proyecto no encontrado'], 404);
+        }
+
+        $proyecto->users()->attach($idUser);
+
+        // Después de asignar el usuario, devolver la lista actualizada de usuarios asignados al proyecto
+        $usuariosAsignados = $proyecto->users()->get();
+        return response()->json(['success' => true, 'data' => $usuariosAsignados]);
+    }
+
     public function getUsersByProyectoId($proyectoId){
         $proyecto = Proyecto::with('users')->findOrFail($proyectoId);
 
