@@ -10,8 +10,20 @@ class ProyectoController extends Controller
 {
     public function index()
     {
-        $proyectos = Proyecto::all()->toArray();
-        return $proyectos;
+       // Obtener el usuario autenticado
+       $user = auth()->user();
+
+       // Verificar si el usuario tiene el rol de administrador
+       if ($user->hasRole('admin')) {
+           // Si es administrador, obtener todos los proyectos
+           $proyectos = Proyecto::all();
+       } else {
+           // Si no es administrador, obtener los proyectos asociados al usuario actual
+           $proyectos = $user->proyectos;
+       }
+
+       return response()->json($proyectos);
+        
     }
 
     public function store(Request $request)
