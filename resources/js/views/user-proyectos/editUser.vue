@@ -2,7 +2,7 @@
     <div class="mx-auto sm:px-6 lg:px-8 container">
         <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
             <h1><strong>{{ proyecto.titulo }}</strong></h1>
-            <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; " to="/">❮
+            <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
                 VOLVER</router-link>
         </div>
         <div class="d-flex" style="margin-top: 20px; width: 100%; justify-content: center">

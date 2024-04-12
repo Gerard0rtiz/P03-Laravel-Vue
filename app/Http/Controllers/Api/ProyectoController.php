@@ -14,7 +14,7 @@ class ProyectoController extends Controller
        $user = auth()->user();
 
        // Verificar si el usuario tiene el rol de administrador
-       if ($user->hasRole('admin')) {
+       if ($user->hasRole('admin') || $user->hasRole('jefe')) {
            // Si es administrador, obtener todos los proyectos
            $proyectos = Proyecto::all();
        } else {

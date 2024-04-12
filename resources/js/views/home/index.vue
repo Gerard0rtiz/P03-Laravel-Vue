@@ -34,7 +34,7 @@
 
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
-                    <div   v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
+                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
                         style="margin: 6px; border-radius: 20px; width: 24% !important; padding: 0;">
                         <RouterLink
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
