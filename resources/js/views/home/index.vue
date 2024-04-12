@@ -1,8 +1,8 @@
 <template>
     <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"
-        style="margin-top: 100px;">
+        style="padding-top: 100px !important;">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+            <div  v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
             </div>
             <div v-if="user.id" class="container mt-5">
@@ -24,11 +24,11 @@
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+            <div  v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
-            <div class="d-flex justify-content-center" v-if="!user.id">
-                <h2>Debe iniciar sesión para hacer uso de la aplicación</h2>
+            <div class="d-flex justify-content-center" v-if="!user.id" style="padding-top: 200px !important;">
+                <h2 style="font-weight: bold;">Debe iniciar sesión para hacer uso de la aplicación</h2>
             </div>
             <div v-if="user.id" class="container mt-5 card">
 
@@ -68,6 +68,7 @@ const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
 const fichaje = ref({});
 const proyectos = ref([]);
+const proyecto = ref({});
 const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');

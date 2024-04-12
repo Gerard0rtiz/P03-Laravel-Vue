@@ -1,7 +1,7 @@
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
-            <img src="/images/logo.svg" alt="logo" />
+            <img src="/images/logos/logo.svg" alt="logoIBF" />
             <span></span>
         </router-link>
 

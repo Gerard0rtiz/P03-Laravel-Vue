@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="margin-top: 150px;">
+    <div class="container" style="padding-top: 150px;">
         <div class="row justify-content-center my-5">
             <div class="col-md-6">
                 <div class="card border-0 shadow-sm">
@@ -57,7 +57,11 @@
 <script setup>
 
 import useAuth from '@/composables/auth'
+import { onMounted } from 'vue';
 
 const { loginForm, validationErrors, processing, submitLogin } = useAuth();
 
+onMounted(()=>{
+    window.scrollTo(0, 0);
+});
 </script>
