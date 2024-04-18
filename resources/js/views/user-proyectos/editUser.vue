@@ -134,9 +134,34 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+ @media (max-width: 1000px ) {
+        th.text-center{
+            font-size: 16px !important;
+        }
+        
+    }
+    @media (max-width: 770px ) {
+        th.text-center{
+            font-size: 13px !important;
+        }
+        
+    }
+    @media (max-width: 560px ) {
+        th.text-center{
+            font-size: 12px !important;
+        }
+        
+    }
+    @media (max-width: 530px ) {
+        th.text-center{
+            font-size: 10px !important;
+        }
+        
+    }
 body {
     font-family: 'Nunito', sans-serif !important;
 }
+
 
 .table-container {
     overflow-y: auto;

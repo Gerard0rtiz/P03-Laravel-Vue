@@ -20,7 +20,7 @@
                             <thead class="text-light" >
                             <tr>
                                 <th class="text-center" style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">EMPLEADO</th>
-                                <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">FECHA IMPUTACIÓN</th>
+                                <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">FECHA</th>
                                 <th class="text-center" style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">HORAS</th>
                                 <th class="text-center" style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">DESCRIPCIÓN</th>
                             </tr>
@@ -125,6 +125,30 @@
     </script>
 
     <style scoped>
+    @media (max-width: 1000px ) {
+        th.text-center{
+            font-size: 16px !important;
+        }
+        
+    }
+    @media (max-width: 770px ) {
+        th.text-center{
+            font-size: 13px !important;
+        }
+        
+    }
+    @media (max-width: 560px ) {
+        th.text-center{
+            font-size: 12px !important;
+        }
+        
+    }
+    @media (max-width: 530px ) {
+        th.text-center{
+            font-size: 10px !important;
+        }
+        
+    }
     .table-container {
     
         overflow-y: auto;
