@@ -40,14 +40,14 @@
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
                             :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '300px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
-                            <h2
+                            <h2 class="titleProject"
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
                                 {{ proyecto.titulo }}</h2>
-                            <p
+                            <p class="descProject"
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">
                                 {{ proyecto.descripcion }}</p>
                             <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id" :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
-                                <button  class="btn btn-warning">Editar Usuarios</button>
+                                <button class="btn btn-warning">Editar Usuarios</button>
                             </Router-link>
                         </RouterLink>
                     </div>
@@ -226,6 +226,86 @@ h2,
 p,
 button {
     font-family: 'Nunito', sans-serif !important;
+}
+
+@media (max-width: 1250px) {
+    .titleProject{
+        font-size: 18px !important;
+    }
+
+    .descProject{
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    .titleProject{
+        font-size: 15px !important;
+    }
+
+    .descProject{
+        font-size: 12px !important;
+    }
+
+    .btn.btn-warning{
+        font-size: 9px;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 900px) {
+    .titleProject{
+        font-size: 12px;
+    }
+
+    .descProject{
+        font-size: 10px;
+    }
+
+    .container{
+        justify-content: space-around !important;
+    }
+}
+
+@media (max-width: 770px) {
+    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center{
+        padding: 5px !important;
+        height: 200px !important;
+        width: 140px !important;
+    }
+
+    .titleProject{
+        font-size: 10px !important;
+        margin: 2px !important;
+    }
+
+    .descProject{
+        font-size: 8px !important;
+        margin: 2px !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center{
+        padding: 2px !important;
+        height: 180px !important;
+        width: 125px !important;
+    }
+
+    .titleProject{
+        padding: 3px !important;
+        font-size: 10px;
+    }
+
+    .descProject{
+        padding: 3px !important;
+        font-size: 8px;
+    }
+
+    .btn.btn-warning{
+        font-size: 9px;
+        padding: 2px;
+    }
 }
 
 a {
