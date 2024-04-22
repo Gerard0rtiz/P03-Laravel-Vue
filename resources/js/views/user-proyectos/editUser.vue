@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto sm:px-6 lg:px-8 container">
+    <div class="mx-auto sm:px-6 lg:px-8 container" style="margin-bottom: 100px;">
         <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
             <h1><strong>{{ proyecto.titulo }}</strong></h1>
             <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
@@ -47,6 +47,12 @@
             </div>
         </div>
     </div>
+    <footer>
+        <div class="footerImputfy">
+            <div>Términos y condiciones</div>
+            <div>Copyright Imputfy 2024</div>
+        </div>
+    </footer>
 </template>
 
 <script setup>
@@ -158,10 +164,26 @@ const mostrarPopupError = () => {
         }
         
     }
+
 body {
     font-family: 'Nunito', sans-serif !important;
 }
 
+footer{
+    background-color: #053b28;
+    color: #fcfcfc;
+}
+
+.footerImputfy {
+    max-width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+}
 
 .table-container {
     overflow-y: auto;

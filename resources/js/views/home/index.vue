@@ -2,8 +2,8 @@
     <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"
         style="padding-top: 100px !important;">
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div  v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
+            <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                <h1 class="titleFichaje" style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
             </div>
             <div v-if="user.id" class="container mt-5">
                 <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
@@ -13,10 +13,10 @@
                     </div>
                     <div id="btns-fichaje" class="card-body"
                         style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
-                        <button class="btn-pulse" @click="EntradaFichaje()" :disabled="entradaDisabled"
+                        <button class="btn-pulse btnEntradaSalida" @click="EntradaFichaje()" :disabled="entradaDisabled"
                             :class="{ 'btn': true, 'btn-primary': true, 'btn-secondary': entradaDisabled }"
                             style="padding: 12px 25px; font-size: 18px; background-color: #053b28;">Entrar</button>
-                        <button class="btn-pulse" @click="SalidaFichaje()" :disabled="salidaDisabled"
+                        <button class="btn-pulse btnEntradaSalida" @click="SalidaFichaje()" :disabled="salidaDisabled"
                             :class="{ 'btn': true, 'btn-danger': true, 'btn-gris': salidaDisabled }"
                             style="padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
@@ -24,8 +24,8 @@
             </div>
         </div>
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
-            <div  v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
+            <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                <h1 class="titleFichaje" style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="d-flex justify-content-center" v-if="!user.id" style="padding-top: 200px !important;">
                 <h2 style="font-weight: bold;">Debe iniciar sesión para hacer uso de la aplicación</h2>
@@ -46,16 +46,22 @@
                             <p class="descProject"
                                 style="background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; font-size: 16px;">
                                 {{ proyecto.descripcion }}</p>
-                            <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id" :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
+                            <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id"
+                                :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
                                 <button class="btn btn-warning">Editar Usuarios</button>
                             </Router-link>
                         </RouterLink>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    <footer>
+        <div class="footerImputfy">
+            <div>Términos y condiciones</div>
+            <div>Copyright Imputfy 2024</div>
+        </div>
+    </footer>
 </template>
 
 <script setup>
@@ -228,81 +234,117 @@ button {
     font-family: 'Nunito', sans-serif !important;
 }
 
+footer{
+    background-color: #053b28;
+    color: #fcfcfc;
+}
+
+.footerImputfy {
+    max-width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+}
+
 @media (max-width: 1250px) {
-    .titleProject{
+    .titleProject {
         font-size: 18px !important;
     }
 
-    .descProject{
+    .descProject {
         font-size: 14px !important;
     }
 }
 
 @media (max-width: 1100px) {
-    .titleProject{
+    .titleProject {
         font-size: 15px !important;
     }
 
-    .descProject{
+    .descProject {
         font-size: 12px !important;
     }
 
-    .btn.btn-warning{
+    .btn.btn-warning {
         font-size: 9px;
         padding: 3px;
     }
 }
 
 @media (max-width: 900px) {
-    .titleProject{
+    .titleProject {
         font-size: 12px;
     }
 
-    .descProject{
+    .descProject {
         font-size: 10px;
     }
 
-    .container{
+    .btnEntradaSalida{
+        font-size: 15px !important;
+    }
+
+    .titleFichaje{
+        font-size: 30px;
+    }
+
+    .container {
         justify-content: space-around !important;
     }
 }
 
 @media (max-width: 770px) {
-    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center{
+    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center {
         padding: 5px !important;
         height: 200px !important;
         width: 140px !important;
     }
 
-    .titleProject{
+    .titleFichaje{
+        font-size: 25px;
+    }
+
+    .titleProject {
         font-size: 10px !important;
         margin: 2px !important;
     }
 
-    .descProject{
+    .descProject {
         font-size: 8px !important;
         margin: 2px !important;
     }
 }
 
 @media (max-width: 550px) {
-    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center{
+    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center {
         padding: 2px !important;
         height: 180px !important;
         width: 125px !important;
     }
 
-    .titleProject{
+    .titleFichaje{
+        font-size: 17px;
+    }
+
+    .btnEntradaSalida{
+        font-size: 12px !important;
+    }
+
+    .titleProject {
         padding: 3px !important;
         font-size: 10px;
     }
 
-    .descProject{
+    .descProject {
         padding: 3px !important;
         font-size: 8px;
     }
 
-    .btn.btn-warning{
+    .btn.btn-warning {
         font-size: 9px;
         padding: 2px;
     }
