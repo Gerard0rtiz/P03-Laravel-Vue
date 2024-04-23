@@ -12,7 +12,7 @@
                     <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
-                                <th width="50" class="text-center">#</th>
+                                <th width="50" class="text-center">ID</th>
                                 <th>ID de usuario</th>
                                 <th>ID de proyecto</th>
                                 <th>Fecha imputacion</th>

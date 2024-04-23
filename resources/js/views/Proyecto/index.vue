@@ -16,7 +16,9 @@
                 </div>
             </div>
             <div class="container mt-5 card">
+                <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado" v-model="filtro">
                 <div class="container table-container" style="display: flex !important;">
+                
                     <table class="table table-hover table-sm" style=" width: 100%;">
                         <thead class="text-light">
                             <tr>
@@ -35,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(imputacion) in imputaciones">
+                            <tr v-for="(imputacion) in imputacionesFiltradas" :key="imputacion.id">
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{
                         imputacion.user.name }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{
@@ -93,11 +95,12 @@ import { ref, computed, onMounted } from "vue";
 
 const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
-const imputaciones = ref({});
+const imputaciones = ref([]);
 const strError = ref(null);
 const strSuccess = ref(null);
 const route = useRoute();
-const imputacion = ref({});
+const imputacion = ref([]);
+const filtro = ref(''); 
 imputacion.value.idUser = user.value.id;
 const proyectoId = route.params.id;
 imputacion.value.idProyecto = proyectoId;
@@ -141,7 +144,13 @@ onMounted(() => {
     window.scrollTo(0, 0);
     getImputaciones();
 });
-
+const imputacionesFiltradas = computed(() => {
+    return imputaciones.value.filter(imputacion => {
+        // Filtrar por nombre de empleado o descripción
+        return imputacion.user.name.toLowerCase().includes(filtro.value.toLowerCase()) ||
+               imputacion.descripcion.toLowerCase().includes(filtro.value.toLowerCase());
+    });
+});
 
 
 </script>
