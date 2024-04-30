@@ -15,8 +15,9 @@
                         style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮ VOLVER</router-link>
                 </div>
             </div>
+            
             <div class="container mt-5 card">
-                <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado" v-model="filtro">
+                <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado y fecha" v-model="filtro" style="width: 300px; margin-left: 12px;">
                 <div class="container table-container" style="display: flex !important;">
                 
                     <table class="table table-hover table-sm" style=" width: 100%;">
@@ -146,9 +147,8 @@ onMounted(() => {
 });
 const imputacionesFiltradas = computed(() => {
     return imputaciones.value.filter(imputacion => {
-        // Filtrar por nombre de empleado o descripción
         return imputacion.user.name.toLowerCase().includes(filtro.value.toLowerCase()) ||
-               imputacion.descripcion.toLowerCase().includes(filtro.value.toLowerCase());
+               imputacion.fechaImputacion.toLowerCase().includes(filtro.value.toLowerCase());
     });
 });
 
