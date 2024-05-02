@@ -5,10 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use App\Models\User;
-
+use App\Models\Fichaje;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 class apiTest extends TestCase
 {
-    use DatabaseMigrations;
+   use DatabaseMigrations;
+
 
     /** @test */
     public function authenticated_user_can_login()
@@ -41,4 +44,24 @@ class apiTest extends TestCase
         //Verificar que el usuario no está autenticado
         $this->assertGuest();
     }
+
+    /** @test */
+    public function puede_agregar_una_imputacion()
+    {
+        $datos = [
+            'idUser' => 1,
+            'idProyecto' => 4,
+            'fechaImputacion' => '2024-05-02',
+            'horasRealizadas' => 8,
+            'descripcion' => 'Trabajo en el proyecto TEST',
+        ];
+
+        $controller = new \App\Http\Controllers\api\ImputacionController();
+
+        $response = $controller->store(new Request($datos));
+
+        $this->assertTrue($response->getData()->success);
+    }
+    
+
 }
