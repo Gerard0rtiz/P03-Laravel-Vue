@@ -1,6 +1,5 @@
 <template>
     <div>
-      <!-- Aquí puedes mostrar el tiempo en tu vista -->
       <h2 style="font-weight: 600; color: white; margin: 0;">{{ time }}</h2>
     </div>
   </template>
@@ -14,13 +13,13 @@
       };
     },
     beforeDestroy() {
-      // Prevenir fuga de memoria
+      //Prevenir fuga de memoria
       clearInterval(this.interval);
     },
     created() {
-      // Actualizar el tiempo cada segundo
+      //Actualizar el tiempo cada segundo
       this.interval = setInterval(() => {
-        // Formatear el tiempo según la configuración regional del sistema
+        //Cambiar el formate de tiempo respecto a la región indicada en el sistema
         this.time = Intl.DateTimeFormat(navigator.language, {
           hour: 'numeric',
           minute: 'numeric',
