@@ -5,12 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Fichaje;
+use App\Models\Proyecto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+
 class apiTest extends TestCase
 {
-   use DatabaseMigrations;
+    use DatabaseMigrations;
 
 
     /** @test */
@@ -48,9 +49,29 @@ class apiTest extends TestCase
     /** @test */
     public function puede_agregar_una_imputacion()
     {
-        $datos = [
-            'idUser' => 1,
-            'idProyecto' => 4,
+        //Crear usuario en bbdd
+        $user = User::factory()->create([
+            "email" => "empleado@testing.com",
+            "password" => bcrypt("12341234")
+        ]);
+
+        //Autenticar usuario creado
+        $this->actingAs($user);
+
+        //Datos del proyecto
+        $datosProyecto = [
+            'titulo' => 'Prueba Automatizada',
+            'descripcion' => 'Realización de pruebas automatizadas con Laravel',
+            'idUser' => $user->id
+        ];
+
+        //Crear proyecto en bbdd para añadir ahí la imputación
+        $proyecto = Proyecto::factory()->create($datosProyecto);
+
+        //Datos de la imputación que se añade
+        $datosImputacion = [
+            'idUser' => $user->id,
+            'idProyecto' => $proyecto->id,
             'fechaImputacion' => '2024-05-02',
             'horasRealizadas' => 8,
             'descripcion' => 'Trabajo en el proyecto TEST',
@@ -58,10 +79,10 @@ class apiTest extends TestCase
 
         $controller = new \App\Http\Controllers\api\ImputacionController();
 
-        $response = $controller->store(new Request($datos));
+        //Almacenar imputación
+        $response = $controller->store(new Request($datosImputacion));
 
+        //Verificar si la imputación se imputó correctamente
         $this->assertTrue($response->getData()->success);
     }
-    
-
 }
