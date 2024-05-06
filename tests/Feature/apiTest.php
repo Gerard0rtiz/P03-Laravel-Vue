@@ -84,5 +84,40 @@ class apiTest extends TestCase
 
         //Verificar si la imputación se imputó correctamente
         $this->assertTrue($response->getData()->success);
+    
     }
+
+  /** @test */
+  public function authenticated_admin_can_create_role()
+  {
+      // Crear usuario administrador en la base de datos
+      $admin = User::factory()->create([
+          "name" => "David",
+          "email" => "admin@gmail.com",
+          "password" => bcrypt("12345678"),
+      ]);
+
+      // Autenticar como usuario administrador
+      $this->actingAs($admin);
+
+      // Acceder a la página de creación de roles
+      $response = $this->get('/admin/roles/index.vue');
+
+      // Verificar que se puede acceder correctamente a la página de creación
+      $response->assertStatus(200);
+
+      // Datos del nuevo rol
+      $datosRol = [
+          'id' => 1,
+          'name' => 'TestRol',
+          'guard_name' => 'web'
+          // Otros campos del rol, si los hubiera
+      ];
+
+      // Enviar una solicitud para crear un nuevo rol
+      $response = $this->post('/admin/roles', $datosRol);
+
+      // Verificar que el rol se haya creado correctamente en la base de datos
+      $this->assertDatabaseHas('roles', $datosRol);
+  }
 }
