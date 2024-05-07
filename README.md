@@ -79,3 +79,10 @@ npm run dev (en una terminal)
 php artisan serve (en otra terminal)
 http://127.0.0.1:8000 (en el navegador)
 ```
+
+### USUARIO ADMIN DEMO
+```
+En el código incluye un usuario administrador:
+email: admin@demo.com
+password: 12345678
+```
