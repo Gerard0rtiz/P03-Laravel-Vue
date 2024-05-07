@@ -10,7 +10,9 @@ Ejemplo proyecto Laravel 10 + vue3 PAra DAW
 - ✅ Restablecimiento de contraseña
 - ✅ Login
 - ✅ Panel de administración
-- ✅ Gestión de perfiles
+- ✅ Gestión de fichajes
+- ✅ Gestión de imputaciones
+- ✅ Gestión de proyectos
 - ✅ Gestión de usuarios
 - ✅ Gestión de roles
 - ✅ Gestión de permisos
@@ -62,8 +64,18 @@ npm install
 
 npm run dev
 ```
+
 ### Lanzar a producción
 
 ```bash
 npm run build or yarn build
+```
+
+### COMO ABRIR LA WEB
+
+```
+Abrir terminal en ruta del proyecto:
+npm run dev (en una terminal)
+php artisan serve (en otra terminal)
+http://127.0.0.1:8000 (en el navegador)
 ```
