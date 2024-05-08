@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Proyecto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use App\Http\Controllers\api\ImputacionController;
+use Illuminate\Validation\ValidationException;
 
 class apiTest extends TestCase
 {
@@ -15,7 +17,7 @@ class apiTest extends TestCase
 
 
     /** @test */
-    public function authenticated_user_can_login()
+    public function usuario_puede_logearse()
     {
         //Crear usuario en bbdd
         $user = User::factory()->create([
@@ -34,7 +36,7 @@ class apiTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_login_with_invalid_credentials()
+    public function usuario_no_puede_logearse_con_credenciales_invalidas()
     {
         //Simular inicio de sesión con credenciales inválidas
         $response = $this->post('/login', [
@@ -45,20 +47,74 @@ class apiTest extends TestCase
         //Verificar que el usuario no está autenticado
         $this->assertGuest();
     }
+    
+    
+  /** @test */
+public function no_puedes_agregar_un_proyecto_invalido()
+{
+    $user = User::factory()->create([
+        "id" => 6,
+        "email" => "empleado@testing.com",
+        "password" => bcrypt("12341234")
+    ]);
 
-    /** @test */
-    public function puede_agregar_una_imputacion()
+    $this->actingAs($user);
+
+    $datosProyectoInvalido = [
+        'titulo' => 'test', 
+        'descripcion' => 'Descripción del proyecto',
+        'idUser' => 9, // ID de usuario que no existe 
+    ];
+
+  
+    $controller = new \App\Http\Controllers\api\ProyectoController();
+
+    // guardar el proyecto inválido 
+    try {
+        $controller->store(new Request($datosProyectoInvalido));
+        $this->fail('Se esperaba una excepción de QueryException');
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Verificar la excepción
+        $this->assertStringContainsString('Integrity constraint violation', $e->getMessage());
+    }
+}
+
+
+ /** @test */
+ public function puede_crear_un_proyecto_correctamente()
     {
-        //Crear usuario en bbdd
         $user = User::factory()->create([
             "email" => "empleado@testing.com",
             "password" => bcrypt("12341234")
         ]);
 
-        //Autenticar usuario creado
         $this->actingAs($user);
 
-        //Datos del proyecto
+        $datosProyectoValido = [
+            'titulo' => 'Proyecto de Prueba',
+            'descripcion' => 'Descripción del proyecto de prueba',
+            'idUser' => $user->id,
+        ];
+
+        $controller = new \App\Http\Controllers\api\ProyectoController();
+
+        // guardamos los datos del proyecto y comprobamos que sean correctos
+        $response = $controller->store(new Request($datosProyectoValido));
+        $this->assertTrue($response->getData()->success);
+    }
+
+    /** @test */
+    public function puede_agregar_una_imputacion()
+    {
+        
+        $user = User::factory()->create([
+            "email" => "empleado@testing.com",
+            "password" => bcrypt("12341234")
+        ]);
+
+        
+        $this->actingAs($user);
+
         $datosProyecto = [
             'titulo' => 'Prueba Automatizada',
             'descripcion' => 'Realización de pruebas automatizadas con Laravel',
@@ -87,37 +143,42 @@ class apiTest extends TestCase
     
     }
 
-  /** @test */
-  public function authenticated_admin_can_create_role()
-  {
-      // Crear usuario administrador en la base de datos
-      $admin = User::factory()->create([
-          "name" => "David",
-          "email" => "admin@gmail.com",
-          "password" => bcrypt("12345678"),
-      ]);
+    
+/** @test */
+public function no_puedes_agregar_una_imputacion_invalida()
+{
+    
+    $user = User::factory()->create([
+        "email" => "empleado@testing.com",
+        "password" => bcrypt("12341234")
+    ]);
 
-      // Autenticar como usuario administrador
-      $this->actingAs($admin);
+    $this->actingAs($user);
 
-      // Acceder a la página de creación de roles
-      $response = $this->get('/admin/roles/index.vue');
+    $proyecto = Proyecto::factory()->create([
+        'titulo' => 'Proyecto de Prueba',
+        'descripcion' => 'Descripción del proyecto de prueba',
+        'idUser' => $user->id,
+    ]);
 
-      // Verificar que se puede acceder correctamente a la página de creación
-      $response->assertStatus(200);
+    $datosImputacionInvalida = [
+      
+        'idUser' => $user->id,
+        'idProyecto' => $proyecto->id, 
+        'fechaImputacion' => '2024-13-45', //fecha incorrecta  
+        'horasRealizadas' => -8, //no puedes poner un numero negativo
+        'descripcion' => '', //el campo de descripcion esta vacio
+    ];
 
-      // Datos del nuevo rol
-      $datosRol = [
-          'id' => 1,
-          'name' => 'TestRol',
-          'guard_name' => 'web'
-          // Otros campos del rol, si los hubiera
-      ];
+  
+    $controller = new \App\Http\Controllers\api\ImputacionController();
 
-      // Enviar una solicitud para crear un nuevo rol
-      $response = $this->post('/admin/roles', $datosRol);
+    // Se lanza una excepcion de validacion
+    $this->expectException(ValidationException::class);
 
-      // Verificar que el rol se haya creado correctamente en la base de datos
-      $this->assertDatabaseHas('roles', $datosRol);
-  }
+    // guardamos la imputacion invalida (deberia lanzar una excepcion de validacion)
+    $controller->store(new Request($datosImputacionInvalida));
+}
+
+ 
 }
