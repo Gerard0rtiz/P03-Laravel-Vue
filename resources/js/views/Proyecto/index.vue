@@ -11,21 +11,26 @@
             <div>
                 <div class="d-flex justify-content-between align pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                     <h1 style="text-transform: uppercase;">{{ proyectoTitulo }}</h1>
-                    <router-link class="nav-link btn-pulse btn"
+                    <router-link class="nav-link btn-pulse btn btn-goback"
                         style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮ VOLVER</router-link>
                 </div>
             </div>
-            
-            <div class="container mt-5 card">
-                <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado y fecha" v-model="filtro" style="width: 300px; margin-left: 12px;">
+
+            <div class="container mt-5 card" style="background-color: #ede8db;">
+                <div class="filtrosTabla">
+                    <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado"
+                        v-model="filtroNombre" style="width: 300px; margin-left: 12px; background-color: #f0efec;">
+                    <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por fecha"
+                        v-model="filtroFecha" style="width: 300px; margin-left: 12px; background-color: #f0efec;">
+                </div>
                 <div class="container table-container" style="display: flex !important;">
-                
-                    <table class="table table-hover table-sm" style=" width: 100%;">
+                    <table class="table table-hover table-sm" style="width: 100%;">
                         <thead class="text-light">
                             <tr>
                                 <th class="text-center"
                                     style="border-top-left-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">
-                                    EMPLEADO</th>
+                                    EMPLEADO
+                                </th>
                                 <th class="text-center"
                                     style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">FECHA
                                 </th>
@@ -34,7 +39,8 @@
                                 </th>
                                 <th class="text-center"
                                     style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">
-                                    DESCRIPCIÓN</th>
+                                    DESCRIPCIÓN
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,32 +51,45 @@
                         imputacion.fechaImputacion }}</td>
                                 <td v-if="imputacion.idProyecto == proyectoId" class="text-center">{{
                         imputacion.horasRealizadas }}</td>
-                                <td v-if="imputacion.idProyecto == proyectoId" class="descripcion text-center">{{
+                                <td v-if="imputacion.idProyecto == proyectoId" class="descripcion text-center"
+                                    @click="showPopup(imputacion.descripcion)">{{
                         imputacion.descripcion }}</td>
+                            </tr>
+                            <tr v-if="imputacionesFiltradas.idProyecto != proyectoId">
+                                <td colspan="4" class="text-center" style="font-size: 18px; color: #053b28;">
+                                    No se han encontrado más imputaciones
+                                </td>
                             </tr>
                         </tbody>
                     </table>
 
+                    <div v-if="showDescriptionPopup" class="popup" @click.self="closePopup">
+                        <div class="popup-content">
+                            <span class="close" @click="closePopup">&times;</span>
+                            <p>{{ descriptionContent }}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="container" style="padding-top: 60px; ">
                     <form @submit.prevent="addImputacion()" class="row g-3">
                         <div class="col-md-3">
                             <label>FECHA:</label>
-                            <input type="date" class="form-control border rounded" v-model="imputacion.fechaImputacion">
+                            <input type="date" class="form-control border rounded" v-model="imputacion.fechaImputacion"
+                            style="background-color: #f0efec;">
                         </div>
                         <div class="col-md-3">
                             <label>HORAS REALIZADAS:</label>
                             <input type="number" max="12" min="0" class="form-control border rounded"
-                                v-model="imputacion.horasRealizadas">
+                                v-model="imputacion.horasRealizadas" style="background-color: #f0efec;" >
                         </div>
                         <div class="col-md-6">
                             <label>DESCRIPCIÓN:</label>
                             <textarea class="form-control border rounded" v-model="imputacion.descripcion"
-                                maxlength="400" style="max-height: 100px; min-height: 100px;"></textarea>
+                                maxlength="400" style="max-height: 100px; min-height: 100px; background-color: #f0efec;"></textarea>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn"
-                                style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">IMPUTAR</button>
+                            <button type="submit" class="btn save-imput"
+                                style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -100,8 +119,9 @@ const imputaciones = ref([]);
 const strError = ref(null);
 const strSuccess = ref(null);
 const route = useRoute();
-const imputacion = ref([]);
-const filtro = ref(''); 
+const imputacion = ref({});
+const filtroNombre = ref('');
+const filtroFecha = ref('');
 imputacion.value.idUser = user.value.id;
 const proyectoId = route.params.id;
 imputacion.value.idProyecto = proyectoId;
@@ -145,29 +165,88 @@ onMounted(() => {
     window.scrollTo(0, 0);
     getImputaciones();
 });
+
 const imputacionesFiltradas = computed(() => {
     return imputaciones.value.filter(imputacion => {
-        return imputacion.user.name.toLowerCase().includes(filtro.value.toLowerCase()) ||
-               imputacion.fechaImputacion.toLowerCase().includes(filtro.value.toLowerCase());
+        const nombreMatch = imputacion.user.name.toLowerCase().includes(filtroNombre.value.toLowerCase());
+        const fechaMatch = imputacion.fechaImputacion.includes(filtroFecha.value);
+        return nombreMatch && fechaMatch;
     });
 });
 
+</script>
 
+<script>
+export default {
+    data() {
+        return {
+            showDescriptionPopup: false,
+            descriptionContent: ''
+        };
+    },
+    methods: {
+        showPopup(content) {
+            this.descriptionContent = content;
+            this.showDescriptionPopup = true;
+        },
+        closePopup() {
+            this.showDescriptionPopup = false;
+            this.descriptionContent = '';
+        }
+    }
+};
 </script>
 
 <style scoped>
+
+.filtrosTabla{
+    display: flex;
+}
+
+td {
+    font-size: 16px;
+    background-color: #f0efec;
+}
+
 @media (max-width: 1000px) {
     th.text-center {
         font-size: 16px !important;
     }
 
+    .filtrosTabla{
+        display: grid;
+        justify-content: center;
+    } 
 }
 
 @media (max-width: 770px) {
     th.text-center {
-        font-size: 13px !important;
+        font-size: 12px !important;
     }
 
+    td {
+        height: 75px !important;
+    }
+
+    .descripcion {
+        height: 75px !important;
+        max-height: 75px !important;
+        display: block !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    .descripcion::after {
+        content: "+";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #053b28;
+        color: #f1f1f1;
+        padding: 3px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 560px) {
@@ -177,14 +256,37 @@ const imputacionesFiltradas = computed(() => {
 
 }
 
-@media (max-width: 530px) {
-    th.text-center {
-        font-size: 10px !important;
-    }
-
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
-footer{
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 80%;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+footer {
     background-color: #053b28;
     color: #fcfcfc;
 }
@@ -627,5 +729,21 @@ video {
         color: #6b7280;
         color: rgba(107, 114, 128, var(--tw-text-opacity))
     }
+}
+
+.save-imput {
+    padding: 10px 20px;
+}
+
+.save-imput:hover {
+    background-color: #04744d !important;
+}
+
+.btn-goback {
+    transition: transform 0.3s ease;
+}
+
+.btn-goback:hover {
+    transform: scale(0.95);
 }
 </style>

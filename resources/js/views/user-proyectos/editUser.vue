@@ -2,11 +2,11 @@
     <div class="mx-auto sm:px-6 lg:px-8 container" style="margin-bottom: 100px;">
         <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
             <h1><strong>{{ proyecto.titulo }}</strong></h1>
-            <router-link class="nav-link btn-pulse btn" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
+            <router-link class="nav-link btn-pulse btn btn-goback" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
                 VOLVER</router-link>
         </div>
         <div class="d-flex" style="margin-top: 20px; width: 100%; justify-content: center">
-            <div class="card" style="width: 100%;">
+            <div class="card" style="width: 100%; background-color: #ede8db;">
                 <table class="table table-hover table-sm" style="font-size: 18px; width: 100%;">
                     <thead class="text-light">
                         <tr>
@@ -27,11 +27,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="(usuario, index) in proyecto.users" :key="index">
-                            <td style="padding: 10px" class="text-center">{{ usuario.id }}</td>
-                            <td style="padding: 10px" class="text-center">{{ usuario.name }}</td>
-                            <td style="padding: 10px" class="text-center">{{ usuario.pivot.idProyecto }}</td>
-                            <td style="padding: 10px" class="text-center">
-                                <button class="btn btn-danger" style="font-size: 15px;"
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.id }}</td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.name }}</td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.pivot.idProyecto }}</td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">
+                                <button class="btn btn-danger btn-delete" style="font-size: 15px;"
                                     @click="eliminarUsuario(proyecto.id, usuario.id)">Eliminar</button>
                             </td>
                         </tr>
@@ -40,7 +40,7 @@
                 <div style="margin-top: 30px;">
                     <form @submit.prevent="agregarUsuario">
                         <p style="font-size: 18px;"><strong>ID del usuario:</strong></p>
-                        <input class="inp-num" v-model="nuevoUsuarioId" type="number" min="0">
+                        <input class="inp-num" v-model="nuevoUsuarioId" type="number" min="0" style="background-color: #f0efec;">
                         <button class="btn-users" type="submit">Añadir usuario</button>
                     </form>
                 </div>
@@ -160,13 +160,30 @@ const mostrarPopupError = () => {
     }
     @media (max-width: 530px ) {
         th.text-center{
-            font-size: 10px !important;
+            font-size: 15px !important;
         }
-        
+
+        td.text-center{
+            font-size: 15px;
+        }
+
+        .inp-num{
+            width: 150px;
+        }
+
+        .btn-delete{
+            font-size: 13px !important;
+        }
+
+        .btn-users{
+            font-size: 16px !important;
+        }
+
     }
 
 body {
     font-family: 'Nunito', sans-serif !important;
+    background-color: #f5f5f5 !important;
 }
 
 footer{
@@ -245,5 +262,23 @@ thead th {
 
 .text-sm {
     font-size: .875rem
+}
+
+.btn-delete:hover{
+    background-color: #ee4141 !important;
+    box-shadow: none;
+    border: none;
+}
+
+.btn-goback{
+    transition: transform 0.3s ease;
+}
+
+.btn-goback:hover{
+    transform: scale(0.95);
+}
+
+.btn-users:hover{
+    background-color: #04744d !important;
 }
 </style>

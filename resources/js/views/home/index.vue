@@ -1,12 +1,14 @@
 <template>
-    <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"
-        style="padding-top: 100px !important;">
-        <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
+    <div class="relative items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0"
+        style="padding-top: 100px !important; ">
+        <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600; text-transform: uppercase;">{{ $t('welcome_starter_title') }}</h1>
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase; background-color: #ede8db;
+ margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">{{
+                $t('welcome_starter_title') }}</h1>
             </div>
-            <div v-if="user.id" class="container mt-5">
-                <div id="fichajes-section" class="card" style="display: flex; align-items: center;">
+            <div v-if="user.id" class="container mt-5" style=" margin-top: 0px !important; padding: 0px !important;">
+                <div id="fichajes-section" class="card" style=" background-color: #ede8db; display: flex; align-items: center;">
                     <div class="card-body">
                         <ClockComponent class="text-center"
                             style="font-family: 'Nunito', sans-serif; background-color: #053b28; padding: 8px 20px; border-radius: 25px;" />
@@ -14,28 +16,31 @@
                     <div id="btns-fichaje" class="card-body"
                         style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
                         <button class="btn-pulse btnEntradaSalida" @click="EntradaFichaje()" :disabled="entradaDisabled"
-                            :class="{ 'btn': true, 'btn-primary': true, 'btn-secondary': entradaDisabled }"
-                            style="padding: 12px 25px; font-size: 18px; background-color: #053b28;">Entrar</button>
+                            :class="{ 'btn': true, 'btn-primary': true, 'btn-enter': true, 'btn-secondary': entradaDisabled }"
+                            style="width: 100px; padding: 12px 25px; font-size: 18px; background-color: #053b28;">Entrar</button>
                         <button class="btn-pulse btnEntradaSalida" @click="SalidaFichaje()" :disabled="salidaDisabled"
-                            :class="{ 'btn': true, 'btn-danger': true, 'btn-gris': salidaDisabled }"
-                            style="padding: 12px 25px; font-size: 18px;">Salir</button>
+                            :class="{ 'btn': true, 'btn-danger': true, 'btn-exit': true, 'btn-gris': salidaDisabled }"
+                            style="width: 100px; padding: 12px 25px; font-size: 18px;">Salir</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%;">
+        <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600; text-transform: uppercase;">{{ $t('imp_horas_proyectos') }}</h1>
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
+ margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">{{
+                $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="d-flex justify-content-center" v-if="!user.id" style="padding-top: 200px !important;">
                 <h2 style="font-weight: bold;">Debe iniciar sesión para hacer uso de la aplicación</h2>
             </div>
-            <div v-if="user.id" class="container mt-5 card">
+            <div v-if="user.id" class="container mt-5 card project-viewer"
+                style=" margin-top: 0px !important; background-color: #ede8db;">
 
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
 
-                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3"
-                        style="margin: 6px; border-radius: 20px; width: 24% !important; padding: 0;">
+                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3 project-item"
+                        style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
                             class="btn btn-light d-flex flex-column align-items-center justify-content-center"
@@ -224,7 +229,7 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
 }
 
 h1,
@@ -234,7 +239,7 @@ button {
     font-family: 'Nunito', sans-serif !important;
 }
 
-footer{
+footer {
     background-color: #053b28;
     color: #fcfcfc;
 }
@@ -252,101 +257,78 @@ footer{
 
 @media (max-width: 1250px) {
     .titleProject {
+        font-size: 22px !important;
+    }
+
+    .descProject {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .titleFichaje {
+        font-size: 30px !important;
+    }
+
+    .titleProject {
         font-size: 18px !important;
     }
 
     .descProject {
-        font-size: 14px !important;
-    }
-}
-
-@media (max-width: 1100px) {
-    .titleProject {
-        font-size: 15px !important;
-    }
-
-    .descProject {
-        font-size: 12px !important;
+        font-size: 16px !important;
     }
 
     .btn.btn-warning {
-        font-size: 9px;
+        font-size: 16px;
         padding: 3px;
     }
 }
 
-@media (max-width: 900px) {
-    .titleProject {
-        font-size: 12px;
-    }
-
-    .descProject {
-        font-size: 10px;
-    }
-
-    .btnEntradaSalida{
-        font-size: 15px !important;
-    }
-
-    .titleFichaje{
-        font-size: 30px;
-    }
-
-    .container {
-        justify-content: space-around !important;
-    }
-}
-
-@media (max-width: 770px) {
-    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center {
-        padding: 5px !important;
-        height: 200px !important;
-        width: 140px !important;
-    }
-
-    .titleFichaje{
-        font-size: 25px;
+@media (max-width: 1050px) {
+    .titleFichaje {
+        font-size: 28px !important;
     }
 
     .titleProject {
-        font-size: 10px !important;
-        margin: 2px !important;
+        font-size: 24px !important;
     }
 
     .descProject {
-        font-size: 8px !important;
-        margin: 2px !important;
-    }
-}
-
-@media (max-width: 550px) {
-    .btn.btn-light.d-flex.flex-column.align-items-center.justify-content-center {
-        padding: 2px !important;
-        height: 180px !important;
-        width: 125px !important;
-    }
-
-    .titleFichaje{
-        font-size: 17px;
-    }
-
-    .btnEntradaSalida{
-        font-size: 12px !important;
-    }
-
-    .titleProject {
-        padding: 3px !important;
-        font-size: 10px;
-    }
-
-    .descProject {
-        padding: 3px !important;
-        font-size: 8px;
+        font-size: 20px !important;
     }
 
     .btn.btn-warning {
-        font-size: 9px;
-        padding: 2px;
+        font-size: 17px;
+        padding: 3px;
+    }
+
+    .project-viewer .project-item {
+        width: 80% !important;
+        height: auto !important;
+    }
+
+    .project-viewer .container {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+}
+
+@media (max-width: 455px) {
+    .titleFichaje {
+        font-size: 26px !important;
+    }
+
+    .titleProject {
+        font-size: 20px !important;
+    }
+
+    .descProject {
+        font-size: 16px !important;
+    }
+
+    .btn.btn-warning {
+        font-size: 15px;
+        padding: 5px 10px;
     }
 }
 
@@ -378,7 +360,7 @@ a {
 svg,
 video {
     display: block;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 video {
@@ -732,12 +714,23 @@ video {
 
 .btn-pulse {
     transition: transform 0.3s ease, box-shadow 0.4s ease;
-    ;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.75) !important;
+}
+
+.project-item {
+    width: 24%;
 }
 
 .btn-pulse:active {
     transform: scale(0.95);
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0) !important;
+}
+
+.btn-enter:hover {
+    background-color: #04744d !important;
+}
+
+.btn-exit:hover {
+    background-color: #ee4141 !important;
 }
 </style>
