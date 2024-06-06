@@ -10,13 +10,13 @@
         <div class="mx-auto sm:px-6 lg:px-8 container" style="width: 100%;">
             <div>
                 <div class="d-flex justify-content-between align pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                    <h1 style="text-transform: uppercase;">{{ proyectoTitulo }}</h1>
+                    <h1 class="project-title" style="text-transform: uppercase;">{{ proyectoTitulo }}</h1>
                     <router-link class="nav-link btn-pulse btn btn-goback"
                         style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮ VOLVER</router-link>
                 </div>
             </div>
 
-            <div class="container mt-5 card" style="background-color: #ede8db;">
+            <div class="container mt-5 card imp-section" style="background-color: #ede8db; margin: 0px !important;">
                 <div class="filtrosTabla">
                     <input type="text" class="form-control border rounded mb-3" placeholder="Filtrar por empleado"
                         v-model="filtroNombre" style="width: 300px; margin-left: 12px; background-color: #f0efec;">
@@ -198,6 +198,17 @@ export default {
 </script>
 
 <style scoped>
+.project-title{
+    margin-bottom: 0px;
+    background-color: #ede8db;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px;
+}
+
+.imp-section{
+    border-top-left-radius: 0px;
+}
 
 .filtrosTabla{
     display: flex;
@@ -206,6 +217,12 @@ export default {
 td {
     font-size: 16px;
     background-color: #f0efec;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 @media (max-width: 1000px) {
@@ -241,9 +258,11 @@ td {
         position: absolute;
         bottom: 0;
         right: 0;
-        background: #053b28;
+        background: rgba(5, 59, 40, 0.75);
         color: #f1f1f1;
-        padding: 3px;
+        padding: 3px 5px;
+        margin-right: 7px;
+        margin-bottom: 4px;
         border-radius: 8px;
         cursor: pointer;
     }

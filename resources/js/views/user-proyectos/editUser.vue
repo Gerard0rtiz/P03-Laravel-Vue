@@ -1,12 +1,12 @@
 <template>
     <div class="mx-auto sm:px-6 lg:px-8 container" style="margin-bottom: 100px;">
         <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
-            <h1><strong>{{ proyecto.titulo }}</strong></h1>
+            <h1 class="title-usrEdit">{{ proyecto.titulo }}</h1>
             <router-link class="nav-link btn-pulse btn btn-goback" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
                 VOLVER</router-link>
         </div>
-        <div class="d-flex" style="margin-top: 20px; width: 100%; justify-content: center">
-            <div class="card" style="width: 100%; background-color: #ede8db;">
+        <div class="d-flex" style="margin: 0px; width: 100%; justify-content: center">
+            <div class="card usr-editor" style="width: 100%; background-color: #ede8db;">
                 <table class="table table-hover table-sm" style="font-size: 18px; width: 100%;">
                     <thead class="text-light">
                         <tr>
@@ -140,6 +140,19 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+.title-usrEdit{
+    margin-bottom: 0px;
+    background-color: #ede8db;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px;
+}
+
+.usr-editor{
+    border-top-left-radius: 0px !important;
+    border: none;
+}
+
  @media (max-width: 1000px ) {
         th.text-center{
             font-size: 16px !important;
