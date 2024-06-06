@@ -13,7 +13,6 @@ class Tecnologia extends Model
 
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'nivel'
+        'nombre'
     ];
 }

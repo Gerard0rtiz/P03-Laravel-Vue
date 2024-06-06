@@ -18,8 +18,7 @@ class TecnologiaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'nivel' => 'required'
+            'nombre' => 'required'
         ]);
         $tecnologia = $request->all();
         $createdTecnologia = Tecnologia::create($tecnologia);
@@ -30,8 +29,7 @@ class TecnologiaController extends Controller
     {
         $Tecnologia = Tecnologia::find($id);
         $request->validate([
-            'nombre' => 'required',
-            'nivel' => 'required'
+            'nombre' => 'required'
         ]);
         $dataToUpdate = $request->all();
         $Tecnologia->update($dataToUpdate);

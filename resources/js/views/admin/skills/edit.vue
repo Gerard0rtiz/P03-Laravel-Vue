@@ -25,11 +25,6 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-2">
-                    <label>Nivel de skill</label><span class="text-danger"> *</span>
-                    <input type="number" min="1" max="5" class="form-control" v-model="skill.nombre" placeholder="Nombre de skill">
-                </div>
-
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar skill</button>
             </form>
         </div>
@@ -49,8 +44,7 @@ const strError = ref('');
 
 const skill = reactive({
     id: route.params.id,
-    nombre: '',
-    nivel: ''
+    nombre: ''
 });
 
 const errors = reactive({
@@ -62,7 +56,6 @@ onMounted(() => {
     .then(response => {
         skill.id = response.data.id;
         skill.nombre = response.data.nombre;
-        skill.nivel = response.data.nivel;
     })
     .catch(function(error) {
         console.log(error);

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('tecnologias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('nivel');
             $table->timestamps();
         });
     }

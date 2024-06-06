@@ -6,38 +6,37 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las tecnologias</h5>
                         <div>
-                            <RouterLink :to="{name:'tecnologias.create'}" class="btn btn-success">Nueva tecnologia</RouterLink>
+                            <RouterLink :to="{ name: 'tecnologias.create' }" class="btn btn-success">Nueva tecnologia
+                            </RouterLink>
                         </div>
                     </div>
 
-                   
-             
-                    <table  class="table table-hover table-sm">
+                    <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
                                 <th>Nombre</th>
-                                <th>Nivel</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                        
-                            <tr v-for="(tecnologia,index) in tecnologias ">
+                            <tr v-for="(tecnologia, index) in tecnologias ">
                                 <td class="text-center">{{ tecnologia.id }}</td>
                                 <td class="text-center">{{ tecnologia.nombre }}</td>
-                                <td class="text-center">{{ tecnologia.nivel }}</td>
                                 <td class="text-center">
-                                    <RouterLink :to="{ name: 'tecnologias.edit', params: { id: tecnologia.id } }" class="btn btn-warning mr-1">Editar</RouterLink>
-                                    <button class="btn btn-danger" @click="deletetecnologia(tecnologia.id,index)">Eliminar</button>
+                                    <RouterLink :to="{ name: 'tecnologias.edit', params: { id: tecnologia.id } }"
+                                        class="btn btn-warning mr-1">Editar</RouterLink>
+                                    <button class="btn btn-danger"
+                                        @click="deletetecnologia(tecnologia.id, index)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
 </template>
 

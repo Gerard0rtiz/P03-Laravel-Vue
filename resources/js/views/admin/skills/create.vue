@@ -21,11 +21,6 @@
                     <input v-model="skill.nombre" type="text" class="form-control" placeholder="Nombre skill">
                 </div>
 
-                <div class="form-group mb-2">
-                    <label>Nivel de skill</label><span class="text-danger"> *</span>
-                    <input v-model="skill.nivel" type="number" min="1" max="5" class="form-control" placeholder="Nivel de skill">
-                </div>
-
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Crear skill</button>
       </form>
     </div>

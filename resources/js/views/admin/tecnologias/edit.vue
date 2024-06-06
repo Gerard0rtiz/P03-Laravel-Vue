@@ -25,11 +25,6 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-2">
-                    <label>Nivel de tecnologia</label><span class="text-danger"> *</span>
-                    <input type="number" min="1" max="5" class="form-control" v-model="tecnologia.nombre" placeholder="Nombre de tecnologia">
-                </div>
-
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar tecnologia</button>
             </form>
         </div>
@@ -49,8 +44,7 @@ const strError = ref('');
 
 const tecnologia = reactive({
     id: route.params.id,
-    nombre: '',
-    nivel: ''
+    nombre: ''
 });
 
 const errors = reactive({
@@ -62,7 +56,6 @@ onMounted(() => {
     .then(response => {
         tecnologia.id = response.data.id;
         tecnologia.nombre = response.data.nombre;
-        tecnologia.nivel = response.data.nivel;
     })
     .catch(function(error) {
         console.log(error);

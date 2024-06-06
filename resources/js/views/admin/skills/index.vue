@@ -6,38 +6,36 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las skills</h5>
                         <div>
-                            <RouterLink :to="{name:'skills.create'}" class="btn btn-success">Nueva skill</RouterLink>
+                            <RouterLink :to="{ name: 'skills.create' }" class="btn btn-success">Nueva skill</RouterLink>
                         </div>
                     </div>
 
-                   
-             
-                    <table  class="table table-hover table-sm">
+                    <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
                                 <th>Nombre</th>
-                                <th>Nivel</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                        
-                            <tr v-for="(skill,index) in skills ">
+                            <tr v-for="(skill, index) in skills ">
                                 <td class="text-center">{{ skill.id }}</td>
                                 <td class="text-center">{{ skill.nombre }}</td>
-                                <td class="text-center">{{ skill.nivel }}</td>
                                 <td class="text-center">
-                                    <RouterLink :to="{ name: 'skills.edit', params: { id: skill.id } }" class="btn btn-warning mr-1">Editar</RouterLink>
-                                    <button class="btn btn-danger" @click="deleteSkill(skill.id,index)">Eliminar</button>
+                                    <RouterLink :to="{ name: 'skills.edit', params: { id: skill.id } }"
+                                        class="btn btn-warning mr-1">Editar</RouterLink>
+                                    <button class="btn btn-danger"
+                                        @click="deleteSkill(skill.id, index)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
 </template>
 

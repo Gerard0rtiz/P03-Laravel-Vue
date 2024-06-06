@@ -21,11 +21,6 @@
                     <input v-model="tecnologia.nombre" type="text" class="form-control" placeholder="Nombre tecnologia">
                 </div>
 
-                <div class="form-group mb-2">
-                    <label>Nivel de tecnologia</label><span class="text-danger"> *</span>
-                    <input v-model="tecnologia.nivel" type="number" min="1" max="5" class="form-control" placeholder="Nivel de tecnologia">
-                </div>
-
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Crear tecnologia</button>
       </form>
     </div>

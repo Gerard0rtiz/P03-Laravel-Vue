@@ -32,6 +32,14 @@ const ImputacionEdit = () => import('../views/admin/imputaciones/Edit.vue');
 const FichajeList = () => import('../views/admin/fichajes/Index.vue');
 const FichajeCreate = () => import('../views/admin/fichajes/Create.vue');
 const FichajeEdit = () => import('../views/admin/fichajes/Edit.vue');
+//rutas a imputacion
+const SkillList = () => import('../views/admin/skills/Index.vue');
+const SkillCreate = () => import('../views/admin/skills/Create.vue');
+const SkillEdit = () => import('../views/admin/skills/Edit.vue');
+//rutas a imputacion
+const TecnologiaList = () => import('../views/admin/tecnologias/Index.vue');
+const TecnologiaCreate = () => import('../views/admin/tecnologias/Create.vue');
+const TecnologiaEdit = () => import('../views/admin/tecnologias/Edit.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -196,6 +204,58 @@ export default [
                         path: 'edit',
                         component: TaskEdit,
                         meta: { breadCrumb: 'Editar tarea' }
+                    }
+                ]
+            },
+
+            {
+                name: 'skills',
+                path: 'skills',
+                meta: { breadCrumb: 'Skills' },
+                children: [
+                    {
+                        name: 'skills.index',
+                        path: '',
+                        component: SkillList,
+                        meta: { breadCrumb: 'Listado skills' }
+                    },
+                    {
+                        name: 'skills.create',
+                        path: 'create',
+                        component: SkillCreate,
+                        meta: { breadCrumb: 'Crear skill' }
+                    },
+                    {
+                        name: 'skills.edit',
+                        path: 'edit/:id',
+                        component: SkillEdit,
+                        meta: { breadCrumb: 'Editar skill' }
+                    }
+                ]
+            },
+
+            {
+                name: 'tecnologias',
+                path: 'tecnologias',
+                meta: { breadCrumb: 'Tecnologias' },
+                children: [
+                    {
+                        name: 'tecnologias.index',
+                        path: '',
+                        component: TecnologiaList,
+                        meta: { breadCrumb: 'Listado tecnologias' }
+                    },
+                    {
+                        name: 'tecnologias.create',
+                        path: 'create',
+                        component: TecnologiaCreate,
+                        meta: { breadCrumb: 'Crear tecnologia' }
+                    },
+                    {
+                        name: 'tecnologias.edit',
+                        path: 'edit/:id',
+                        component: TecnologiaEdit,
+                        meta: { breadCrumb: 'Editar tecnologia' }
                     }
                 ]
             },

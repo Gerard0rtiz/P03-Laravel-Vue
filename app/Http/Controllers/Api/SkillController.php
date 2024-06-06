@@ -17,8 +17,7 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'nivel' => 'required'
+            'nombre' => 'required'
         ]);
         $skill = $request->all();
         $createdSkill = Skill::create($skill);
@@ -29,8 +28,7 @@ class SkillController extends Controller
     {
         $Skill = Skill::find($id);
         $request->validate([
-            'nombre' => 'required',
-            'nivel' => 'required'
+            'nombre' => 'required'
         ]);
         $dataToUpdate = $request->all();
         $Skill->update($dataToUpdate);
