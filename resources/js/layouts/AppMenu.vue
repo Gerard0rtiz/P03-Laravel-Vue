@@ -23,14 +23,16 @@ const model = ref([
         items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/admin', permision: 'all'}]
     },
     {
-        label: 'Usuarios',
+        label: 'GESTIÓN IMPUTFY',
         items: [
             { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
             { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
             { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' },
             { label: 'Proyectos', icon: 'pi pi-server', to: '/admin/proyectos', permision:'permission-list' },
             { label: 'Imputaciones', icon: 'pi pi-folder-open', to: '/admin/imputaciones', permision:'permission-list' },
-            { label: 'Fichajes', icon: 'pi pi-paperclip', to: '/admin/fichajes', permision:'permission-list' }
+            { label: 'Fichajes', icon: 'pi pi-paperclip', to: '/admin/fichajes', permision:'permission-list' },
+            { label: 'Skills', icon: 'pi pi-briefcase', to: '/admin/skills', permision:'permission-list' },
+            { label: 'Tecnologias', icon: 'pi pi-cog', to: '/admin/tecnologias', permision:'permission-list' }
         ]
     }
 ]);

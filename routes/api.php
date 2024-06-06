@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\ProyectoController;
 use App\Http\Controllers\Api\ImputacionController;
 use App\Http\Controllers\Api\FichajeController;
+use App\Http\Controllers\Api\SkillController;
+use App\Http\Controllers\Api\TecnologiaController;
 use App\Http\Controllers\Api\UserProyectoController;
 
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -24,6 +26,20 @@ Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/',[TaskController::class,'store']);
 Route::put('tasks/update/{id}',[TaskController::class,'update']);
 Route::delete('tasks/{id}',[TaskController::class,'destroy']);
+
+//Rutas de SkillController
+Route::get('skills',[SkillController::class,'index']);
+Route::post('skills/',[SkillController::class,'store']);
+Route::get('skills/{id}',[SkillController::class,'show']);
+Route::put('skills/update/{id}',[SkillController::class,'update']);
+Route::delete('skills/{id}',[SkillController::class,'destroy']);
+
+//Rutas de TecnologiaController
+Route::get('tecnologias',[TecnologiaController::class,'index']);
+Route::post('tecnologias/',[TecnologiaController::class,'store']);
+Route::get('tecnologias/{id}',[TecnologiaController::class,'show']);
+Route::put('tecnologias/update/{id}',[TecnologiaController::class,'update']);
+Route::delete('tecnologias/{id}',[TecnologiaController::class,'destroy']);
 
 //Rutas de ProyectoController:
 Route::get('proyectos',[ProyectoController::class,'index']);
