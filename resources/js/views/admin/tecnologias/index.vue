@@ -15,7 +15,7 @@
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
-                                <th>Nombre</th>
+                                <th class="text-center">Nombre</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>

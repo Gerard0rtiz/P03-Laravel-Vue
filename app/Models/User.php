@@ -16,6 +16,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyecto::class, 'user_proyectos', 'idUser', 'idProyecto');
     }
 
+    public function tecnologias()
+    {
+        return $this->belongsToMany(Tecnologia::class, 'tecnologia_user', 'idUser', 'idTecnologia')->withPivot('nivel')->withTimestamps();
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'skill_user', 'idUser', 'idSkill')->withPivot('nivel')->withTimestamps();
+    }
+
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
