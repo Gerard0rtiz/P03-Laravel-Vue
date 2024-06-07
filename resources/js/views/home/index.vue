@@ -1,6 +1,8 @@
 <template>
     <div class="relative items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0"
         style="padding-top: 100px !important; ">
+
+        <!--Sección fichajes-->
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase; background-color: #ede8db;
@@ -8,7 +10,8 @@
                 $t('welcome_starter_title') }}</h1>
             </div>
             <div v-if="user.id" class="container mt-5" style=" margin-top: 0px !important; padding: 0px !important;">
-                <div id="fichajes-section" class="card" style=" background-color: #ede8db; display: flex; align-items: center;">
+                <div id="fichajes-section" class="card"
+                    style=" background-color: #ede8db; display: flex; align-items: center;">
                     <div class="card-body">
                         <ClockComponent class="text-center"
                             style="font-family: 'Nunito', sans-serif; background-color: #053b28; padding: 8px 20px; border-radius: 25px;" />
@@ -25,6 +28,8 @@
                 </div>
             </div>
         </div>
+
+        <!--Sección proyectos-->
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
                 <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
@@ -34,7 +39,7 @@
             <div class="d-flex justify-content-center" v-if="!user.id" style="padding-top: 200px !important;">
                 <h2 style="font-weight: bold;">Debe iniciar sesión para hacer uso de la aplicación</h2>
             </div>
-            <div v-if="user.id" class="container mt-5 card project-viewer"
+            <div v-if="user.id" class="container mt-5 card item-viewer"
                 style=" margin-top: 0px !important; background-color: #ede8db;">
 
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
@@ -60,6 +65,67 @@
                 </div>
             </div>
         </div>
+
+        <!--Sección skills-->
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
+            style="width: 100%; padding: 0px !important;">
+
+            <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
+         margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    Skills de empleados</h1>
+            </div>
+
+            <div v-if="user.id" class="container mt-5 card item-viewer"
+                style=" margin-top: 0px !important; background-color: #ede8db;">
+
+                <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
+
+                    <div v-for="(skill, index) in skills" class="shadow btn-pulse col-3 project-item"
+                        style="margin: 6px; border-radius: 20px; padding: 0;">
+                        <RouterLink :to="{ name: 'EditarSkills', params: { id: skill.id } }">
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
+                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject"
+                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                                    {{ skill.nombre }}</h2>
+                            </div>
+                        </RouterLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Sección tecnologías-->
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
+            style="width: 100%; padding: 0px !important;">
+
+            <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
+         margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    Tecnologías de empleados</h1>
+            </div>
+
+            <div v-if="user.id" class="container mt-5 card item-viewer"
+                style=" margin-top: 0px !important; background-color: #ede8db;">
+
+                <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
+
+                    <div v-for="(tecnologia, index) in tecnologias" class="shadow btn-pulse col-3 project-item"
+                        style="margin: 6px; border-radius: 20px; padding: 0;">
+                        <RouterLink :to="{ name: 'EditarTecnologias', params: { id: tecnologia.id } }">
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
+                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject"
+                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                                    {{ tecnologia.nombre }}</h2>
+                            </div>
+                        </RouterLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <footer>
         <div class="footerImputfy">
@@ -79,7 +145,8 @@ const store = useStore();
 const user = computed(() => store.getters["auth/user"]);
 const fichaje = ref({});
 const proyectos = ref([]);
-const proyecto = ref({});
+const tecnologias = ref([]);
+const skills = ref([]);
 const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
@@ -95,7 +162,25 @@ onMounted(() => {
         })
         .catch(error => {
             console.error("Error fetching proyectos", error);
+        });
+
+    axios.get('/api/tecnologias')
+        .then(response => {
+            tecnologias.value = response.data;
+            console.log(response.data);
         })
+        .catch(error => {
+            console.error("Error fetching tecnologias", error);
+        });
+
+    axios.get('/api/skills')
+        .then(response => {
+            skills.value = response.data;
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching skills", error);
+        });
 
     checkUserCookies();
     checkSalidaFichaje();
@@ -213,6 +298,7 @@ function getCookie(name) {
 
 <script>
 import { defineComponent } from 'vue';
+import { RouterLink } from "vue-router";
 
 export default defineComponent({
     components: {
@@ -302,12 +388,12 @@ footer {
         padding: 3px;
     }
 
-    .project-viewer .project-item {
+    .item-viewer .project-item {
         width: 80% !important;
         height: auto !important;
     }
 
-    .project-viewer .container {
+    .item-viewer .container {
         flex-direction: column !important;
         align-items: center !important;
     }

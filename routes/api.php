@@ -12,7 +12,6 @@ use App\Http\Controllers\Api\ImputacionController;
 use App\Http\Controllers\Api\FichajeController;
 use App\Http\Controllers\Api\SkillController;
 use App\Http\Controllers\Api\TecnologiaController;
-use App\Http\Controllers\Api\UserProyectoController;
 
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;

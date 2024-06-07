@@ -19,6 +19,12 @@ const TaskEdit = () => import('../views/admin/tasks/edit.vue');
 //rutas a userProyecto
 const UserProyectoVista = () => import('../views/user-proyectos/editUser.vue');
 
+//rutas a tecnologiasUsers
+const tecnologiasUsersVista = () => import('../views/tecnologia-user/tecnologiasUsers.vue');
+
+//rutas a skillsUsers
+const skillsUsersVista = () => import('../views/skill-user/skillsUsers.vue');
+
 //rutas a proyecto
 const ProyectoList = () => import('../views/admin/proyectos/Index.vue');
 const ProyectoCreate = () => import('../views/admin/proyectos/Create.vue');
@@ -80,6 +86,32 @@ export default [
                         name: 'UserProyecto.index',
                         path: '',
                         component: () => import('../views/user-proyectos/editUser.vue'),
+                    },
+                ]
+            },
+            {
+                name: 'EditarSkills',
+                path: '/editar-skills/:id',
+                meta: { breadCrumb: 'Editar skills de empleados' },
+                component: () => import('../views/skill-user/skillsUsers.vue'),
+                children: [
+                    {
+                        name: 'SkillUser.index',
+                        path: '',
+                        component: () => import('../views/skill-user/skillsUsers.vue'),
+                    },
+                ]
+            },
+            {
+                name: 'EditarTecnologias',
+                path: '/editar-tecnologias/:id',
+                meta: { breadCrumb: 'Editar tecnologias de empleados' },
+                component: () => import('../views/tecnologia-user/tecnologiasUsers.vue'),
+                children: [
+                    {
+                        name: 'TecnologiaUser.index',
+                        path: '',
+                        component: () => import('../views/tecnologia-user/tecnologiasUsers.vue'),
                     },
                 ]
             },
