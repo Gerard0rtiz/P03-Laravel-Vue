@@ -75,21 +75,29 @@
                         <div class="col-md-3">
                             <label>FECHA:</label>
                             <input type="date" class="form-control border rounded" v-model="imputacion.fechaImputacion"
-                            style="background-color: #f0efec;">
+                                style="background-color: #f0efec;">
                         </div>
                         <div class="col-md-3">
                             <label>HORAS REALIZADAS:</label>
                             <input type="number" max="12" min="0" class="form-control border rounded"
-                                v-model="imputacion.horasRealizadas" style="background-color: #f0efec;" >
+                                v-model="imputacion.horasRealizadas" style="background-color: #f0efec;">
                         </div>
                         <div class="col-md-6">
                             <label>DESCRIPCIÓN:</label>
                             <textarea class="form-control border rounded" v-model="imputacion.descripcion"
-                                maxlength="400" style="max-height: 100px; min-height: 100px; background-color: #f0efec;"></textarea>
+                                maxlength="400"
+                                style="max-height: 100px; min-height: 100px; background-color: #f0efec;"></textarea>
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn save-imput"
-                                style=" background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">Guardar</button>
+                                style="display: flex; align-items: center; background-color: #053b28; color: #FFF; font-weight: 700; font-size: 16px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="icon-save-imputacion" viewBox="0 0 16 16">
+                                    <path d="M11 2H9v3h2z" />
+                                    <path
+                                        d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
+                                </svg><p style="font-weight: 300;">Guardar</p>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -198,19 +206,24 @@ export default {
 </script>
 
 <style scoped>
-.project-title{
+.icon-save-imputacion{
+    fill: white;
+    margin-right: 10px;
+}
+
+.project-title {
     margin-bottom: 0px;
     background-color: #ede8db;
     padding: 10px;
     border-top-left-radius: 8px;
-    border-top-right-radius:8px;
+    border-top-right-radius: 8px;
 }
 
-.imp-section{
+.imp-section {
     border-top-left-radius: 0px;
 }
 
-.filtrosTabla{
+.filtrosTabla {
     display: flex;
 }
 
@@ -230,10 +243,10 @@ thead th {
         font-size: 16px !important;
     }
 
-    .filtrosTabla{
+    .filtrosTabla {
         display: grid;
         justify-content: center;
-    } 
+    }
 }
 
 @media (max-width: 770px) {

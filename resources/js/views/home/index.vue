@@ -20,10 +20,25 @@
                         style="display: flex; align-items: center; justify-content: space-around; width: 400px;">
                         <button class="btn-pulse btnEntradaSalida" @click="EntradaFichaje()" :disabled="entradaDisabled"
                             :class="{ 'btn': true, 'btn-primary': true, 'btn-enter': true, 'btn-secondary': entradaDisabled }"
-                            style="width: 100px; padding: 12px 25px; font-size: 18px; background-color: #053b28;">Entrar</button>
+                            style="display: flex; justify-content: center; align-items: center; width: 130px; padding: 12px 25px; font-size: 18px; background-color: #053b28;">
+                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
+                            Entrar
+                        </button>
                         <button class="btn-pulse btnEntradaSalida" @click="SalidaFichaje()" :disabled="salidaDisabled"
                             :class="{ 'btn': true, 'btn-danger': true, 'btn-exit': true, 'btn-gris': salidaDisabled }"
-                            style="width: 100px; padding: 12px 25px; font-size: 18px;">Salir</button>
+                            style="display: flex; justify-content: center; align-items: center; width: 130px; padding: 12px 25px; font-size: 18px;">
+                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+</svg>
+                            Salir
+                        </button>
                     </div>
                 </div>
             </div>
@@ -58,7 +73,10 @@
                                 {{ proyecto.descripcion }}</p>
                             <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id"
                                 :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
-                                <button class="btn btn-warning">Editar Usuarios</button>
+                                <button class="btn btn-warning">
+                                    <img style="width: 20px; height: 20px;" src="images/iconos/editUsers.svg"
+                                        alt="icon-edit-users-projects">
+                                </button>
                             </Router-link>
                         </RouterLink>
                     </div>

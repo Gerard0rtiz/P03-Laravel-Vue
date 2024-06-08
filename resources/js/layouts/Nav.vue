@@ -12,7 +12,7 @@
             
             <ul class="user-options" style="width: 33%; display: flex; justify-content: right !important; list-style-type: none; padding-right: 20px; margin: 0;">
                 <template v-if="!user?.name">
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-right: 20px;">
                         <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
                     </li>
                     <li class="nav-item">
