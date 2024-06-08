@@ -32,6 +32,9 @@ Route::post('skills/',[SkillController::class,'store']);
 Route::get('skills/{id}',[SkillController::class,'show']);
 Route::put('skills/update/{id}',[SkillController::class,'update']);
 Route::delete('skills/{id}',[SkillController::class,'destroy']);
+Route::delete('/skills/{idSkill}/usuarios/{idUser}', [SkillController::class, 'eliminarUsuario']);
+Route::post('/skills/{idSkill}/usuarios/{idUser}/{nivel}', [SkillController::class, 'asignarUsuario']);
+Route::get('skills/{id}/usuarios', [SkillController::class, 'getUsersBySkillId']);
 
 //Rutas de TecnologiaController
 Route::get('tecnologias',[TecnologiaController::class,'index']);
@@ -39,6 +42,9 @@ Route::post('tecnologias/',[TecnologiaController::class,'store']);
 Route::get('tecnologias/{id}',[TecnologiaController::class,'show']);
 Route::put('tecnologias/update/{id}',[TecnologiaController::class,'update']);
 Route::delete('tecnologias/{id}',[TecnologiaController::class,'destroy']);
+Route::delete('/tecnologias/{idTecnolgia}/usuarios/{idUser}', [TecnologiaController::class, 'eliminarUsuario']);
+Route::post('/tecnologias/{idTecnologia}/usuarios/{idUser}/{nivel}', [TecnologiaController::class, 'asignarUsuario']);
+Route::get('tecnologias/{id}/usuarios', [TecnologiaController::class, 'getUsersByTecnologiaId']);
 
 //Rutas de ProyectoController:
 Route::get('proyectos',[ProyectoController::class,'index']);

@@ -151,8 +151,6 @@ const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
 
-
-
 //Al iniciar la vista, verifica las cookies y establece los estados de los botones
 onMounted(() => {
     axios.get('/api/proyectos')

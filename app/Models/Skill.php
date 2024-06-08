@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     public function users(){
-        return $this->belongsToMany(User::class, 'skill_users', 'idSkill', 'idUser')->withPivot('nivel');
+        return $this->belongsToMany(User::class, 'skill_user', 'idSkill', 'idUser')->withPivot('nivel');
     }
 
     use HasFactory;
