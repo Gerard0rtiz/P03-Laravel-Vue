@@ -21,8 +21,8 @@
                         <button class="btn-pulse btnEntradaSalida" @click="EntradaFichaje()" :disabled="entradaDisabled"
                             :class="{ 'btn': true, 'btn-primary': true, 'btn-enter': true, 'btn-secondary': entradaDisabled }"
                             style="display: flex; justify-content: center; align-items: center; width: 130px; padding: 12px 25px; font-size: 18px; background-color: #053b28;">
-                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                     d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
                                 <path fill-rule="evenodd"
@@ -33,10 +33,13 @@
                         <button class="btn-pulse btnEntradaSalida" @click="SalidaFichaje()" :disabled="salidaDisabled"
                             :class="{ 'btn': true, 'btn-danger': true, 'btn-exit': true, 'btn-gris': salidaDisabled }"
                             style="display: flex; justify-content: center; align-items: center; width: 130px; padding: 12px 25px; font-size: 18px;">
-                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-</svg>
+                            <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
                             Salir
                         </button>
                     </div>
@@ -47,8 +50,9 @@
         <!--Sección proyectos-->
         <div class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
- margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">{{
+                <h1 class="titleFichaje"
+                    style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
+            margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">{{
                 $t('imp_horas_proyectos') }}</h1>
             </div>
             <div class="d-flex justify-content-center" v-if="!user.id" style="padding-top: 200px !important;">
@@ -56,10 +60,10 @@
             </div>
             <div v-if="user.id" class="container mt-5 card item-viewer"
                 style=" margin-top: 0px !important; background-color: #ede8db;">
-
+                <input type="text" v-model="proyectoFilter" placeholder="Buscar proyecto"
+                    class="form-control mb-3 filtro-seccion">
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
-
-                    <div v-for="(proyecto, index) in proyectos" class="shadow btn-pulse col-3 project-item"
+                    <div v-for="(proyecto, index) in filteredProyectos" class="shadow btn-pulse col-3 project-item"
                         style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink
                             :to="{ name: 'Proyecto.index', params: { id: proyecto.id, titulo: proyecto.titulo } }"
@@ -73,8 +77,8 @@
                                 {{ proyecto.descripcion }}</p>
                             <Router-link v-if="user.roles[0]?.name == 'admin' || proyecto.idUser == user.id"
                                 :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
-                                <button class="btn btn-warning">
-                                    <img style="width: 20px; height: 20px;" src="images/iconos/editUsers.svg"
+                                <button class="btn btn-warning btn-editUser">
+                                    <img style="width: 24px; height: 24px;" src="images/iconos/editUsers.svg"
                                         alt="icon-edit-users-projects">
                                 </button>
                             </Router-link>
@@ -85,20 +89,28 @@
         </div>
 
         <!--Sección skills-->
-        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
+            style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                <h1 class="titleFichaje"
+                    style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
                     Skills de empleados
                 </h1>
             </div>
 
-            <div v-if="user.id" class="container mt-5 card item-viewer" style="margin-top: 0px !important; background-color: #ede8db;">
-                <input type="text" v-model="skillFilter" placeholder="Buscar skill" class="form-control mb-3 filtro-seccion">
+            <div v-if="user.id" class="container mt-5 card item-viewer"
+                style="margin-top: 0px !important; background-color: #ede8db;">
+                <input type="text" v-model="skillFilter" placeholder="Buscar skill"
+                    class="form-control mb-3 filtro-seccion">
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
-                    <div v-for="(skill, index) in filteredSkills" :key="skill.id" class="shadow btn-pulse col-3 project-item" style="margin: 6px; border-radius: 20px; padding: 0;">
+                    <div v-for="(skill, index) in filteredSkills" :key="skill.id"
+                        class="shadow btn-pulse col-3 project-item"
+                        style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink :to="{ name: 'EditarSkills', params: { id: skill.id } }">
-                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center" :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
-                                <h2 class="titleProject" style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
+                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject"
+                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
                                     {{ skill.nombre }}
                                 </h2>
                             </div>
@@ -109,20 +121,28 @@
         </div>
 
         <!--Sección tecnologías-->
-        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important; margin-bottom: 50px;">
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
+            style="width: 100%; padding: 0px !important; margin-bottom: 50px;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                <h1 class="titleFichaje"
+                    style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
                     Tecnologías de empleados
                 </h1>
             </div>
 
-            <div v-if="user.id" class="container mt-5 card item-viewer" style="margin-top: 0px !important; background-color: #ede8db;">
-                <input type="text" v-model="tecnologiaFilter" placeholder="Buscar tecnología" class="form-control mb-3 filtro-seccion">
+            <div v-if="user.id" class="container mt-5 card item-viewer"
+                style="margin-top: 0px !important; background-color: #ede8db;">
+                <input type="text" v-model="tecnologiaFilter" placeholder="Buscar tecnología"
+                    class="form-control mb-3 filtro-seccion">
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
-                    <div v-for="(tecnologia, index) in filteredTecnologias" :key="tecnologia.id" class="shadow btn-pulse col-3 project-item" style="margin: 6px; border-radius: 20px; padding: 0;">
+                    <div v-for="(tecnologia, index) in filteredTecnologias" :key="tecnologia.id"
+                        class="shadow btn-pulse col-3 project-item"
+                        style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink :to="{ name: 'EditarTecnologias', params: { id: tecnologia.id } }">
-                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center" :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
-                                <h2 class="titleProject" style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
+                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject"
+                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
                                     {{ tecnologia.nombre }}
                                 </h2>
                             </div>
@@ -157,10 +177,15 @@ const salidaDisabled = ref(true);
 const swal = inject('$swal');
 
 // Filtros
+const proyectoFilter = ref("");
 const skillFilter = ref("");
 const tecnologiaFilter = ref("");
 
 // Computed para filtrar skills y tecnologias
+const filteredProyectos = computed(() => {
+    return proyectos.value.filter(proyecto => proyecto.titulo.toLowerCase().includes(proyectoFilter.value.toLowerCase()));
+});
+
 const filteredSkills = computed(() => {
     return skills.value.filter(skill => skill.nombre.toLowerCase().includes(skillFilter.value.toLowerCase()));
 });
@@ -321,12 +346,13 @@ footer {
     height: 50px;
 }
 
-.filtro-seccion{
-    width: 200px; 
-    height: 40px; 
-    font-size: 18px; 
+.filtro-seccion {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
     font-family: 'Nunito', sans-serif;
     margin-left: 18px;
+    background-color: #f0efec;
 }
 
 @media (max-width: 1250px) {
@@ -405,7 +431,7 @@ footer {
         padding: 5px 10px;
     }
 
-    .filtro-seccion{
+    .filtro-seccion {
         width: 100%;
         max-width: 400px;
     }
@@ -798,6 +824,15 @@ video {
 
 .project-item {
     width: 24%;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover{
+    transform: scale(1.05);
+}
+
+.btn-editUser:hover{
+    background-color: #ffd864;
 }
 
 .btn-pulse:active {

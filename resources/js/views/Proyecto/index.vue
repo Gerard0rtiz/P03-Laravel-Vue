@@ -9,7 +9,8 @@
         </div>
         <div class="mx-auto sm:px-6 lg:px-8 container" style="width: 100%;">
             <div>
-                <div class="d-flex justify-content-between align pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
+                <h2 class="mt-8 titles-seccion">Imputación de horas de proyecto:</h2>
+                <div class="d-flex justify-content-between align sm:text-gray-600 dark:text-gray-400 text-sm">
                     <h1 class="project-title" style="text-transform: uppercase;">{{ proyectoTitulo }}</h1>
                     <router-link class="nav-link btn-pulse btn btn-goback"
                         style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮ VOLVER</router-link>
@@ -96,7 +97,8 @@
                                     <path d="M11 2H9v3h2z" />
                                     <path
                                         d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
-                                </svg><p style="font-weight: 300;">Guardar</p>
+                                </svg>
+                                <p style="font-weight: 300;">Guardar</p>
                             </button>
                         </div>
                     </form>
@@ -206,7 +208,17 @@ export default {
 </script>
 
 <style scoped>
-.icon-save-imputacion{
+.titles-seccion {
+    background-color: #ede8db;
+    width: 455px;
+    padding: 10px;
+    margin-bottom: 0px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.icon-save-imputacion {
     fill: white;
     margin-right: 10px;
 }
@@ -215,8 +227,6 @@ export default {
     margin-bottom: 0px;
     background-color: #ede8db;
     padding: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
 .imp-section {
@@ -286,6 +296,10 @@ thead th {
         font-size: 12px !important;
     }
 
+    .titles-seccion {
+        font-size: 22px;
+        width: 370px;
+    }
 }
 
 .popup {

@@ -1,6 +1,7 @@
 <template>
     <div class="mx-auto sm:px-6 lg:px-8 container" style="margin-bottom: 100px;">
-        <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
+        <h2 class="titles-seccion">Dominio de tecnologías de empleados:</h2>
+        <div class="d-flex" style="text-transform: uppercase; justify-content: space-between;">
             <h1 class="title-usrEdit">{{ tecnologia.nombre }}</h1>
             <router-link class="nav-link btn-pulse btn btn-goback"
                 style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
@@ -156,6 +157,17 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+.titles-seccion {
+    background-color: #ede8db;
+    margin-top: 150px !important;
+    width: 505px;
+    padding: 10px;
+    margin-bottom: 0px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
 .form-userSkill {
     display: flex;
 }
@@ -164,8 +176,6 @@ const mostrarPopupError = () => {
     margin-bottom: 0px;
     background-color: #ede8db;
     padding: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
 .usr-editor {
@@ -230,6 +240,10 @@ const mostrarPopupError = () => {
         font-size: 16px !important;
     }
 
+    .titles-seccion {
+        font-size: 22px;
+        width: auto;
+    }
 }
 
 body {
@@ -326,6 +340,8 @@ thead th {
 
 .btn-goback {
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .btn-goback:hover {

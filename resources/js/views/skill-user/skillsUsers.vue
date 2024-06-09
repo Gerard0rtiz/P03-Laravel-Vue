@@ -1,8 +1,10 @@
 <template>
     <div class="mx-auto sm:px-6 lg:px-8 container" style="margin-bottom: 100px;">
-        <div class="d-flex" style="padding-top: 150px; text-transform: uppercase; justify-content: space-between;">
+        <h2 class="titles-seccion">Dominio de skills de empleados:</h2>
+        <div class="d-flex" style="text-transform: uppercase; justify-content: space-between;">
             <h1 class="title-usrEdit">{{ skill.nombre }}</h1>
-            <router-link class="nav-link btn-pulse btn btn-goback" style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
+            <router-link class="nav-link btn-pulse btn btn-goback"
+                style="padding: 12px 25px; font-size: 18px; color: #053b28;" to="/">❮
                 VOLVER</router-link>
         </div>
         <div class="d-flex" style="margin: 0px; width: 100%; justify-content: center">
@@ -17,7 +19,8 @@
                                 style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">Nombre del
                                 empleado</th>
                             <th class="text-center"
-                                style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">Nivel del empleado
+                                style="background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;">Nivel del
+                                empleado
                             </th>
                             <th class="text-center"
                                 style="border-top-right-radius: 15px; background-color: #053b28; color: #FFF; width: 25%; font-size: 18px;"
@@ -26,15 +29,20 @@
                     </thead>
                     <tbody>
                         <tr v-for="(usuario, index) in skill.users" :key="index">
-                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.id }}</td>
-                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.name }}</td>
-                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.pivot.nivel }}</td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.id }}
+                            </td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{ usuario.name }}
+                            </td>
+                            <td style="background-color: #f0efec; padding: 10px" class="text-center">{{
+                usuario.pivot.nivel }}</td>
                             <td style="background-color: #f0efec; padding: 10px" class="text-center">
                                 <button class="btn btn-danger btn-delete" style="font-size: 15px;"
                                     @click="eliminarUsuario(skill.id, usuario.id)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-</svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                    </svg>
                                 </button>
                             </td>
                         </tr>
@@ -43,9 +51,11 @@
                 <div style="margin-top: 30px;">
                     <form class="form-userSkill" @submit.prevent="agregarUsuario">
                         <p style="font-size: 18px;"><strong>ID del empleado:</strong></p>
-                        <input required class="inp-num" v-model="nuevoUsuarioId" type="number" min="0" style="background-color: #f0efec;">
+                        <input required class="inp-num" v-model="nuevoUsuarioId" type="number" min="0"
+                            style="background-color: #f0efec;">
                         <p style="font-size: 18px;"><strong>Nivel de dominio de habilidad:</strong></p>
-                        <input required class="inp-num-2" v-model="nivelNuevoUsuario" type="number" min="0" max="5" style="background-color: #f0efec;">
+                        <input required class="inp-num-2" v-model="nivelNuevoUsuario" type="number" min="0" max="5"
+                            style="background-color: #f0efec;">
                         <button class="btn-users" type="submit">Añadir empleado</button>
                     </form>
                 </div>
@@ -147,8 +157,18 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+.titles-seccion {
+    background-color: #ede8db;
+    margin-top: 150px !important;
+    width: 425px;
+    padding: 10px;
+    margin-bottom: 0px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
 
-.form-userSkill{
+.form-userSkill {
     display: flex;
 }
 
@@ -156,8 +176,6 @@ const mostrarPopupError = () => {
     margin-bottom: 0px;
     background-color: #ede8db;
     padding: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
 .usr-editor {
@@ -195,21 +213,22 @@ const mostrarPopupError = () => {
         font-size: 15px;
     }
 
-    .form-userSkill{
+    .form-userSkill {
         display: block !important;
     }
 
-    .form-userSkill p{
+    .form-userSkill p {
         margin-top: 20px;
         margin-bottom: 0px;
     }
 
-    .inp-num, .inp-num-2 {
+    .inp-num,
+    .inp-num-2 {
         width: 150px;
         margin-left: 0px !important;
     }
 
-    .inp-num-2{
+    .inp-num-2 {
         margin-bottom: 20px;
     }
 
@@ -221,6 +240,10 @@ const mostrarPopupError = () => {
         font-size: 16px !important;
     }
 
+    .titles-seccion {
+        font-size: 22px;
+        width: 340px;
+    }
 }
 
 body {
@@ -259,7 +282,8 @@ thead th {
     top: 0;
 }
 
-.inp-num, .inp-num-2 {
+.inp-num,
+.inp-num-2 {
     margin-right: 20px;
     border: solid 1px #9a9b9c;
     border-radius: 5px;
@@ -316,6 +340,8 @@ thead th {
 
 .btn-goback {
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .btn-goback:hover {

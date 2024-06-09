@@ -72,7 +72,7 @@ Route::put('fichajes/update/{id}',[FichajeController::class,'update']);
 Route::delete('fichajes/{id}',[FichajeController::class,'destroy']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::apiResource('users', UserController::class);
+    Route::apiResource('usuarios', UserController::class);
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('roles', RoleController::class);
