@@ -10,20 +10,19 @@ class ProyectoController extends Controller
 {
     public function index()
     {
-       // Obtener el usuario autenticado
-       $user = auth()->user();
+        // Obtener el usuario autenticado
+        $user = auth()->user();
 
-       // Verificar si el usuario tiene el rol de administrador
-       if ($user->hasRole('admin') || $user->hasRole('jefe')) {
-           // Si es administrador, obtener todos los proyectos
-           $proyectos = Proyecto::all();
-       } else {
-           // Si no es administrador, obtener los proyectos asociados al usuario actual
-           $proyectos = $user->proyectos;
-       }
+        // Verificar si el usuario tiene el rol de administrador
+        if ($user->hasRole('admin') || $user->hasRole('jefe')) {
+            // Si es administrador, obtener todos los proyectos
+            $proyectos = Proyecto::all();
+        } else {
+            // Si no es administrador, obtener los proyectos asociados al usuario actual
+            $proyectos = $user->proyectos;
+        }
 
-       return response()->json($proyectos);
-        
+        return response()->json($proyectos);
     }
 
     public function store(Request $request)
@@ -79,7 +78,8 @@ class ProyectoController extends Controller
         return response()->json(['success' => true, 'data' => $usuariosAsignados]);
     }
 
-    public function asignarUsuario($idProyecto, $idUser){
+    public function asignarUsuario($idProyecto, $idUser)
+    {
         $proyecto = Proyecto::find($idProyecto);
 
         if (!$proyecto) {
@@ -93,9 +93,26 @@ class ProyectoController extends Controller
         return response()->json(['success' => true, 'data' => $usuariosAsignados]);
     }
 
-    public function getUsersByProyectoId($proyectoId){
+    public function getUsersByProyectoId($proyectoId)
+    {
         $proyecto = Proyecto::with('users')->findOrFail($proyectoId);
 
         return $proyecto;
     }
+
+    //filtrado de proyectos a partir de eloquent
+    public function filtrarProyectos(Request $request)
+    {
+        $query = Proyecto::query();
+
+        if ($request->has('filtro')) {
+            $filtro = $request->input('filtro');
+            $query->where('titulo', 'like', "%$filtro%");
+        }
+
+        $proyectos = $query->get();
+
+        return $proyectos;
+    }
+
 }

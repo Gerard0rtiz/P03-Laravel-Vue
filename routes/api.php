@@ -57,6 +57,7 @@ Route::delete('/proyectos/{idProyecto}/usuarios/{idUser}', [ProyectoController::
 Route::post('/proyectos/{idProyecto}/usuarios/{idUser}', [ProyectoController::class, 'asignarUsuario']);
 Route::get('proyectos/{id}/usuarios', [ProyectoController::class, 'getUsersByProyectoId']);
 Route::get('Proyecto',[ProyectoController::class,'index']);
+Route::get('/proyectos/filtrar', 'ProyectoController@filtrarProyectos');
 
 //Rutas de ImputacionController:
 Route::get('imputaciones',[ImputacionController::class,'index']);

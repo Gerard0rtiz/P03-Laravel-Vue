@@ -60,8 +60,8 @@
             </div>
             <div v-if="user.id" class="container mt-5 card item-viewer"
                 style=" margin-top: 0px !important; background-color: #ede8db;">
-                <input type="text" v-model="proyectoFilter" placeholder="Buscar proyecto"
-                    class="form-control mb-3 filtro-seccion">
+                <input v-model="proyectoFilter" placeholder="Buscar proyecto"
+                    class="form-control mb-3 filtro-seccion" />
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
                     <div v-for="(proyecto, index) in filteredProyectos" class="shadow btn-pulse col-3 project-item"
                         style="margin: 6px; border-radius: 20px; padding: 0;">
@@ -79,7 +79,7 @@
                                 :to="{ name: 'EditarUsuarios', params: { id: proyecto.id } }">
                                 <button class="btn btn-warning btn-editUser">
                                     <img style="width: 24px; height: 24px;" src="images/iconos/editUsers.svg"
-                                        alt="icon-edit-users-projects">
+                                        alt="icon-edit-users-projects" />
                                 </button>
                             </Router-link>
                         </RouterLink>
@@ -177,15 +177,16 @@ const salidaDisabled = ref(true);
 const swal = inject('$swal');
 
 // Filtros
-const proyectoFilter = ref("");
 const skillFilter = ref("");
 const tecnologiaFilter = ref("");
+const proyectoFilter = ref("");
 
-// Computed para filtrar skills y tecnologias
+// Computed para filtrar proyectos
 const filteredProyectos = computed(() => {
-    return proyectos.value.filter(proyecto => proyecto.titulo.toLowerCase().includes(proyectoFilter.value.toLowerCase()));
+  return proyectos.value.filter(proyecto => proyecto.titulo.toLowerCase().includes(proyectoFilter.value.toLowerCase()));
 });
 
+// Computed para filtrar skills y tecnologias
 const filteredSkills = computed(() => {
     return skills.value.filter(skill => skill.nombre.toLowerCase().includes(skillFilter.value.toLowerCase()));
 });
@@ -827,11 +828,11 @@ video {
     transition: transform 0.3s ease;
 }
 
-.project-item:hover{
+.project-item:hover {
     transform: scale(1.05);
 }
 
-.btn-editUser:hover{
+.btn-editUser:hover {
     background-color: #ffd864;
 }
 
