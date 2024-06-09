@@ -226,6 +226,7 @@ export default {
 .project-title {
     margin-bottom: 0px;
     background-color: #ede8db;
+    border-top-right-radius: 8px;
     padding: 10px;
 }
 

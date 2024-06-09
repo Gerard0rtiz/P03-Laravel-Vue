@@ -51,10 +51,13 @@
                 <div style="margin-top: 30px;">
                     <form @submit.prevent="agregarUsuario">
                         <p style="font-size: 18px;"><strong>ID del usuario:</strong></p>
-                        <input class="inp-num" v-model="nuevoUsuarioId" type="number" min="0"
-                            style="background-color: #f0efec;">
+                        <input class="inp-num" v-model="nuevoUsuarioId" @input="buscarNombreEmpleado(nuevoUsuarioId)"
+                            type="number" min="0" style="background-color: #f0efec;">
                         <button class="btn-users" type="submit">Añadir usuario</button>
                     </form>
+                    <div v-if="nombreEmpleado && nombreEmpleado.name">
+                        <p class="name-user-display"><strong>Nombre del empleado: {{ nombreEmpleado.name }}</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,6 +79,7 @@ const swal = inject('$swal');
 const proyecto = ref({});
 const route = useRoute();
 const nuevoUsuarioId = ref('');
+const nombreEmpleado = ref('');
 
 onMounted(() => {
     window.scrollTo(0, 0);
@@ -92,6 +96,20 @@ const obtenerUsuariosProyecto = () => {
             console.error("Error al obtener usuarios asignados al proyecto:", error);
         });
 }
+
+const buscarNombreEmpleado = async (id) => {
+    if (id) {
+        try {
+            const response = await axios.get(`/api/user/${id}`);
+            nombreEmpleado.value = { name: response.data.name };
+        } catch (error) {
+            console.error("Error al buscar el nombre del empleado:", error);
+            nombreEmpleado.value = '';
+        }
+    } else {
+        nombreEmpleado.value = '';
+    }
+};
 
 const eliminarUsuario = (proyectoId, usuarioId) => {
     swal.fire({
@@ -152,6 +170,11 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+.name-user-display{
+    font-size: 18px;
+    padding-top: 20px;
+}
+
 .titles-seccion {
     background-color: #ede8db;
     margin-top: 150px !important;
@@ -166,6 +189,7 @@ const mostrarPopupError = () => {
 .title-usrEdit {
     margin-bottom: 0px;
     background-color: #ede8db;
+    border-top-right-radius: 8px;
     padding: 10px;
 }
 

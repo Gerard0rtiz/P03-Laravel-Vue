@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -28,18 +29,16 @@ class UserController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $users = User::
-        when(request('search_id'), function ($query) {
+        $users = User::when(request('search_id'), function ($query) {
             $query->where('id', request('search_id'));
         })
             ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%'.request('search_title').'%');
+                $query->where('name', 'like', '%' . request('search_title') . '%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%'.request('search_global').'%');
-
+                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
@@ -95,7 +94,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        if(!empty($request->password)) {
+        if (!empty($request->password)) {
             $user->password = Hash::make($request->password) ?? $user->password;
         }
 
@@ -119,5 +118,28 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
+    }
+
+    public function verifyUser(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $user = User::find($userId);
+
+        if ($user) {
+            return response()->json(['message' => 'El usuario existe'], 200);
+        } else {
+            return response()->json(['error' => 'El usuario no existe'], 404);
+        }
+    }
+
+    public function obtenerNombreUsuario($id)
+    {
+        $usuario = User::find($id);
+
+        if ($usuario) {
+            return response()->json(['name' => $usuario->name], 200);
+        } else {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
     }
 }

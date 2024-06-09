@@ -58,6 +58,9 @@
                             style="background-color: #f0efec;">
                         <button class="btn-users" type="submit">Añadir empleado</button>
                     </form>
+                    <div v-if="nombreEmpleado && nombreEmpleado.name">
+                        <p class="name-user-display"><strong>Nombre del empleado: {{ nombreEmpleado.name }}</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from 'vue';
+import { watch, ref, inject, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 const swal = inject('$swal');
@@ -80,6 +83,7 @@ const skill = ref({});
 const route = useRoute();
 const nuevoUsuarioId = ref('');
 const nivelNuevoUsuario = ref('');
+const nombreEmpleado = ref('');
 
 onMounted(() => {
     window.scrollTo(0, 0);
@@ -96,6 +100,20 @@ const obtenerUsuariosSkill = () => {
             console.error("Error al obtener usuarios asignados a la skill:", error);
         });
 }
+
+const buscarNombreEmpleado = async (id) => {
+    if (id) {
+        try {
+            const response = await axios.get(`/api/user/${id}`);
+            nombreEmpleado.value = { name: response.data.name };
+        } catch (error) {
+            console.error("Error al buscar el nombre del empleado:", error);
+            nombreEmpleado.value = '';
+        }
+    } else {
+        nombreEmpleado.value = '';
+    }
+};
 
 const eliminarUsuario = (skillId, usuarioId) => {
     swal.fire({
@@ -122,19 +140,45 @@ const eliminarUsuario = (skillId, usuarioId) => {
 }
 
 const agregarUsuario = () => {
-    axios.post(`/api/skills/${skill.value.id}/usuarios/${nuevoUsuarioId.value}/${nivelNuevoUsuario.value}`)
-        .then(response => {
-            obtenerUsuariosSkill();
-            console.log("Usuario asignado exitosamente");
-            nuevoUsuarioId.value = '';
-            nivelNuevoUsuario.value = '';
-            mostrarPopupExitoso();
-        })
-        .catch(error => {
-            console.error("Error al asignar usuario:", error);
-            mostrarPopupError();
+    if (nuevoUsuarioId.value) {
+        buscarNombreEmpleado(nuevoUsuarioId.value).then(() => {
+            if (nombreEmpleado.value.name) {
+                //Proceder con la adición del usuario
+                axios.post(`/api/skills/${skill.value.id}/usuarios/${nuevoUsuarioId.value}/${nivelNuevoUsuario.value}`, {
+                    user_id: nuevoUsuarioId.value,
+                    nivel: nivelNuevoUsuario.value
+                })
+                .then(response => {
+                    obtenerUsuariosSkill();
+                    console.log("Usuario asignado exitosamente");
+                    nuevoUsuarioId.value = '';
+                    nivelNuevoUsuario.value = '';
+                    mostrarPopupExitoso();
+                })
+                .catch(error => {
+                    console.error("Error al asignar usuario:", error);
+                    mostrarPopupError();
+                });
+            } else {
+                mostrarErrorUsuarioNoExiste();
+            }
         });
-}
+    }
+};
+
+watch(nuevoUsuarioId, (newVal) => {
+    if (newVal) {
+        buscarNombreEmpleado(newVal);
+    }
+});
+
+const mostrarErrorUsuarioNoExiste = () => {
+    swal.fire({
+        title: 'Error',
+        text: 'El usuario no existe',
+        icon: 'error',
+    });
+};
 
 const mostrarPopupExitoso = () => {
     swal({
@@ -157,6 +201,11 @@ const mostrarPopupError = () => {
 </script>
 
 <style>
+.name-user-display{
+    font-size: 18px;
+    padding-top: 20px;
+}
+
 .titles-seccion {
     background-color: #ede8db;
     margin-top: 150px !important;
@@ -170,12 +219,14 @@ const mostrarPopupError = () => {
 
 .form-userSkill {
     display: flex;
+    
 }
 
 .title-usrEdit {
     margin-bottom: 0px;
     background-color: #ede8db;
     padding: 10px;
+    border-top-right-radius: 8px;
 }
 
 .usr-editor {

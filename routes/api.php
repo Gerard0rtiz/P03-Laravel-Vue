@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
+Route::post('/verify-user', [UserController::class, 'verifyUser']);
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
 Route::get('tasks',[TaskController::class,'index']);
@@ -72,7 +73,7 @@ Route::put('fichajes/update/{id}',[FichajeController::class,'update']);
 Route::delete('fichajes/{id}',[FichajeController::class,'destroy']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::apiResource('usuarios', UserController::class);
+    Route::apiResource('users', UserController::class);
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('roles', RoleController::class);
@@ -89,6 +90,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('category-list', [CategoryController::class, 'getList']);
     Route::get('/user', [ProfileController::class, 'user']);
     Route::put('/user', [ProfileController::class, 'update']);
+    Route::get('/user/{id}', [UserController::class, 'obtenerNombreUsuario']);
    
     Route::get('abilities', function(Request $request) {
         return $request->user()->roles()->with('permissions')
