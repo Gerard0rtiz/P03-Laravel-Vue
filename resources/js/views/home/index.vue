@@ -85,28 +85,22 @@
         </div>
 
         <!--Sección skills-->
-        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
-            style="width: 100%; padding: 0px !important;">
-
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
-         margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    Skills de empleados</h1>
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    Skills de empleados
+                </h1>
             </div>
 
-            <div v-if="user.id" class="container mt-5 card item-viewer"
-                style=" margin-top: 0px !important; background-color: #ede8db;">
-
+            <div v-if="user.id" class="container mt-5 card item-viewer" style="margin-top: 0px !important; background-color: #ede8db;">
+                <input type="text" v-model="skillFilter" placeholder="Buscar skill" class="form-control mb-3 filtro-seccion">
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
-
-                    <div v-for="(skill, index) in skills" class="shadow btn-pulse col-3 project-item"
-                        style="margin: 6px; border-radius: 20px; padding: 0;">
+                    <div v-for="(skill, index) in filteredSkills" :key="skill.id" class="shadow btn-pulse col-3 project-item" style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink :to="{ name: 'EditarSkills', params: { id: skill.id } }">
-                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
-                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
-                                <h2 class="titleProject"
-                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
-                                    {{ skill.nombre }}</h2>
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center" :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject" style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                                    {{ skill.nombre }}
+                                </h2>
                             </div>
                         </RouterLink>
                     </div>
@@ -115,35 +109,28 @@
         </div>
 
         <!--Sección tecnologías-->
-        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8"
-            style="width: 100%; padding: 0px !important;">
-
+        <div v-if="user.roles[0]?.name == 'jefe' || user.roles[0]?.name == 'admin'" class="mx-auto sm:px-6 lg:px-8" style="width: 100%; padding: 0px !important; margin-bottom: 50px;">
             <div v-if="user.id" class="flex justify-center pt-8 sm:text-gray-600 dark:text-gray-400 text-sm">
-                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db;
-         margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    Tecnologías de empleados</h1>
+                <h1 class="titleFichaje" style="font-weight: 600;text-transform: uppercase;background-color: #ede8db; margin: 0; margin-bottom: -10px; padding: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    Tecnologías de empleados
+                </h1>
             </div>
 
-            <div v-if="user.id" class="container mt-5 card item-viewer"
-                style=" margin-top: 0px !important; background-color: #ede8db;">
-
+            <div v-if="user.id" class="container mt-5 card item-viewer" style="margin-top: 0px !important; background-color: #ede8db;">
+                <input type="text" v-model="tecnologiaFilter" placeholder="Buscar tecnología" class="form-control mb-3 filtro-seccion">
                 <div class="container" style="display: flex !important; justify-content: center; flex-wrap: wrap;">
-
-                    <div v-for="(tecnologia, index) in tecnologias" class="shadow btn-pulse col-3 project-item"
-                        style="margin: 6px; border-radius: 20px; padding: 0;">
+                    <div v-for="(tecnologia, index) in filteredTecnologias" :key="tecnologia.id" class="shadow btn-pulse col-3 project-item" style="margin: 6px; border-radius: 20px; padding: 0;">
                         <RouterLink :to="{ name: 'EditarTecnologias', params: { id: tecnologia.id } }">
-                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center"
-                                :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
-                                <h2 class="titleProject"
-                                    style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
-                                    {{ tecnologia.nombre }}</h2>
+                            <div class="btn btn-light d-flex flex-column align-items-center justify-content-center" :style="{ 'padding': '15px 25px', 'border-radius': '16px', 'width': '100%', 'height': '100px', 'background-image': 'url(' + (index % 2 === 0 ? '/images/bkg-proyectos/fondo1.jpeg' : '/images/bkg-proyectos/fondo2.jpeg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+                                <h2 class="titleProject" style="margin: 0px; background-color: #053b28; padding: 5px 10px; border-radius: 15px; color: white; text-transform: uppercase; font-size: 25px;">
+                                    {{ tecnologia.nombre }}
+                                </h2>
                             </div>
                         </RouterLink>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <footer>
         <div class="footerImputfy">
@@ -169,6 +156,19 @@ const entradaDisabled = ref(true);
 const salidaDisabled = ref(true);
 const swal = inject('$swal');
 
+// Filtros
+const skillFilter = ref("");
+const tecnologiaFilter = ref("");
+
+// Computed para filtrar skills y tecnologias
+const filteredSkills = computed(() => {
+    return skills.value.filter(skill => skill.nombre.toLowerCase().includes(skillFilter.value.toLowerCase()));
+});
+
+const filteredTecnologias = computed(() => {
+    return tecnologias.value.filter(tecnologia => tecnologia.nombre.toLowerCase().includes(tecnologiaFilter.value.toLowerCase()));
+});
+
 //Al iniciar la vista, verifica las cookies y establece los estados de los botones
 onMounted(() => {
     axios.get('/api/proyectos')
@@ -182,8 +182,8 @@ onMounted(() => {
 
     axios.get('/api/tecnologias')
         .then(response => {
-            tecnologias.value = response.data;
-            console.log(response.data);
+            tecnologias.value = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            console.log(tecnologias.value);
         })
         .catch(error => {
             console.error("Error fetching tecnologias", error);
@@ -191,8 +191,8 @@ onMounted(() => {
 
     axios.get('/api/skills')
         .then(response => {
-            skills.value = response.data;
-            console.log(response.data);
+            skills.value = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            console.log(skills.value);
         })
         .catch(error => {
             console.error("Error fetching skills", error);
@@ -250,81 +250,45 @@ function EntradaFichaje() {
     }
 }
 
+// Función para guardar las cookies de salida al fichar
+function saveSalidaCookies() {
+    const now = new Date();
+    const horaSalida = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    setCookie("horaSalida", horaSalida, 1); // Cookie expira en 1 día
+}
+
 // Función para fichar salida
 function SalidaFichaje() {
     if (user.value.id) {
-        const now = new Date();
-        const horaSalida = now.toLocaleTimeString('en-US', { hour12: false });
-
-        fichaje.value.idUser = parseInt(getCookie("idUser"), 10);
-        fichaje.value.fechaFichaje = getCookie("fechaFichaje");
-        fichaje.value.horaEntrada = getCookie("horaEntrada");
-        fichaje.value.horaSalida = horaSalida
-
-        axios.post('/api/fichajes', fichaje.value)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-        // Eliminar cookies al salir
-        document.cookie = "fechaFichaje=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "horaEntrada=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "idUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "horaSalida=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
+        saveSalidaCookies();
+        entradaDisabled.value = false;
         salidaDisabled.value = true;
-        entradaDisabled.value = false; // Habilitar el botón de entrada
         swal({
             icon: 'success',
-            title: 'Ha salido correctamente'
+            title: 'Ha fichado correctamente'
         });
     } else {
         console.log("Error: debes iniciar sesión");
     }
 }
 
-//Función para setear cookies
+// Función para obtener una cookie por nombre
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// Función para establecer una cookie
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
 }
-
-//Función para obtener toda la info de las cookies cuando se vuelva a entrar a la web
-function getCookie(name) {
-    const cookieName = name + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(cookieName) === 0) {
-            return cookie.substring(cookieName.length, cookie.length);
-        }
-    }
-    return "";
-}
-</script>
-
-<script>
-import { defineComponent } from 'vue';
-import { RouterLink } from "vue-router";
-
-export default defineComponent({
-    components: {
-        ClockComponent
-    }
-});
 </script>
 
 <style scoped>
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%
@@ -355,6 +319,14 @@ footer {
     margin-left: auto;
     margin-right: auto;
     height: 50px;
+}
+
+.filtro-seccion{
+    width: 200px; 
+    height: 40px; 
+    font-size: 18px; 
+    font-family: 'Nunito', sans-serif;
+    margin-left: 18px;
 }
 
 @media (max-width: 1250px) {
@@ -431,6 +403,11 @@ footer {
     .btn.btn-warning {
         font-size: 15px;
         padding: 5px 10px;
+    }
+
+    .filtro-seccion{
+        width: 100%;
+        max-width: 400px;
     }
 }
 
